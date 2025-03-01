@@ -16,3 +16,7 @@ source-dir = "src"
 
 [install]
 library = true
+
+[fortran]
+implicit-external = true
+

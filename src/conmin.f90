@@ -1,4 +1,9 @@
 
+module conmin_module
+
+   implicit none
+
+   contains
 
 subroutine cnmn00(x,Vlb,Vub,g,Scal,Df,a,s,g1,g2,b,c,Isc,Ic,Ms1,n1,n2,n3,n4,n5)
    implicit none
@@ -3021,3 +3026,5 @@ subroutine conmin(Ndv_,Ncon_,x_,Vlb_,Vub_,Obj_,g_,n1,n2,n3,n4,n5,Iprint_,Iout_,I
    return
 
 end subroutine conmin
+
+end module conmin_module
