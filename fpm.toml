@@ -1,0 +1,18 @@
+name = "conmin"
+author = "Jacob Williams"
+copyright  = "Ladislav Luksan, 2007"
+license = "LGPL"
+description = "Modern Fortran edition of conmin"
+homepage = "https://github.com/jacobwilliams/conmin"
+keywords = ["sqp", "optimization", "fortran"]
+
+[build]
+auto-executables = true
+auto-examples = true
+auto-tests = true
+
+[library]
+source-dir = "src"
+
+[install]
+library = true
