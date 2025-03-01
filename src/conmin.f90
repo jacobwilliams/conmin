@@ -12,7 +12,14 @@
 !  problems may also be solved, and the conjugate direction method of
 !  Fletcher and Reeves is used for this purpose.
 !
+!### History
+!   * BY G. N. VANDERPLAATS
+!     NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
+!
 !### See also
+!  * CONMIN - A FORTRAN PROGRAM FOR CONSTRAINED FUNCTION
+!    MINIMIZATION:  USER'S MANUAL,  BY G. N. VANDERPLAATS,
+!    NASA TM X-62,282, AUGUST, 1973.
 !  * [conmin.zip](https://jblevins.org/mirror/amiller/conmin.zip) from Alan Miller.
 
 module conmin_module
@@ -59,12 +66,9 @@ contains
 subroutine conmin(me,x,vlb,vub,g,scal,df,a,s,g1,g2,b,c,isc,ic,ms1,n1,n2,n3,n4,n5)
 
   !!  ROUTINE TO SOLVE CONSTRAINED OR UNCONSTRAINED FUNCTION MINIMIZATION.
-  !!  BY G. N. VANDERPLAATS                          APRIL, 1972.
+  !!
   !!  * * * * * * * * * * *   JUNE, 1979 VERSION   * * * * * * * * * * *
-  !!  NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
-  !!  REFERENCE;  CONMIN - A FORTRAN PROGRAM FOR CONSTRAINED FUNCTION
-  !!      MINIMIZATION:  USER'S MANUAL,  BY G. N. VANDERPLAATS,
-  !!      NASA TM X-62,282, AUGUST, 1973.
+  !!
   !!  STORAGE REQUIREMENTS:
   !!      PROGRAM - 7000 DECIMAL WORDS (CDC COMPUTER)
   !!      ARRAYS  - APPROX. 2*(NDV**2)+26*NDV+4*NCON, WHERE N3 = NDV+2.
@@ -1023,8 +1027,8 @@ subroutine cnmn01(me,jgoto,x,df,g,isc,ic,a,g1,vub,scal,ncal,dx,  &
                   dx1,fi,xi,iii,n1,n2,n3)
 
 !!  ROUTINE TO CALCULATE GRADIENT INFORMATION BY FINITE DIFFERENCE.
+!!
 !!  BY G. N. VANDERPLAATS                         JUNE, 1972.
-!!  NASA-AMES RESEARCH CENTER,  MOFFETT FIELD, CALIF.
 
 class(conmin_class),intent(inout) :: me
 integer, intent(in out)   :: jgoto
@@ -1134,7 +1138,7 @@ subroutine cnmn02(me,ncalc,slope,dftdf1,df,s)
 !!  ROUTINE TO DETERMINE CONJUGATE DIRECTION VECTOR OR DIRECTION
 !!  OF STEEPEST DESCENT FOR UNCONSTRAINED FUNCTION MINIMIZATION.
 !!  BY G. N. VANDERPLAATS                       APRIL, 1972.
-!!  NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
+!!
 !!  NCALC = CALCULATION CONTROL.
 !!      NCALC = 0,     S = STEEPEST DESCENT.
 !!      NCALC = 1,     S = CONJUGATE DIRECTION.
@@ -1201,7 +1205,7 @@ subroutine cnmn03(me,x,s,slope,alp,fff,a1,a2,a3,a4,f1,f2,f3,f4,app,  &
 !!  MINIMIZATION USING 2-POINT QUADRATIC INTERPOLATION, 3-POINT
 !!  CUBIC INTERPOLATION AND 4-POINT CUBIC INTERPOLATION.
 !!  BY G. N. VANDERPLAATS                         APRIL, 1972.
-!!  NASA-AMES RESEARCH CENTER,  MOFFETT FIELD, CALIF.
+!!
 !!  ALP = PROPOSED MOVE PARAMETER.
 !!  SLOPE = INITIAL FUNCTION SLOPE = S-TRANSPOSE TIMES DF.
 !!  SLOPE MUST BE NEGATIVE.
@@ -1491,10 +1495,10 @@ end subroutine cnmn03
 
 subroutine cnmn04(ii,xbar,eps,x1,y1,slope,x2,y2,x3,y3,x4,y4)
 
-!!  ROUTINE TO FIND FIRST XBAR.GE.EPS CORRESPONDING TO A MINIMUM
+!!  ROUTINE TO FIND FIRST XBAR>=EPS CORRESPONDING TO A MINIMUM
 !!  OF A ONE-DIMENSIONAL REAL FUNCTION BY POLYNOMIEL INTERPOLATION.
+!!
 !!  BY G. N. VANDERPLAATS                          APRIL, 1972.
-!!  NASA-AMES RESEARCH CENTER,  MOFFETT FIELD, CALIF.
 !!
 !!  II = CALCULATION CONTROL.
 !!       1:  2-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, SLOPE, X2 AND Y2.
@@ -1629,8 +1633,9 @@ subroutine cnmn05(me,g,df,a,s,b,c,slope,phi,isc,ic,ms1,nvc,n1,n2,n3,n4,n5)
 
 !!  ROUTINE TO SOLVE DIRECTION FINDING PROBLEM IN MODIFIED METHOD OF
 !!  FEASIBLE DIRECTIONS.
+!!
 !!  BY G. N. VANDERPLAATS                            MAY, 1972.
-!!  NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
+!!
 !!  NORM OF S VECTOR USED HERE IS S-TRANSPOSE TIMES S.LE.1.
 !!  IF NVC = 0 FIND DIRECTION BY ZOUTENDIJK'S METHOD.  OTHERWISE
 !!  FIND MODIFIED DIRECTION.
@@ -1873,8 +1878,9 @@ subroutine cnmn06(me,x,vlb,vub,g,scal,df,s,g1,g2,ctam,ctbm,slope,alp,a2,a3,a4, &
 
 !!  ROUTINE TO SOLVE ONE-DIMENSIONAL SEARCH PROBLEM FOR CONSTRAINED
 !!  FUNCTION MINIMIZATION.
+!!
 !!  BY G. N. VANDERPLAATS                           AUG., 1974.
-!!  NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
+!!
 !!  OBJ = INITIAL AND FINAL FUNCTION VALUE.
 !!  ALP = MOVE PARAMETER.
 !!  SLOPE = INITIAL SLOPE.
@@ -2431,8 +2437,9 @@ subroutine cnmn07(ii,xbar,eps,x1,y1,x2,y2,x3,y3)
 
 !!  ROUTINE TO FIND FIRST XBAR.GE.EPS CORRESPONDING TO A REAL ZERO
 !!  OF A ONE-DIMENSIONAL FUNCTION BY POLYNOMIEL INTERPOLATION.
+!!
 !!  BY G. N. VANDERPLAATS                          APRIL, 1972.
-!!  NASA-AMES RESEARCH CENTER,  MOFFETT FIELD, CALIF.
+!!
 !!  II = CALCULATION CONTROL.
 !!       1:  2-POINT LINEAR INTERPOLATION, GIVEN X1, Y1, X2 AND Y2.
 !!       2:  3-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, X2, Y2, X3 AND Y3.
@@ -2443,9 +2450,13 @@ subroutine cnmn07(ii,xbar,eps,x1,y1,x2,y2,x3,y3)
 !!  INTERPOLATION, CONSISTANT WITH INPUT DATA, WILL BE ATTEMPTED AND
 !!  II WILL BE CHANGED ACCORDINGLY.
 
-integer, intent(in out)    :: ii
+integer, intent(in out)    :: ii  !! CALCULATION CONTROL:
+                                  !!
+                                  !! 1.  2-POINT LINEAR INTERPOLATION, GIVEN X1, Y1, X2 AND Y2.
+                                  !! 2.  3-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, X2, Y2, X3 AND Y3.
 real (dp), intent(out)     :: xbar
-real (dp), intent(in)      :: eps, x1, y1, x2, y2, x3, y3
+real (dp), intent(in)      :: eps !! may be negative
+real (dp), intent(in)      :: x1, y1, x2, y2, x3, y3
 
 ! Local variables
 real (dp)  :: aa, bac, bb, cc, dy, qq, x21, x31, x32, xb2, xbar1, yy
@@ -2507,14 +2518,15 @@ subroutine cnmn08(ndb,ner,c,ms1,b,n3,n4)
 
 !!  ROUTINE TO SOLVE SPECIAL LINEAR PROBLEM FOR IMPOSING S-TRANSPOSE
 !!  TIMES S.LE.1 BOUNDS IN THE MODIFIED METHOD OF FEASIBLE DIRECTIONS.
+!!
 !!  BY G. N. VANDERPLAATS                             APRIL, 1972.
-!!  NASA-AMES RESEARCH CENTER,  MOFFETT FIELD, CALIF.
+!!
 !!  REF.  'STRUCTURAL OPTIMIZATION BY METHODS OF FEASIBLE DIRECTIONS',
 !!  G. N. VANDERPLAATS AND F. MOSES, JOURNAL OF COMPUTERS
 !!  AND STRUCTURES, VOL 3, PP 739-755, 1973.
 !!  FORM OF L. P. IS BX=C WHERE 1ST NDB COMPONENTS OF X CONTAIN VECTOR
 !!  U AND LAST NDB COMPONENTS CONTAIN VECTOR V.  CONSTRAINTS ARE
-!!  U.GE.0, V.GE.0, AND U-TRANSPOSE TIMES V = 0.
+!!  U>=0, V>=0, AND U-TRANSPOSE TIMES V = 0.
 !!  NER = ERROR FLAG.  IF NER.NE.0 ON RETURN, PROCESS HAS NOT
 !!  CONVERGED IN 5*NDB ITERATIONS.
 !!  VECTOR MS1 IDENTIFIES THE SET OF BASIC VARIABLES.
