@@ -49,6 +49,9 @@ module conmin_module
 
         ! private  ! for now these are public so they can be set by user [should replace with an init method]
 
+        real(wp) :: small = 1.0e-20_wp !! Small number
+        real(wp) :: large = 1.0e+20_wp !! Large number
+
         ! cnmn1 variables
         real(wp) :: delfun = 0.001_wp   !! Minimum relative change in the objective
                                         !! function to indicate convergence.  If in `ITRM` consecutive
@@ -217,8 +220,8 @@ module conmin_module
                         !! `S` is the move direction.
 
         ! consav variables
-        real(wp) :: dm1, dm2, dm3, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, &
-                    dm12, dct, dctl, abobj, cta, ctam, ctbm, obj1, &
+        ! [note: removed dm1, dm2, idm1, etc. as no longer necessary]
+        real(wp) :: dct, dctl, abobj, cta, ctam, ctbm, obj1, &
                     slope, dx, dx1, fi, xi, dftdf1, alp, fff, a1, a2, a3, &
                     a4, f1, f2, f3, f4, cv1, cv2, cv3, cv4, app, alpca, &
                     alpfes, alpln, alpmin, alpnc, alpsav, alpsid, alptot, &
@@ -233,7 +236,7 @@ module conmin_module
                                     !! feasible solution cannot be obtained with `PHI = 100`, it is
                                     !! probable that no feasible solution exists.  The default value
                                     !! is usually adequate.
-        integer :: idm1, idm2, idm3, jdir, iobj, kobj, kcount, &
+        integer :: jdir, iobj, kobj, kcount, &
                    nfeas, mscal, ncobj, nvc, kount, icount, igood1, igood2, &
                    igood3, igood4, ibest, iii, nlnc, jgoto, ispace(2)
         integer :: ncal(2)  !! Bookkeeping information.  NCAL(1) gives the number of times
@@ -247,8 +250,10 @@ module conmin_module
         procedure :: cnmn01
         procedure :: cnmn02
         procedure :: cnmn03
+        procedure :: cnmn04
         procedure :: cnmn05
         procedure :: cnmn06
+        procedure :: cnmn07
     end type conmin_class
 
 contains
@@ -356,7 +361,9 @@ contains
             !                 CHECK FOR UNBOUNDED SOLUTION
             ! ------------------------------------------------------------------
             ! STOP IF OBJ IS LESS THAN -1.0D+40
-            if (me%obj <= -1.0e+40_wp) then
+            !if (me%obj <= -1.0e+40_wp) then ! original code
+            if (me%obj <= -huge(1.0_real32)) then ! JW : replaced with this. note this is single precision huge (~3.0e38)
+                                                  ! This is so it will not overflow if using single precision real numbers.
                 if (me%iprint > 0) write (me%iunit, 5100)
                 go to 520
             end if
@@ -378,21 +385,6 @@ contains
             if (me%iprint > 0) write (me%iunit, 5000) me%linobj, me%ncon, me%nside
             return
         end if
-        me%idm1 = me%itrm
-        me%idm2 = me%itmax
-        me%idm3 = me%icndir
-        me%dm1 = me%delfun
-        me%dm2 = me%dabfun
-        me%dm3 = me%ct
-        me%dm4 = me%ctmin
-        me%dm5 = me%ctl
-        me%dm6 = me%ctlmin
-        me%dm7 = me%theta
-        me%dm8 = me%phi
-        me%dm9 = me%fdch
-        me%dm10 = me%fdchm
-        me%dm11 = me%abobj1
-        me%dm12 = me%alphax
         ! ------------------------------------------------------------------
         !                            DEFAULTS
         ! ------------------------------------------------------------------
@@ -480,7 +472,7 @@ contains
             else
                 do i = 1, me%ndv
                     si = abs(scal(i))
-                    if (si < 1.0e-20_wp) si = 1.0e-5_wp
+                    if (si < me%small) si = 1.0e-5_wp
                     scal(i) = si
                     si = 1.0_wp/si
                     x(i) = x(i)*si
@@ -796,7 +788,7 @@ contains
         ! ------------------------------------------------------------------
         ! ******************  DETERMINE SEARCH DIRECTION *******************
         ! ------------------------------------------------------------------
-        me%alp = 1.0e+20_wp
+        me%alp = me%large
         if (me%nac > 0) go to 340
         ! ------------------------------------------------------------------
         !                    UNCONSTRAINED FUNCTION
@@ -864,7 +856,7 @@ contains
                 if (c1 > ctc) then
                     alp1 = dot_product(s(1:me%ndv), a(1:me%ndv, i))
                     alp1 = alp1*a(ndv2, i)
-                    if (abs(alp1) >= 1.0e-20_wp) then
+                    if (abs(alp1) >= me%small) then
                         alp1 = -c1/alp1
                         if (alp1 > me%alp) me%alp = alp1
                     end if
@@ -874,17 +866,17 @@ contains
         ! ------------------------------------------------------------------
         !                   LIMIT CHANCE TO ABOBJ1*OBJ
         ! ------------------------------------------------------------------
-380     alp1 = 1.0e+20_wp
+380     alp1 = me%large
         si = abs(me%obj)
         if (si < 0.01_wp) si = 0.01_wp
-        if (abs(me%slope) > 1.0e-20_wp) alp1 = me%abobj1*si/me%slope
+        if (abs(me%slope) > me%small) alp1 = me%abobj1*si/me%slope
         alp1 = abs(alp1)
         if (me%nvc > 0) alp1 = 10.0_wp*alp1
         if (alp1 < me%alp) me%alp = alp1
         ! ------------------------------------------------------------------
         !               LIMIT CHANGE IN VARIABLE TO ALPHAX
         ! ------------------------------------------------------------------
-        alp11 = 1.0e+20_wp
+        alp11 = me%large
         do i = 1, me%ndv
             si = abs(s(i))
             me%xi = abs(x(i))
@@ -895,8 +887,8 @@ contains
         end do
         if (me%nvc > 0) alp11 = 10.0_wp*alp11
         if (alp11 < me%alp) me%alp = alp11
-        if (me%alp > 1.0e+20_wp) me%alp = 1.0e+20_wp
-        if (me%alp <= 1.0e-20_wp) me%alp = 1.0e-20_wp
+        if (me%alp > me%large) me%alp = me%large
+        if (me%alp <= me%small) me%alp = me%small
         if (me%iprint >= 3) then
             write (me%iunit, 9100)
             do i = 1, me%ndv, 6
@@ -1151,24 +1143,6 @@ contains
             if (me%nfdg /= 0) write (me%iunit, 10600) me%ncal(2)
             if (me%ncon > 0 .and. me%nfdg == 1) write (me%iunit, 10700) me%ncal(2)
         end if
-        ! ------------------------------------------------------------------
-        !               RE-SET BASIC PARAMETERS TO INPUT VALUES
-        ! ------------------------------------------------------------------
-        me%itrm = me%idm1
-        me%itmax = me%idm2
-        me%icndir = me%idm3
-        me%delfun = me%dm1
-        me%dabfun = me%dm2
-        me%ct = me%dm3
-        me%ctmin = me%dm4
-        me%ctl = me%dm5
-        me%ctlmin = me%dm6
-        me%theta = me%dm7
-        me%phi = me%dm8
-        me%fdch = me%dm9
-        me%fdchm = me%dm10
-        me%abobj1 = me%dm11
-        me%alphax = me%dm12
         me%igoto = 0
 
 580     if (me%nscal == 0 .or. me%igoto == 0) return
@@ -1411,7 +1385,7 @@ contains
         ! FIND DIRECTION S
         fletcher_reeves = .false.
         if (ncalc == 1) then
-            if (dftdf1 >= 1.0e-20_wp) then
+            if (dftdf1 >= me%small) then
                 ! FIND FLETCHER-REEVES CONJUGATE DIRECTION
                 beta = dftdf/dftdf1
                 slope = 0.0_wp
@@ -1436,7 +1410,7 @@ contains
             s2 = abs(s(i))
             if (s2 > s1) s1 = s2
         end do
-        if (s1 < 1.0e-20_wp) s1 = 1.0e-20_wp
+        if (s1 < me%small) s1 = me%small
         s1 = 1.0_wp/s1
         dftdf1 = dftdf*s1
         s(1:me%ndv) = s1*s(1:me%ndv)
@@ -1552,7 +1526,7 @@ contains
         ! **********        2-POINT QUADRATIC INTERPOLATION       **********
         ! ------------------------------------------------------------------
 60      ii = 1
-        call cnmn04(ii, app, zro, a1, f1, slope, a2, f2, zro, zro, zro, zro)
+        call me%cnmn04(ii, app, zro, a1, f1, slope, a2, f2, zro, zro, zro, zro)
         if (app < zro .or. app > a2) go to 90
         f3 = f2
         a3 = a2
@@ -1599,7 +1573,7 @@ contains
         ! **********       3-POINT CUBIC INTERPOLATION      **********
         ! ------------------------------------------------------------------
 130     ii = 3
-        call cnmn04(ii, app, zro, a1, f1, slope, a2, f2, a3, f3, zro, zro)
+        call me%cnmn04(ii, app, zro, a1, f1, slope, a2, f2, a3, f3, zro, zro)
         if (app < zro .or. app > a3) go to 170
         ! ------------------------------------------------------------------
         ! UPDATE DESIGN VECTOR AND FUNCTION VALUE.
@@ -1663,7 +1637,7 @@ contains
         end if
 
 200     ii = 4
-        call cnmn04(ii, app, a1, a1, f1, slope, a2, f2, a3, f3, a4, f4)
+        call me%cnmn04(ii, app, a1, a1, f1, slope, a2, f2, a3, f3, a4, f4)
         if (app <= a1) then
             ap = a1 - alp
             alp = a1
@@ -1735,7 +1709,7 @@ contains
 
     end subroutine cnmn03
 
-    subroutine cnmn04(ii, xbar, eps, x1, y1, slope, x2, y2, x3, y3, x4, y4)
+    subroutine cnmn04(me, ii, xbar, eps, x1, y1, slope, x2, y2, x3, y3, x4, y4)
 
         !!  Routine to find first `xbar>=eps` corresponding to a minimum
         !!  of a one-dimensional real function by polynomial interpolation.
@@ -1748,6 +1722,7 @@ contains
         !!  INTERPOLATION, CONSISTANT WITH INPUT DATA, WILL BE ATTEMPTED,
         !!  AND II WILL BE CHANGED ACCORDINGLY.
 
+        class(conmin_class), intent(inout) :: me
         integer, intent(inout)   :: ii !! CALCULATION CONTROL:
                                        !!
                                        !!  1.  2-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, SLOPE, X2 AND Y2.
@@ -1767,7 +1742,7 @@ contains
         xbar1 = eps - 1.0_wp
         xbar = xbar1
         x21 = x2 - x1
-        if (abs(x21) < 1.0e-20_wp) return
+        if (abs(x21) < me%small) return
         nslop = mod(ii, 2)
         select case (ii)
         case (1); go to 10
@@ -1781,9 +1756,9 @@ contains
         ! ------------------------------------------------------------------
 10      ii = 1
         dx = x1 - x2
-        if (abs(dx) < 1.0e-20_wp) return
+        if (abs(dx) < me%small) return
         aa = (slope + (y2 - y1)/dx)/dx
-        if (aa < 1.0e-20_wp) return
+        if (aa < me%small) return
         bb = slope - 2.0_wp*aa*x1
         xbar = -0.5_wp*bb/aa
         if (xbar < eps) xbar = xbar1
@@ -1797,9 +1772,9 @@ contains
         x31 = x3 - x1
         x32 = x3 - x2
         qq = x21*x31*x32
-        if (abs(qq) < 1.0e-20_wp) return
+        if (abs(qq) < me%small) return
         aa = (y1*x32 - y2*x31 + y3*x21)/qq
-        if (aa >= 1.0e-20_wp) then
+        if (aa >= me%small) then
             bb = (y2 - y1)/x21 - aa*(x1 + x2)
             xbar = -0.5_wp*bb/aa
             if (xbar < eps) xbar = xbar1
@@ -1816,12 +1791,12 @@ contains
         x31 = x3 - x1
         x32 = x3 - x2
         qq = x21*x31*x32
-        if (abs(qq) < 1.0e-20_wp) return
+        if (abs(qq) < me%small) return
         x11 = x1*x1
         dnom = x2*x2*x31 - x11*x32 - x3*x3*x21
-        if (abs(dnom) < 1.0e-20_wp) go to 20
+        if (abs(dnom) < me%small) go to 20
         aa = ((x31*x31*(y2 - y1) - x21*x21*(y3 - y1))/(x31*x21) - slope*x32)/dnom
-        if (abs(aa) < 1.0e-20_wp) go to 20
+        if (abs(aa) < me%small) go to 20
         bb = ((y2 - y1)/x21 - slope - aa*(x2*x2 + x1*x2 - 2.0_wp*x11))/x21
         cc = slope - 3.0_wp*aa*x11 - 2.0_wp*bb*x1
         bac = bb*bb - 3.0_wp*aa*cc
@@ -1858,7 +1833,7 @@ contains
             bb = (q3 - q1*aa)/q2
             cc = (y2 - y1 - aa*(x222 - x111))/x21 - bb*(x1 + x2)
             bac = bb*bb - 3.0_wp*aa*cc
-            if (abs(aa) >= 1.0e-20_wp .and. bac >= 0.0_wp) then
+            if (abs(aa) >= me%small .and. bac >= 0.0_wp) then
                 bac = sqrt(bac)
                 xbar = (bac - bb)/(3.0_wp*aa)
                 if (xbar < eps) xbar = xbar1
@@ -1934,7 +1909,7 @@ contains
                 do j = 1, me%ndv
                     a1 = a1 + a(j, i)**2
                 end do
-                if (a1 < 1.0e-20_wp) a1 = 1.0e-20_wp
+                if (a1 < me%small) a1 = me%small
                 a1 = sqrt(a1)
                 a(ndv2, i) = a1
                 a1 = 1.0_wp/a1
@@ -1989,7 +1964,7 @@ contains
         do i = 1, me%ndv
             a1 = a1 + df(i)**2
         end do
-        if (a1 < 1.0e-20_wp) a1 = 1.0e-20_wp
+        if (a1 < me%small) a1 = me%small
         a1 = sqrt(a1)
         a1 = 1.0_wp/a1
         do i = 1, me%ndv
@@ -2166,7 +2141,7 @@ contains
         ! ------------------------------------------------------------------
 10      a2 = alpsav
         icount = icount + 1
-        alpsid = 1.0e+20_wp
+        alpsid = me%large
         ! INITIAL ALPHA AND OBJ.
         alp = 0.0_wp
         f1 = me%obj
@@ -2178,7 +2153,7 @@ contains
             ! ------------------------------------------------------------------
             do i = 1, me%ndv
                 si = s(i)
-                if (abs(si) <= 1.0e-20_wp) then
+                if (abs(si) <= me%small) then
                     ! ITH COMPONENT OF S IS SMALL.  SET TO ZERO.
                     s(i) = 0.0_wp
                     slope = slope - si*df(i)
@@ -2335,7 +2310,7 @@ contains
                 !                    LINEAR CONSTRAINT
                 ! ------------------------------------------------------------------
                 if (c1 >= 1.0e-5_wp .and. c1 <= ctbm) go to 100
-                call cnmn07(ii, alp, zro, zro, c1, a2, c2, zro, zro)
+                call me%cnmn07(ii, alp, zro, zro, c1, a2, c2, zro, zro)
                 if (alp <= 0.0_wp) go to 100
                 if (c1 > ctbm .and. alp > alpfes) alpfes = alp
                 if (c1 < me%ctl .and. alp < alpln) alpln = alp
@@ -2344,7 +2319,7 @@ contains
                 !                 NON-LINEAR CONSTRAINT
                 ! ------------------------------------------------------------------
                 if (c1 < 1.0e-5_wp .or. c1 > ctam) then
-                    call cnmn07(ii, alp, zro, zro, c1, a2, c2, zro, zro)
+                    call me%cnmn07(ii, alp, zro, zro, c1, a2, c2, zro, zro)
                     if (alp > 0.0_wp) then
                         if (c1 > ctam .and. alp > alpfes) alpfes = alp
                         if (c1 < me%ct .and. alp < alpnc) alpnc = alp
@@ -2356,7 +2331,7 @@ contains
         end if
         if (me%linobj <= 0 .and. slope < 0.0_wp) then
             ! CALCULATE ALPHA TO MINIMIZE FUNCTION.
-            call cnmn04(ii, alpmin, zro, zro, f1, slope, a2, f2, zro, zro, zro, zro)
+            call me%cnmn04(ii, alpmin, zro, zro, f1, slope, a2, f2, zro, zro, zro, zro)
         end if
         ! ------------------------------------------------------------------
         !                     PROPOSED MOVE
@@ -2371,7 +2346,7 @@ contains
         if (a3 > alpnc) a3 = alpnc
         if (a3 > alpln) a3 = alpln
         ! MAKE A3 NON-ZERO.
-        if (a3 <= 1.0e-20_wp) a3 = 1.0e-20_wp
+        if (a3 <= me%small) a3 = me%small
         ! IF A3=A2=ALPSID AND F2 IS BEST, GO INVOKE SIDE CONSTRAINT
         ! MODIFICATION.
         alpb = 1.0_wp-a2/a3
@@ -2464,10 +2439,10 @@ contains
         if (me%linobj /= 0 .and. nlnc == me%ncon) go to 340
         ! IF A3 = ALPLN AND F3 IS BOTH GOOD AND BEST RETURN.
         alpb = 1.0_wp-alpln/a3
-        if (abs(alpb) < 1.0e-20_wp .and. ibest == 3 .and. igood3 == 0) go to 340
+        if (abs(alpb) < me%small .and. ibest == 3 .and. igood3 == 0) go to 340
         ! IF A3 = ALPSID AND F3 IS BEST, GO INVOKE SIDE CONSTRAINT MODIFICATION.
         alpa = 1.0_wp-alpsid/a3
-        if (abs(alpa) < 1.0e-20_wp .and. ibest == 3) go to 10
+        if (abs(alpa) < me%small .and. ibest == 3) go to 10
         ! ------------------------------------------------------------------
         ! **********            3 - POINT INTERPOLATION            *********
         ! ------------------------------------------------------------------
@@ -2496,21 +2471,21 @@ contains
                 ! ------------------------------------------------------------------
                 if (c1 <= ctbm) go to 190
                 ii = 1
-                call cnmn07(ii, alp, zro, zro, c1, a3, c3, zro, zro)
+                call me%cnmn07(ii, alp, zro, zro, c1, a3, c3, zro, zro)
                 if (alp > alpfes) alpfes = alp
             else
                 ! ------------------------------------------------------------------
                 !                 NON-LINEAR CONSTRAINT
                 ! ------------------------------------------------------------------
                 ii = 2
-                call cnmn07(ii, alp, zro, zro, c1, a2, c2, a3, c3)
+                call me%cnmn07(ii, alp, zro, zro, c1, a2, c2, a3, c3)
                 if (alp > zro) then
                     if (c1 < me%ct .or. c1 > 0.0_wp) then
                         if (c1 > ctam .or. c1 < 0.0_wp) go to 180
                     end if
                     ! ALP IS MINIMUM MOVE.  UPDATE FOR NEXT CONSTRAINT ENCOUNTER.
                     alpa = alp
-                    call cnmn07(ii, alp, alpa, zro, c1, a2, c2, a3, c3)
+                    call me%cnmn07(ii, alp, alpa, zro, c1, a2, c2, a3, c3)
                     if (alp < alpca .and. alp >= alpa) alpca = alp
                     go to 190
 
@@ -2527,7 +2502,7 @@ contains
             ! ------------------------------------------------------------------
             ii = 3
             if (a2 > a3 .and. (igood2 == 0 .and. ibest == 2)) ii = 2
-            call cnmn04(ii, alpmin, zro, zro, f1, slope, a2, f2, a3, f3, zro, zro)
+            call me%cnmn04(ii, alpmin, zro, zro, f1, slope, a2, f2, a3, f3, zro, zro)
         end if
         ! ------------------------------------------------------------------
         !                   PROPOSED MOVE
@@ -2554,7 +2529,7 @@ contains
         end if
         ! IF A4=A3 AND IGOOD1=0 AND IGOOD3=1, SET A4=.9*A3.
         alp = a4 - a3
-        if (igood1 == 0 .and. igood3 == 1 .and. abs(alp) < 1.0e-20_wp) a4 = 0.9_wp*a3
+        if (igood1 == 0 .and. igood3 == 1 .and. abs(alp) < me%small) a4 = 0.9_wp*a3
         ! ------------------------------------------------------------------
         !               MOVE A DISTANCE A4*S
         ! ------------------------------------------------------------------
@@ -2671,7 +2646,7 @@ contains
 
     end subroutine cnmn06
 
-    subroutine cnmn07(ii, xbar, eps, x1, y1, x2, y2, x3, y3)
+    subroutine cnmn07(me, ii, xbar, eps, x1, y1, x2, y2, x3, y3)
 
         !!  Routine to find first `xbar>=eps `corresponding to a real zero
         !!  of a one-dimensional function by polynomial interpolation.
@@ -2684,6 +2659,7 @@ contains
         !!  interpolation, consistant with input data, will be attempted and
         !!  ii will be changed accordingly.
 
+        class(conmin_class), intent(inout) :: me
         integer, intent(inout)     :: ii  !! CALCULATION CONTROL:
                                           !!
                                           !! 1.  2-POINT LINEAR INTERPOLATION, GIVEN X1, Y1, X2 AND Y2.
@@ -2699,7 +2675,7 @@ contains
         xbar = xbar1
         jj = 0
         x21 = x2 - x1
-        if (abs(x21) < 1.0e-20_wp) return
+        if (abs(x21) < me%small) return
         if (ii == 2) then
             ! ------------------------------------------------------------------
             !                 ii=2: 3-point quadratic interpolation
@@ -2708,9 +2684,9 @@ contains
             x31 = x3 - x1
             x32 = x3 - x2
             qq = x21*x31*x32
-            if (abs(qq) < 1.0e-20_wp) return
+            if (abs(qq) < me%small) return
             aa = (y1*x32 - y2*x31 + y3*x21)/qq
-            if (abs(aa) >= 1.0e-20_wp) then
+            if (abs(aa) >= me%small) then
                 bb = (y2 - y1)/x21 - aa*(x1 + x2)
                 cc = y1 - x1*(aa*x1 + bb)
                 bac = bb*bb - 4.0_wp*aa*cc
@@ -2735,7 +2711,7 @@ contains
         if (jj /= 0 .and. yy >= 0.0_wp) then
             ! interpolate between x2 and x3.
             dy = y3 - y2
-            if (abs(dy) >= 1.0e-20_wp) then
+            if (abs(dy) >= me%small) then
                 xbar = x2 + y2*(x2 - x3)/dy
                 if (xbar < eps) xbar = xbar1
                 return
@@ -2743,7 +2719,7 @@ contains
         end if
         dy = y2 - y1
         ! interpolate between x1 and x2.
-        if (abs(dy) < 1.0e-20_wp) return
+        if (abs(dy) < me%small) return
         xbar = x1 + y1*(x1 - x2)/dy
         if (xbar < eps) xbar = xbar1
 
