@@ -1947,27 +1947,29 @@ contains
         ! CHECK FOR ZERO GRADIENT.  PROGRAM CHANGE-FEB, 1981, GV.
         ! ------------------------------------------------------------------
         i = 0
-40      i = i + 1
-50      if (a(ndv2, i) <= 1.0e-6_wp) then
-            ! ZERO GRADIENT IS FOUND.  WRITE ERROR MESSAGE.
-            if (me%iprint >= 2) write (me%iunit, 5000) ic(i)
-            ! REDUCE NAC BY ONE.
-            me%nac = me%nac - 1
-            ! SHIFT COLUMNS OF A AND ROWS OF IC IF I<=NAC.
-            if (i > me%nac) go to 80
-            ! SHIFT.
-            do j = i, me%nac
-                j1 = j + 1
-                ic(j) = ic(j1)
-                do k = 1, ndv2
-                    a(k, j) = a(k, j1)
+        main : do
+            i = i + 1
+            do
+                if (a(ndv2, i) > 1.0e-6_wp) exit
+                ! ZERO GRADIENT IS FOUND.  WRITE ERROR MESSAGE.
+                if (me%iprint >= 2) write (me%iunit, 5000) ic(i)
+                ! REDUCE NAC BY ONE.
+                me%nac = me%nac - 1
+                ! SHIFT COLUMNS OF A AND ROWS OF IC IF I<=NAC.
+                if (i > me%nac) exit main
+                ! SHIFT.
+                do j = i, me%nac
+                    j1 = j + 1
+                    ic(j) = ic(j1)
+                    do k = 1, ndv2
+                        a(k, j) = a(k, j1)
+                    end do
                 end do
+                if (i > me%nac) exit
             end do
-            if (i <= me%nac) go to 50
-        end if
-        if (i < me%nac) go to 40
-
-80      if (me%nac <= 0) return
+            if (i >= me%nac) exit
+        end do main
+        if (me%nac <= 0) return
         nac1 = me%nac + 1
         ! DETERMINE IF CONSTRAINTS ARE VIOLATED.
         nvc = 0
@@ -2065,32 +2067,28 @@ contains
         do j = 1, me%nac
             ! S DOT DEL(G).
             sg = dot_product(s(1:me%ndv), a(1:me%ndv, j))
-!           IF(SG>0.) GO TO 176
-!
-!  THIS CHANGE MADE ON 4/8/81 FOR G. VANDERPLAATS
-
-            if (sg > 1.0e-04_wp) go to 240
+            ! IF(SG>0.) GO TO 176
+            ! THIS CHANGE MADE ON 4/8/81 FOR G. VANDERPLAATS
+            if (sg > 1.0e-04_wp) then
+                ! S-VECTOR IS NOT FEASIBLE DUE TO SOME NUMERICAL PROBLEM.
+                if (me%iprint >= 2) write (me%iunit, 5100)
+                s(ndv1) = 0.0_wp
+                nvc = 0
+                return
+            end if
             ! FEASIBLE FOR THIS CONSTRAINT.  CONTINUE.
         end do
-        go to 250
-
-        ! S-VECTOR IS NOT FEASIBLE DUE TO SOME NUMERICAL PROBLEM.
-240     if (me%iprint >= 2) write (me%iunit, 5100)
-        s(ndv1) = 0.0_wp
-        nvc = 0
-        return
 
         ! ------------------------------------------------------------------
         !              NORMALIZE S TO MAX ABS OF UNITY
         ! ------------------------------------------------------------------
-250     s1 = 0.0_wp
+        s1 = 0.0_wp
         do i = 1, me%ndv
             a1 = abs(s(i))
             if (a1 > s1) s1 = a1
         end do
-!       IF (S1<1.0E-10) RETURN
-!
-!  E-10 CHANGED TO E-04 ON 1/12/81
+        ! IF (S1<1.0E-10) RETURN
+        ! E-10 CHANGED TO E-04 ON 1/12/81
 
         if (s1 < 1.0e-04_wp) return
         s1 = 1.0_wp/s1
