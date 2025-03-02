@@ -12,7 +12,7 @@ INTEGER    :: ms1(22), isc(11), ic(11)
 INTEGER    :: i, n1, n2, n3, n4, n5, nlim
 type(conmin_class) :: solver
 
-OPEN (UNIT=6,FILE='EXOUT1.TXT',STATUS='REPLACE')
+OPEN (newunit=solver%iunit,FILE='EXOUT1.TXT',STATUS='REPLACE')
 
 !  INITIALIZE
 solver%infog = 0
@@ -68,7 +68,7 @@ DO  i = 1, nlim
   IF (solver%igoto == 0) EXIT
 END DO
 
-CLOSE (6)
+CLOSE (solver%iunit)
 
 CONTAINS
 

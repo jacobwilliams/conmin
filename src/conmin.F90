@@ -136,7 +136,8 @@ module conmin_module
                             !! lower and upper bounds on the unbounded variables must be taken
                             !! as very large negative and positive values respectively
                             !! (i.e., `VLB(I) = -1.0E+10`, `VUB(I) = 1.0E+10`).
-        integer :: iprint = 0   !! Print control.  All printing is done on unit number 6.
+        integer :: iunit = output_unit !! Unit number for printing. Should be non-zero.
+        integer :: iprint = 0   !! Print control.  All printing is done on unit number `iunit`.
                                 !!
                                 !!  * `iprint=0`:  Print nothing.
                                 !!  * `iprint=1`:  Print initial and final function information.
@@ -356,7 +357,7 @@ contains
             ! ------------------------------------------------------------------
             ! STOP IF OBJ IS LESS THAN -1.0D+40
             if (me%obj <= -1.0e+40_wp) then
-                write (6, 5100)
+                if (me%iprint > 0) write (me%iunit, 5100)
                 go to 520
             end if
             select case (me%igoto)
@@ -370,11 +371,11 @@ contains
         ! ------------------------------------------------------------------
         !                  SAVE INPUT CONTROL PARAMETERS
         ! ------------------------------------------------------------------
-        if (me%iprint > 0) write (6, 7500)
+        if (me%iprint > 0) write (me%iunit, 7500)
         if (.not. (me%linobj == 0 .or. (me%ncon > 0 .or. me%nside > 0))) then
             ! TOTALLY UNCONSTRAINED FUNCTION WITH LINEAR OBJECTIVE.
             ! SOLUTION IS UNBOUNDED.
-            write (6, 5000) me%linobj, me%ncon, me%nside
+            if (me%iprint > 0) write (me%iunit, 5000) me%linobj, me%ncon, me%nside
             return
         end if
         me%idm1 = me%itrm
@@ -450,21 +451,21 @@ contains
         if (me%nside /= 0) then
             do i = 1, me%ndv
                 if (vlb(i) > vub(i)) then
-                    xx = .5*(vlb(i) + vub(i))
+                    xx = 0.5_wp*(vlb(i) + vub(i))
                     x(i) = xx
                     vlb(i) = xx
                     vub(i) = xx
-                    write (6, 6500) i
+                    if (me%iprint > 0) write (me%iunit, 6500) i
                 end if
                 xx = x(i) - vlb(i)
                 if (xx < 0.0_wp) then
                     ! LOWER BOUND VIOLATED.
-                    write (6, 6600) x(i), vlb(i), i
+                    if (me%iprint > 0) write (me%iunit, 6600) x(i), vlb(i), i
                     x(i) = vlb(i)
                 else
                     xx = vub(i) - x(i)
                     if (xx < 0.0_wp) then
-                        write (6, 6700) x(i), vub(i), i
+                        if (me%iprint > 0) write (me%iunit, 6700) x(i), vub(i), i
                         x(i) = vub(i)
                     end if
                 end if
@@ -506,43 +507,43 @@ contains
             !                PRINT INITIAL DESIGN INFORMATION
             ! ------------------------------------------------------------------
             if (me%iprint > 1) then
-                if (me%nside == 0 .and. me%ncon == 0) write (6, 8200)
-                if (me%nside /= 0 .or. me%ncon > 0) write (6, 7600)
-                write (6, 7700) me%iprint, me%ndv, me%itmax, me%ncon, me%nside, me%icndir, me%nscal, &
+                if (me%nside == 0 .and. me%ncon == 0) write (me%iunit, 8200)
+                if (me%nside /= 0 .or. me%ncon > 0) write (me%iunit, 7600)
+                write (me%iunit, 7700) me%iprint, me%ndv, me%itmax, me%ncon, me%nside, me%icndir, me%nscal, &
                                 me%nfdg, me%linobj, me%itrm, n1, n2, n3, n4, n5
-                write (6, 7900) me%ct, me%ctmin, me%ctl, me%ctlmin, me%theta, me%phi, me%delfun, me%dabfun
-                write (6, 7800) me%fdch, me%fdchm, me%alphax, me%abobj1
+                write (me%iunit, 7900) me%ct, me%ctmin, me%ctl, me%ctlmin, me%theta, me%phi, me%delfun, me%dabfun
+                write (me%iunit, 7800) me%fdch, me%fdchm, me%alphax, me%abobj1
                 if (me%nside /= 0) then
-                    write (6, 8000)
+                    write (me%iunit, 8000)
                     do i = 1, me%ndv, 6
                         m1 = min(me%ndv, i + 5)
-                        write (6, 5400) i, vlb(i:m1)
+                        write (me%iunit, 5400) i, vlb(i:m1)
                     end do
-                    write (6, 8100)
+                    write (me%iunit, 8100)
                     do i = 1, me%ndv, 6
                         m1 = min(me%ndv, i + 5)
-                        write (6, 5400) i, vub(i:m1)
+                        write (me%iunit, 5400) i, vub(i:m1)
                     end do
                 end if
                 if (me%nscal < 0) then
-                    write (6, 8300)
-                    write (6, 9900) scal(1:me%ndv)
+                    write (me%iunit, 8300)
+                    write (me%iunit, 9900) scal(1:me%ndv)
                 end if
                 if (me%ncon /= 0) then
                     if (me%nlnc /= 0 .and. me%nlnc /= me%ncon) then
-                        write (6, 5500)
+                        write (me%iunit, 5500)
                         do i = 1, me%ncon, 15
                             m1 = min(me%ncon, i + 14)
-                            write (6, 5600) i, isc(i:m1)
+                            write (me%iunit, 5600) i, isc(i:m1)
                         end do
                     else
-                        if (me%nlnc == me%ncon) write (6, 5700)
-                        if (me%nlnc == 0) write (6, 5800)
+                        if (me%nlnc == me%ncon) write (me%iunit, 5700)
+                        if (me%nlnc == 0) write (me%iunit, 5800)
                     end if
                 end if
             end if
-            write (6, 9700) me%obj
-            write (6, 9800)
+            write (me%iunit, 9700) me%obj
+            write (me%iunit, 9800)
             do i = 1, me%ndv
                 x1 = 1.
                 if (me%nscal /= 0) x1 = scal(i)
@@ -550,17 +551,17 @@ contains
             end do
             do i = 1, me%ndv, 6
                 m1 = min(me%ndv, i + 5)
-                write (6, 5400) i, g1(i:m1)
+                write (me%iunit, 5400) i, g1(i:m1)
             end do
             if (me%ncon /= 0) then
-                write (6, 10000)
+                write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
                     m1 = min(me%ncon, i + 5)
-                    write (6, 5400) i, g(i:m1)
+                    write (me%iunit, 5400) i, g(i:m1)
                 end do
             end if
         end if
-        if (me%iprint > 1) write (6, 8900)
+        if (me%iprint > 1) write (me%iunit, 8900)
         ! ------------------------------------------------------------------
         ! ********************  BEGIN MINIMIZATION  ************************
         ! ------------------------------------------------------------------
@@ -574,8 +575,8 @@ contains
 
 !       NFEAS=NFEAS+1
 !       IF (NFEAS>10) GO TO 810
-        if (me%iprint > 2) write (6, 8400) me%iter
-        if (me%iprint > 3 .and. me%ncon > 0) write (6, 8500) me%ct, me%ctl, me%phi
+        if (me%iprint > 2) write (me%iunit, 8400) me%iter
+        if (me%iprint > 3 .and. me%ncon > 0) write (me%iunit, 8500) me%ct, me%ctl, me%phi
         me%cta = abs(me%ct)
         if (me%ncobj /= 0) then
             ! ------------------------------------------------------------------
@@ -629,8 +630,8 @@ contains
                     end if
                 end do
                 if (.not. (me%iprint < 4 .or. (me%nscal < 0 .and. me%iter > 1))) then
-                    write (6, 8600)
-                    write (6, 9900) scal(1:me%ndv)
+                    write (me%iunit, 8600)
+                    write (me%iunit, 9900) scal(1:me%ndv)
                 end if
             end if
         end if
@@ -697,16 +698,16 @@ contains
                 end do
             end if
             m3 = m2 - n3
-            write (6, 5900) m1
+            write (me%iunit, 5900) m1
             if (m1 /= 0) then
-                write (6, 6000)
-                write (6, 10100) ms1(1:m1)
+                write (me%iunit, 6000)
+                write (me%iunit, 10100) ms1(1:m1)
             end if
-            write (6, 6100) m3
+            write (me%iunit, 6100) m3
             if (m3 /= 0) then
-                write (6, 6000)
+                write (me%iunit, 6000)
                 m3 = n3 + 1
-                write (6, 10100) ms1(m3:m2)
+                write (me%iunit, 10100) ms1(m3:m2)
             end if
         end if
         ! ------------------------------------------------------------------
@@ -761,34 +762,34 @@ contains
             ! ------------------------------------------------------------------
             ! PRINT ACTIVE SIDE CONSTRAINT NUMBERS.
             if (me%iprint >= 3) then
-                write (6, 6200) m1
+                write (me%iunit, 6200) m1
                 if (m1 /= 0) then
-                    write (6, 6300)
-                    write (6, 10100) (ms1(j), j=1, m1)
+                    write (me%iunit, 6300)
+                    write (me%iunit, 10100) (ms1(j), j=1, m1)
                 end if
             end if
         end if
         ! PRINT GRADIENTS OF ACTIVE AND VIOLATED CONSTRAINTS.
         if (me%iprint >= 4) then
-            write (6, 8700)
+            write (me%iunit, 8700)
             do i = 1, me%ndv, 6
                 m1 = min(me%ndv, i + 5)
-                write (6, 5400) i, df(i:m1)
+                write (me%iunit, 5400) i, df(i:m1)
             end do
             if (me%nac /= 0) then
-                write (6, 8800)
+                write (me%iunit, 8800)
                 do i = 1, me%nac
                     m1 = ic(i)
                     m2 = m1 - me%ncon
                     m3 = 0
                     if (m2 > 0) m3 = abs(ms1(m2))
-                    if (m2 <= 0) write (6, 5200) m1
-                    if (m2 > 0) write (6, 5300) m3
+                    if (m2 <= 0) write (me%iunit, 5200) m1
+                    if (m2 > 0) write (me%iunit, 5300) m3
                     do k = 1, me%ndv, 6
                         m1 = min(me%ndv, k + 5)
-                        write (6, 5400) k, (a(j, i), j=k, m1)
+                        write (me%iunit, 5400) k, (a(j, i), j=k, m1)
                     end do
-                    write (6, 8900)
+                    write (me%iunit, 8900)
                 end do
             end if
         end if
@@ -839,12 +840,12 @@ contains
 !       IF (NVC==0 .AND. NFEAS>1) ABOBJ1=.05
 !       IF (NVC==0) NFEAS=0
         if (me%iprint >= 3) then
-            write (6, 9000)
+            write (me%iunit, 9000)
             do i = 1, me%nac, 6
                 m1 = min(me%nac, i + 5)
-                write (6, 5400) i, (a(ndv1, j), j=i, m1)
+                write (me%iunit, 5400) i, (a(ndv1, j), j=i, m1)
             end do
-            write (6, 7400) s(ndv1)
+            write (me%iunit, 7400) s(ndv1)
         end if
         ! ------------------------------------------------------------------
         ! ****************** ONE-DIMENSIONAL SEARCH ************************
@@ -897,12 +898,12 @@ contains
         if (me%alp > 1.0e+20_wp) me%alp = 1.0e+20_wp
         if (me%alp <= 1.0e-20_wp) me%alp = 1.0e-20_wp
         if (me%iprint >= 3) then
-            write (6, 9100)
+            write (me%iunit, 9100)
             do i = 1, me%ndv, 6
                 m1 = min(me%ndv, i + 5)
-                write (6, 5400) i, (s(j), j=i, m1)
+                write (me%iunit, 5400) i, (s(j), j=i, m1)
             end do
-            write (6, 6400) me%slope, me%alp
+            write (me%iunit, 6400) me%slope, me%alp
         end if
         if (me%ncon > 0 .or. me%nside > 0) go to 420
         ! ------------------------------------------------------------------
@@ -958,20 +959,20 @@ contains
         ! ------------------------------------------------------------------
         ! PRINT MOVE PARAMETER, NEW X-VECTOR AND CONSTRAINTS.
         if (me%iprint >= 3) then
-            write (6, 9200) me%alp
+            write (me%iunit, 9200) me%alp
         end if
         if (me%iprint >= 2) then
             if (objb <= 0.) then
-                if (me%iprint == 2) write (6, 9300) me%iter, me%obj
-                if (me%iprint > 2) write (6, 9400) me%obj
+                if (me%iprint == 2) write (me%iunit, 9300) me%iter, me%obj
+                if (me%iprint > 2) write (me%iunit, 9400) me%obj
             else
                 if (me%iprint /= 2) then
-                    write (6, 9500) me%obj
+                    write (me%iunit, 9500) me%obj
                 else
-                    write (6, 9600) me%iter, me%obj
+                    write (me%iunit, 9600) me%iter, me%obj
                 end if
             end if
-            write (6, 9800)
+            write (me%iunit, 9800)
             do i = 1, me%ndv
                 ff1 = 1.
                 if (me%nscal /= 0) ff1 = scal(i)
@@ -979,13 +980,13 @@ contains
             end do
             do i = 1, me%ndv, 6
                 m1 = min(me%ndv, i + 5)
-                write (6, 5400) i, (g1(j), j=i, m1)
+                write (me%iunit, 5400) i, (g1(j), j=i, m1)
             end do
             if (me%ncon /= 0) then
-                write (6, 10000)
+                write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
                     m1 = min(me%ncon, i + 5)
-                    write (6, 5400) i, (g(j), j=i, m1)
+                    write (me%iunit, 5400) i, (g(j), j=i, m1)
                 end do
             end if
         end if
@@ -1051,7 +1052,7 @@ contains
             end if
         end if
 
-520     if (me%nac >= n3) write (6, 10200)
+520     if (me%nac >= n3 .and. me%iprint > 0) write (me%iunit, 10200)
         ! ------------------------------------------------------------------
         ! ****************  FINAL FUNCTION INFORMATION  ********************
         ! ------------------------------------------------------------------
@@ -1070,18 +1071,18 @@ contains
         !                       PRINT FINAL RESULTS
         ! ------------------------------------------------------------------
         if (me%iprint /= 0 .and. me%nac < n3) then
-            write (6, 10300)
-            write (6, 9500) me%obj
-            write (6, 9800)
+            write (me%iunit, 10300)
+            write (me%iunit, 9500) me%obj
+            write (me%iunit, 9800)
             do i = 1, me%ndv, 6
                 m1 = min(me%ndv, i + 5)
-                write (6, 5400) i, (x(j), j=i, m1)
+                write (me%iunit, 5400) i, (x(j), j=i, m1)
             end do
             if (me%ncon /= 0) then
-                write (6, 10000)
+                write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
                     m1 = min(me%ncon, i + 5)
-                    write (6, 5400) i, (g(j), j=i, m1)
+                    write (me%iunit, 5400) i, (g(j), j=i, m1)
                 end do
                 ! DETERMINE WHICH CONSTRAINTS ARE ACTIVE AND PRINT.
                 me%nac = 0
@@ -1100,15 +1101,15 @@ contains
                         ms1(me%nvc) = i
                     end if
                 end do
-                write (6, 5900) me%nac
+                write (me%iunit, 5900) me%nac
                 if (me%nac /= 0) then
-                    write (6, 6000)
-                    write (6, 10100) ic(1:me%nac)
+                    write (me%iunit, 6000)
+                    write (me%iunit, 10100) ic(1:me%nac)
                 end if
-                write (6, 6100) me%nvc
+                write (me%iunit, 6100) me%nvc
                 if (me%nvc /= 0) then
-                    write (6, 6000)
-                    write (6, 10100) ms1(1:me%nvc)
+                    write (me%iunit, 6000)
+                    write (me%iunit, 10100) ms1(1:me%nvc)
                 end if
             end if
             if (me%nside /= 0) then
@@ -1133,22 +1134,22 @@ contains
                         ms1(me%nac) = i
                     end if
                 end do
-                write (6, 6200) me%nac
+                write (me%iunit, 6200) me%nac
                 if (me%nac /= 0) then
-                    write (6, 6300)
-                    write (6, 10100) (ms1(j), j=1, me%nac)
+                    write (me%iunit, 6300)
+                    write (me%iunit, 10100) (ms1(j), j=1, me%nac)
                 end if
             end if
-            write (6, 6800)
-            if (me%iter >= me%itmax) write (6, 6900)
-            if (me%nfeas >= nfeasct) write (6, 7000)
-            if (me%iobj >= me%itrm) write (6, 7100) me%itrm
-            if (me%kobj >= me%itrm) write (6, 7200) me%itrm
-            write (6, 7300) me%iter
-            write (6, 10400) me%ncal(1)
-            if (me%ncon > 0) write (6, 10500) me%ncal(1)
-            if (me%nfdg /= 0) write (6, 10600) me%ncal(2)
-            if (me%ncon > 0 .and. me%nfdg == 1) write (6, 10700) me%ncal(2)
+            write (me%iunit, 6800)
+            if (me%iter >= me%itmax) write (me%iunit, 6900)
+            if (me%nfeas >= nfeasct) write (me%iunit, 7000)
+            if (me%iobj >= me%itrm) write (me%iunit, 7100) me%itrm
+            if (me%kobj >= me%itrm) write (me%iunit, 7200) me%itrm
+            write (me%iunit, 7300) me%iter
+            write (me%iunit, 10400) me%ncal(1)
+            if (me%ncon > 0) write (me%iunit, 10500) me%ncal(1)
+            if (me%nfdg /= 0) write (me%iunit, 10600) me%ncal(2)
+            if (me%ncon > 0 .and. me%nfdg == 1) write (me%iunit, 10700) me%ncal(2)
         end if
         ! ------------------------------------------------------------------
         !               RE-SET BASIC PARAMETERS TO INPUT VALUES
@@ -1487,7 +1488,7 @@ contains
             alp = 0.0_wp
             return
         end if
-        if (me%iprint > 4) write (6, 5000)
+        if (me%iprint > 4) write (me%iunit, 5000)
         fff = me%obj
         a1 = 0.0_wp
         f1 = me%obj
@@ -1503,14 +1504,14 @@ contains
         do i = 1, me%ndv
             x(i) = x(i) + ap*s(i)
         end do
-        if (me%iprint > 4) write (6, 5100) ap
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) ap
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 1
         return
 
 30      f2 = me%obj
-        if (me%iprint > 4) write (6, 5300) f2
+        if (me%iprint > 4) write (me%iunit, 5300) f2
         if (f2 < f1) go to 90
         ! ------------------------------------------------------------------
         !                 CHECK FOR ILL-CONDITIONING
@@ -1537,14 +1538,14 @@ contains
         do i = 1, me%ndv
             x(i) = x(i) + ap*s(i)
         end do
-        if (me%iprint > 4) write (6, 5100) a2
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) a2
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 2
         return
 
 50      f2 = me%obj
-        if (me%iprint > 4) write (6, 5300) f2
+        if (me%iprint > 4) write (me%iunit, 5300) f2
         ! PROCEED TO CUBIC INTERPOLATION.
         go to 130
         ! ------------------------------------------------------------------
@@ -1564,14 +1565,14 @@ contains
         do i = 1, me%ndv
             x(i) = x(i) + ap*s(i)
         end do
-        if (me%iprint > 4) write (6, 5100) a2
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) a2
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 3
         return
 
 80      f2 = me%obj
-        if (me%iprint > 4) write (6, 5300) f2
+        if (me%iprint > 4) write (me%iunit, 5300) f2
         go to 120
 
 90      a3 = 2.*a2
@@ -1583,14 +1584,14 @@ contains
         do i = 1, me%ndv
             x(i) = x(i) + ap*s(i)
         end do
-        if (me%iprint > 4) write (6, 5100) a3
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) a3
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 4
         return
 
 110     f3 = me%obj
-        if (me%iprint > 4) write (6, 5300) f3
+        if (me%iprint > 4) write (me%iunit, 5300) f3
 
 120     if (f3 < f2) go to 170
 
@@ -1606,13 +1607,13 @@ contains
         ap = app - alp
         alp = app
         x(1:me%ndv) = x(1:me%ndv) + ap*s(1:me%ndv)
-        if (me%iprint > 4) write (6, 5100) alp
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) alp
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 5
         return
 
-150     if (me%iprint > 4) write (6, 5300) me%obj
+150     if (me%iprint > 4) write (me%iunit, 5300) me%obj
         ! ------------------------------------------------------------------
         !                     CHECK CONVERGENCE
         ! ------------------------------------------------------------------
@@ -1643,14 +1644,14 @@ contains
         ap = a4 - alp
         alp = a4
         x(1:me%ndv) = x(1:me%ndv) + ap*s(1:me%ndv)
-        if (me%iprint > 4) write (6, 5100) alp
-        if (me%iprint > 4) write (6, 5200) (x(i), i=1, me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) alp
+        if (me%iprint > 4) write (me%iunit, 5200) (x(i), i=1, me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 6
         return
 
 190     f4 = me%obj
-        if (me%iprint > 4) write (6, 5300) f4
+        if (me%iprint > 4) write (me%iunit, 5300) f4
         if (f4 <= f3) then
             a1 = a2
             f1 = f2
@@ -1678,13 +1679,13 @@ contains
         ap = app - alp
         alp = app
         x(1:me%ndv) = x(1:me%ndv) + ap*s(1:me%ndv)
-        if (me%iprint > 4) write (6, 5100) alp
-        if (me%iprint > 4) write (6, 5200) x(1:me%ndv)
+        if (me%iprint > 4) write (me%iunit, 5100) alp
+        if (me%iprint > 4) write (me%iunit, 5200) x(1:me%ndv)
         ncal(1) = ncal(1) + 1
         jgoto = 7
         return
 
-230     if (me%iprint > 4) write (6, 5300) me%obj
+230     if (me%iprint > 4) write (me%iunit, 5300) me%obj
 
         ! ------------------------------------------------------------------
         !                CHECK FOR ILL-CONDITIONING
@@ -1949,7 +1950,7 @@ contains
 40      i = i + 1
 50      if (a(ndv2, i) <= 1.0e-6_wp) then
             ! ZERO GRADIENT IS FOUND.  WRITE ERROR MESSAGE.
-            if (me%iprint >= 2) write (6, 5000) ic(i)
+            if (me%iprint >= 2) write (me%iunit, 5000) ic(i)
             ! REDUCE NAC BY ONE.
             me%nac = me%nac - 1
             ! SHIFT COLUMNS OF A AND ROWS OF IC IF I<=NAC.
@@ -2037,7 +2038,7 @@ contains
         !                SOLVE SPECIAL L. P. PROBLEM
         ! ------------------------------------------------------------------
         call cnmn08(ndb, ner, c, ms1, b, n3, n4)
-        if (me%iprint > 1 .and. ner > 0) write (6, 5200)
+        if (me%iprint > 1 .and. ner > 0) write (me%iunit, 5200)
         ! CALCULATE RESULTING DIRECTION VECTOR, S.
         slope = 0.0_wp
         ! ------------------------------------------------------------------
@@ -2074,7 +2075,7 @@ contains
         go to 250
 
         ! S-VECTOR IS NOT FEASIBLE DUE TO SOME NUMERICAL PROBLEM.
-240     if (me%iprint >= 2) write (6, 5100)
+240     if (me%iprint >= 2) write (me%iunit, 5100)
         s(ndv1) = 0.0_wp
         nvc = 0
         return
@@ -2154,7 +2155,7 @@ contains
             case (3); go to 230
             end select
         end if
-        if (me%iprint >= 5) write (6, 5100)
+        if (me%iprint >= 5) write (me%iunit, 5100)
         alpsav = alp
         icount = 0
         alptot = 0.0_wp
@@ -2245,14 +2246,14 @@ contains
             x(i) = x(i) + a2*s(i)
         end do
         if (me%iprint >= 5) then
-            write (6, 5200) a2
+            write (me%iunit, 5200) a2
             if (me%nscal /= 0) then
                 do i = 1, me%ndv
                     g(i) = scal(i)*x(i)
                 end do
-                write (6, 5300) (g(i), i=1, me%ndv)
+                write (me%iunit, 5300) (g(i), i=1, me%ndv)
             else
-                write (6, 5300) (x(i), i=1, me%ndv)
+                write (me%iunit, 5300) (x(i), i=1, me%ndv)
             end if
         end if
         ! ------------------------------------------------------------------
@@ -2263,10 +2264,10 @@ contains
         return
 
 70      f2 = me%obj
-        if (me%iprint >= 5) write (6, 5400) f2
+        if (me%iprint >= 5) write (me%iunit, 5400) f2
         if (me%iprint >= 5 .and. me%ncon /= 0) then
-            write (6, 5500)
-            write (6, 5300) (g(i), i=1, me%ncon)
+            write (me%iunit, 5500)
+            write (me%iunit, 5300) (g(i), i=1, me%ncon)
         end if
         ! ------------------------------------------------------------------
         !           IDENTIFY ACCAPTABILITY OF DESIGNS F1 AND F2
@@ -2402,13 +2403,13 @@ contains
             x(i) = x(i) + alp*s(i)
         end do
         if (me%iprint >= 5) then
-            write (6, 5600)
-            write (6, 5200) a3
+            write (me%iunit, 5600)
+            write (me%iunit, 5200) a3
             if (me%nscal /= 0) then
                 g(1:me%ndv) = scal(1:me%ndv)*x(1:me%ndv)
-                write (6, 5300) g(1:me%ndv)
+                write (me%iunit, 5300) g(1:me%ndv)
             else
-                write (6, 5300) x(1:me%ndv)
+                write (me%iunit, 5300) x(1:me%ndv)
             end if
         end if
         ! ------------------------------------------------------------------
@@ -2419,10 +2420,10 @@ contains
         return
 
 140     f3 = me%obj
-        if (me%iprint >= 5) write (6, 5400) f3
+        if (me%iprint >= 5) write (me%iunit, 5400) f3
         if (me%iprint >= 5 .and. me%ncon /= 0) then
-            write (6, 5500)
-            write (6, 5300) (g(i), i=1, me%ncon)
+            write (me%iunit, 5500)
+            write (me%iunit, 5300) (g(i), i=1, me%ncon)
         end if
         ! ------------------------------------------------------------------
         !   CALCULATE MAXIMUM CONSTRAINT VIOLATION AND PICK BEST DESIGN
@@ -2565,13 +2566,13 @@ contains
             x(i) = x(i) + alp*s(i)
         end do
         if (me%iprint >= 5) then
-            write (6, 5000)
-            write (6, 5200) a4
+            write (me%iunit, 5000)
+            write (me%iunit, 5200) a4
             if (me%nscal /= 0) then
                 g(1:me%ndv) = scal(1:me%ndv)*x(1:me%ndv)
-                write (6, 5300) g(1:me%ndv)
+                write (me%iunit, 5300) g(1:me%ndv)
             else
-                write (6, 5300) x(1:me%ndv)
+                write (me%iunit, 5300) x(1:me%ndv)
             end if
         end if
         ! ------------------------------------------------------------------
@@ -2582,10 +2583,10 @@ contains
         return
 
 230     f4 = me%obj
-        if (me%iprint >= 5) write (6, 5400) f4
+        if (me%iprint >= 5) write (me%iunit, 5400) f4
         if (me%iprint >= 5 .and. me%ncon /= 0) then
-            write (6, 5500)
-            write (6, 5300) g(1:me%ncon)
+            write (me%iunit, 5500)
+            write (me%iunit, 5300) g(1:me%ncon)
         end if
         ! DETERMINE ACCAPTABILITY OF F4.
         igood4 = 0
@@ -2653,7 +2654,7 @@ contains
         end select
 
 340     alp = alptot
-        if (me%iprint >= 5) write (6, 5700)
+        if (me%iprint >= 5) write (me%iunit, 5700)
         jgoto = 0
         return
 
