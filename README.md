@@ -60,6 +60,12 @@ For constrained minimization problems, the initial design need not be feasible (
 
 The user must supply a main program to call subroutine CONMIN along with an external subroutine to evaluate the objective function, constraint functions and the analytic gradient of the objective and currently active or violated constraint functions. At any given time in the minimization process, gradient information is required only for constraints which are active or violated (G(J)>=CT). Gradients are calculated by finite difference if this information is not directly obtainable, and a subroutine is included with CONMIN for this purpose.
 
+### See also
+ * [pyoptsparse](https://github.com/mdolab/pyoptsparse) -- includes a Python wrapper to the original CONMIN.
+ * [slsqp](https://github.com/jacobwilliams/slsqp) -- Modern Fortran Edition of the SLSQP Optimizer
+ * [conmax](https://github.com/jacobwilliams/conmax) -- Modern Fortran CONMAX Optimization Method for general nonlinearly constrained function minimization
+ * [optgra](https://github.com/jacobwilliams/optgra) -- Modern Fortran edition of OPTGRA optimization algorithm from ESA
+* [psqp](https://github.com/jacobwilliams/psqp)  -- Modern Fortran Edition of PSQP (Sequential quadratic programming algorithm)
 
 ### References
 
