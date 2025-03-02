@@ -2420,16 +2420,16 @@ contains
 
     subroutine cnmn07(ii, xbar, eps, x1, y1, x2, y2, x3, y3)
 
-        !!  ROUTINE TO FIND FIRST XBAR.GE.EPS CORRESPONDING TO A REAL ZERO
-        !!  OF A ONE-DIMENSIONAL FUNCTION BY POLYNOMIEL INTERPOLATION.
+        !!  Routine to find first `xbar>=eps `corresponding to a real zero
+        !!  of a one-dimensional function by polynomiel interpolation.
         !!
         !!  BY G. N. VANDERPLAATS, APRIL, 1972.
         !!
-        !!  IF REQUIRED ZERO ON Y DOES NOT EXITS, OR THE FUNCTION IS
-        !!  ILL-CONDITIONED, XBAR = EPS-1.0 WILL BE RETURNED AS AN ERROR INDICATOR.
-        !!  IF DESIRED INTERPOLATION IS ILL-CONDITIONED, A LOWER ORDER
-        !!  INTERPOLATION, CONSISTANT WITH INPUT DATA, WILL BE ATTEMPTED AND
-        !!  II WILL BE CHANGED ACCORDINGLY.
+        !!  If required zero on `y` does not exits, or the function is
+        !!  ill-conditioned, `xbar = eps-1.0` will be returned as an error indicator.
+        !!  if desired interpolation is ill-conditioned, a lower order
+        !!  interpolation, consistant with input data, will be attempted and
+        !!  ii will be changed accordingly.
 
         integer, intent(in out)    :: ii  !! CALCULATION CONTROL:
                                           !!
@@ -2498,28 +2498,28 @@ contains
 
     subroutine cnmn08(ndb, ner, c, ms1, b, n3, n4)
 
-    !!  ROUTINE TO SOLVE SPECIAL LINEAR PROBLEM FOR IMPOSING S-TRANSPOSE
-    !!  TIMES S<=1 BOUNDS IN THE MODIFIED METHOD OF FEASIBLE DIRECTIONS.
-    !!
-    !!  BY G. N. VANDERPLAATS                             APRIL, 1972.
-    !!
-    !!  REF.  'STRUCTURAL OPTIMIZATION BY METHODS OF FEASIBLE DIRECTIONS',
-    !!  G. N. VANDERPLAATS AND F. MOSES, JOURNAL OF COMPUTERS
-    !!  AND STRUCTURES, VOL 3, PP 739-755, 1973.
-    !!
-    !!  FORM OF L. P. IS BX=C WHERE 1ST NDB COMPONENTS OF X CONTAIN VECTOR
-    !!  U AND LAST NDB COMPONENTS CONTAIN VECTOR V.  CONSTRAINTS ARE
-    !!  U>=0, V>=0, AND U-TRANSPOSE TIMES V = 0.
-    !!  NER = ERROR FLAG.  IF NER/=0 ON RETURN, PROCESS HAS NOT
-    !!  CONVERGED IN 5*NDB ITERATIONS.
-    !!  VECTOR MS1 IDENTIFIES THE SET OF BASIC VARIABLES.
+        !!  Routine to solve special linear problem for imposing s-transpose
+        !!  times s<=1 bounds in the modified method of feasible directions.
+        !!
+        !!  FORM OF L. P. IS BX=C WHERE 1ST NDB COMPONENTS OF X CONTAIN VECTOR
+        !!  U AND LAST NDB COMPONENTS CONTAIN VECTOR V.
+        !!  CONSTRAINTS ARE U>=0, V>=0, AND U-TRANSPOSE TIMES V = 0.
+        !!
+        !!  BY G. N. VANDERPLAATS, APRIL, 1972.
+        !!
+        !!### Reference
+        !!  * 'Structural optimization by methods of feasible directions',
+        !!    G. N. Vanderplaats and F. Moses, Journal of computers
+        !!    and structures, vol 3, pp 739-755, 1973.
 
         !  ------------------------------------------------------------------
         !  CHOOSE INITIAL BASIC VARIABLES AS V, AND INITIALIZE VECTOR MS1
         !  ------------------------------------------------------------------
 
         integer, intent(in)        :: ndb, n3, n4
-        integer, intent(out)       :: ner, ms1(:)
+        integer, intent(out)       :: ner !! NER = ERROR FLAG.  IF NER/=0 ON RETURN, PROCESS HAS NOT
+                                          !! CONVERGED IN 5*NDB ITERATIONS.
+        integer, intent(out)       :: ms1(:) !! VECTOR MS1 IDENTIFIES THE SET OF BASIC VARIABLES.
         real(wp), intent(in out)  :: c(n4), b(n3, n3)
 
         integer   :: i, ichk, iter1, j, jj, kk, m2, nmax
@@ -2538,13 +2538,13 @@ contains
             if (cbmax > cbmin) cbmin = cbmax
             ms1(i) = 0
         end do
-        eps = .0001_wp*eps
+        eps = 0.0001_wp*eps
 !       IF (EPS<-1.0E-10) EPS=-1.0E-10
 !
 !  E-10 CHANGED TO E-03 ON 1/12/81
 !
         if (eps < -1.0e-03_wp) eps = -1.0e-03_wp
-        if (eps > -.0001_wp) eps = -.0001_wp
+        if (eps > -0.0001_wp) eps = -0.0001_wp
         cbmin = cbmin*1.0e-6_wp
 !       IF (CBMIN<1.0e-10_wp) CBMIN=1.0e-10_wp
 !
