@@ -1,4 +1,8 @@
-This is a modern Fortran version of the CONMIN optimizer.
+This is work in progress to refactor the original CONMIN optimizer (by G. N. Vanderplaats) into Modern Fortran. The latest API documentation can be found [here](https://jacobwilliams.github.io/conmin/index.html).
+
+[![Language](https://img.shields.io/badge/-Fortran-734f96?logo=fortran&logoColor=white)](https://github.com/topics/fortran)
+[![CI Status](https://github.com/jacobwilliams/conmin/actions/workflows/CI.yml/badge.svg)](https://github.com/jacobwilliams/conmin/actions)
+[![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/conmin)](https://github.com/jacobwilliams/conmin/commits/master)
 
 ### Introduction
 
@@ -55,5 +59,11 @@ The minimization algorithm is based on Zoutendijk's method of feasible direction
 For constrained minimization problems, the initial design need not be feasible (one or more G(J) may be greater than ABS(CT)), and a feasible solution (if one exists) is obtained with a minimal increase in the value of the objective function.
 
 The user must supply a main program to call subroutine CONMIN along with an external subroutine to evaluate the objective function, constraint functions and the analytic gradient of the objective and currently active or violated constraint functions. At any given time in the minimization process, gradient information is required only for constraints which are active or violated (G(J)>=CT). Gradients are calculated by finite difference if this information is not directly obtainable, and a subroutine is included with CONMIN for this purpose.
+
+
+### References
+
+ * G. N. Vanderplaats, "[CONMIN - A fortran program for constrained function minimization: user's manual](https://ntrs.nasa.gov/citations/19730017892)", NASA TM X-62,282, AUGUST, 1973.
+ * [conmin.zip](https://jblevins.org/mirror/amiller/conmin.zip) Fortran 90 version from Alan Miller.
 
 
