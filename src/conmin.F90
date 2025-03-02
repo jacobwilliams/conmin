@@ -49,21 +49,196 @@ module conmin_module
         ! private
 
         ! cnmn1 variables
-        real(wp)  :: delfun, dabfun, fdch, fdchm, ct, ctmin, ctl, &
-                     ctlmin, alphax, abobj1, theta, obj
-        integer    :: ndv, ncon, nside, iprint, nfdg, nscal, linobj, &
-                      itmax, itrm, icndir, igoto, nac, info, infog, iter
+        real(wp) :: delfun = 0.001_wp   !! Minimum relative change in the objective
+                                        !! function to indicate convergence.  If in `ITRM` consecutive
+                                        !! iterations, `ABS(1.0-OBJ(J-1)/OBJ(J))<DELFUN` and the current
+                                        !! design is feasible (all `G(J)<=ABS(CT)`), the minimization
+                                        !! process is terminated.  If the current design is infeasible
+                                        !! (some `G(J)>ABS(CT)`), five iterations are required to
+                                        !! terminate and this situation indicates that a feasible design
+                                        !! may not exist.
+        real(wp) :: dabfun = 0.0_wp !! Default value = 0.001 times the initial function value.  Same
+                                    !! as DELFUN except comparison is on absolute change in the
+                                    !! objective function, `ABS(OBJ(J)-OBJ(J-1))`, instead of relative
+                                    !! change.
+        real(wp) :: fdch = 0.01_wp   !! Not used if `NFDG = 0`.  Relative change in
+                                     !! decision variable `X(I)` in calculating finite difference
+                                     !! gradients.  For example, `FDCH = 0.01` corresponds to a finite
+                                     !! difference step of one percent of the value of the decision
+                                     !! variable.
+        real(wp) :: fdchm = 0.01_wp !! Not used if `NFDG = 0`.  Minimum absolute
+                                    !! step in finite difference gradient calculations.  FDCHM applies
+                                    !! to the unscaled variable values.
+        real(wp) :: ct = -0.1_wp    !! Not used if `NCON = NSIDE = 0`.
+                                    !! Constraint thickness parameter.  If `CT<=G(J)<=ABS(CT)`,
+                                    !! `G(J)` is defined as active.  If `G(J)>ABS(CT)`, `G(J)` is said to
+                                    !! be violated.  If `G(J)<CT`, `G(J)` is not active.  CT is
+                                    !! sequentially reduced in magnitude during the optimization
+                                    !! process.  If `ABS(CT)` is very small, one or more constraints
+                                    !! may be active on one iteration and inactive on the next,
+                                    !! only to become active again on a subsequent iteration.
+                                    !! This is often referred to as "zigzagging" between constraints.
+                                    !! A wide initial value of the constraint thickness is desirable
+                                    !! for highly nonlinear problems so that when a constraint
+                                    !! becomes active it tends to remain active, thus reducing the
+                                    !! zigzagging problem.  The default value is usually adequate.
+        real(wp) :: ctmin = 0.004_wp    !! Not used if `NCON = NSIDE = 0`.  Minimum
+                                        !! absolute value of CT considered in the optimization process.
+                                        !! CTMIN may be considered as "numerical zero" since it may not be
+                                        !! meaningful to compare numbers smaller than CTMIN.  The value of
+                                        !! CTMIN is chosen to indicate that satisfaction of a constraint
+                                        !! within this tolerance is acceptable.  The default value is usually
+                                        !! adequate.
+        real(wp) :: ctl = -0.01_wp  !! Not used if `NCON = NSIDE = 0`.
+                                    !! Constraint thickness parameter for linear and side constraints.
+                                    !! CTL is smaller in magnitude than CT because the zigzagging
+                                    !! problem is avoided with linear and side constraints.  The default
+                                    !! value is usually adequate.
+        real(wp) :: ctlmin = 0.001_wp   !! Not used if `NCON = NSIDE = 0`.  Minimum
+                                        !! absolute value of CTL considered in the optimization process.
+                                        !! The default value is usually adequate.
+        real(wp) :: alphax = 0.1_wp  !! the maximum fractional change in any
+                                     !! component of X as an initial estimate for ALPHA in the one-dimensional
+                                     !! search. That is, the initial ALPHA will be such that no component of X is changed by
+                                     !! more than this amount. This only applies to those X(i) of magnitude greater than 0.1.
+                                     !! If an optimization run shows numerous ALPHA = 0 results for the one-dimensional search,
+                                     !! it may help to try ALPHAX less than the default. ALPHAX is changed by CONMIN depending
+                                     !! on the progress of the optimization.
+        real(wp) :: abobj1 = 0.1_wp  !! the fractional change attempted as a first step in
+                                     !! the one-dimensional search and is based on a linear approximation.
+                                     !! ABOBJ1 is updated during the optimization, depending on progress.
+                                     !! The initial step in the one-dimensional search is taken as the amount
+                                     !! necessary to change `OBJ` by `ABOBJ1*ABS(OBJ)` or to change some `X(i)` by `ALPHAX*ABS( X(i) )`,
+                                     !! whichever is less.
+        real(wp) :: theta = 1.0_wp !! Not used if `NCON = NSIDE = 0`.  Mean value
+                                    !! of the push-off factor in the method of feasible directions.
+                                    !! A larger value of THETA is desirable if the constraints, `G(J)`,
+                                    !! are known to be highly nonlinear, and a smaller value may be
+                                    !! used if all `G(J)` are known to be nearly linear.  The actual
+                                    !! value of the push-off factor used in the program is a quadratic
+                                    !! function of each `G(J)`, varying from 0.0 for `G(J) = CT` to `4.0*THETA`
+                                    !! for `G(J) = ABS(CT)`.  A value of `THETA = 0.0` is used in the
+                                    !! program for constraints which are identified by the user to be
+                                    !! strictly linear.  THETA is called a "push-off" factor because
+                                    !! it pushes the design away from the active constraints into the
+                                    !! feasible region.  The default value is usually adequate.
+        real(wp) :: obj !! Value of objective function for the current decision variables,
+                        !! `X(I), I = 1, NDV` contained in vector `X`.  Calculate OBJ if
+                        !! INFO = 1 or INFO = 2.
+        integer :: ndv !! Number of decision variables, `X(I)`, contained in vector `X`.
+        integer :: ncon !! Number of constraint functions, `G(J)`.  NCON may be zero.
+        integer :: nside    !! Side constraint parameter.  `NSIDE = 0` signifies that the
+                            !! variables `X(I)` do not have lower or upper bounds.  `NSIDE>0`
+                            !! signifies that all variables `X(I)` have lower and upper bounds
+                            !! defined by `VLB(I)` and `VUB(I)` respectively.  If one or more
+                            !! variables are not bounded while others are, the values of the
+                            !! lower and upper bounds on the unbounded variables must be taken
+                            !! as very large negative and positive values respectively
+                            !! (i.e., `VLB(I) = -1.0E+10`, `VUB(I) = 1.0E+10`).
+        integer :: iprint = 0   !! Print control.  All printing is done on unit number 6.
+                                !!
+                                !!  * `iprint=0`:  Print nothing.
+                                !!  * `iprint=1`:  Print initial and final function information.
+                                !!  * `iprint=2`:  1st debug level.  Print all of above plus control
+                                !!      parameters.  Print function value and X-vector at each
+                                !!      iteration.
+                                !!  * `iprint=3`:  2nd. debug level.  Print all of above plus all constraint
+                                !!      values, numbers of active or violated constraints, direction
+                                !!      vectors, move parameters and miscellaneous information.  The
+                                !!      constraint parameter, BETA, printed under this option
+                                !!      approaches zero as the optimum objective is achieved.
+                                !!  * `iprint=4`:  Complete debug.  Print all of above plus gradients of
+                                !!      objective function, active or violated constraint functions
+                                !!      and miscellaneous information.
+                                !!  * `iprint=5`:  all of above plus each proposed design vector, objective
+                                !!      and constraints during the one-dimensional search.
+        integer :: nfdg !! the finite difference gradient parameter:
+                        !!
+                        !!  * `NFDG = 0`:  all gradient information is calculated by finite difference
+                        !!    within [[conmin]].
+                        !!  * `NFDG = 1`:  all gradient information is supplied by the user.
+                        !!  * `NFDG = 2`:  the gradient of `OBJ` is supplied by the user and the
+                        !!    gradients of constraints are calculated by finite
+                        !!    difference within [[conmin]].
+        integer :: nscal    !! Scaling control parameter.  The decision variables will be
+                            !! scaled linearly.
+                            !!
+                            !!  * `NSCAL<0`:  Scale variables `X(I) `by dividing by `SCAL(I)`, where
+                            !!                vector SCAL is defined by the user.
+                            !!  * `NSCAL==0`: Do not scale the variables.
+                            !!  * `NSCAL>0`:  Scale the variables every NSCAL iterations.
+                            !!                Variables are normalized so that scaled
+                            !!                `X(I) = X(I)/ABS(X(I))`.  When using this option, it
+                            !!                is desirable that `NSCAL = ICNDIR` if ICNDIR is input
+                            !!                as nonzero, and `NSCAL = NDV + 1` in ICNDIR is input
+                            !!                as zero.
+        integer :: linobj = 0   !! Not used if NCON = NSIDE = 0.  Linear objective function
+                                !! identifier.  If the objective, OBJ, is specifically known to
+                                !! be a strictly linear function of the decision variables, `X(I)`,
+                                !! set `LINOBJ = 1`.  If OBJ is a general nonlinear function, set
+                                !! `LINOBJ = 0`.
+        integer :: itmax = 10 !! Maximum number of iterations in the
+                              !! minimization process.  If `NFDG==0` each iteration requires one
+                              !! set of gradient computations (INFO = 3 or 4) and approximately
+                              !! three function evaluations (INFO = 1 or 2).  If `NFDG>0`
+                              !! each iteration requires approximately NDV + 3 function
+                              !! evaluations (INFO = 1 or 2).
+        integer :: itrm = 3 !! Number of consecutive iterations to indicate
+                            !! convergence by relative or absolute changes, `DELFUN` or `DABFUN`.
+        integer :: icndir !! Default value = `NDV + 1`.  Conjugate direction restart parameter.
+                          !! If the function is currently unconstrained, (all `G(J)<CT` or
+                          !! `NCON = NSIDE = 0`), Fletcher-Reeves conjugate direction method will
+                          !! be restarted with a steepest descent direction every ICNDIR
+                          !! iterations.  If `ICNDIR = 1` only steepest descent will be used.
+        integer :: igoto !! Reverse communication flag.
+                         !! CONMIN executes according to the parameter IGOTO which must be initialized to zero.
+        integer :: nac  !! Number of active and violated constraints (`G(J)>=CT`).
+                        !! Calculate `NAC` if `INFO = 4` and `NFDG = 0`.
+        integer :: info !! * `INFO = 1`:  calculate OBJ and G(I), I = 1, NCON
+                        !! * `INFO = 2`:  calculate NAC, IC(I), I = 1,NAC, the gradient of OBJ, and
+                        !!   the gradient of G(J), where J = IC(I), I = 1,NAC.
+                        !!   Store the gradients of G in columns of A.
+        integer :: infog !! * `INFOG = 0`:   same as when INFOG was not used.
+                         !! * `INFOG = 1`:   only those constraints identified as active or violated
+                         !!                in array IC(I), I = 1, NAC need be evaluated.  This is
+                         !!                only meaningful if finite difference gradients are
+                         !!                calculated, and allows the user to avoid
+                         !!                calculating non-essential information.  If it is
+                         !!                convenient to evaluate all constraints each time,
+                         !!                variable INFOG may be ignored.
+        integer :: iter !! Iteration number.  The optimization process is iterative so
+                        !! that the vector of decision variables at the Kth iteration
+                        !! is defined by `X(K) = X(K - 1) + ALPHA*S(K)`, where in this case
+                        !! `K` refers to the iteration number and the components `X(I)` are
+                        !! all changed simultaneously.  `ALPHA` is defined as the move
+                        !! parameter and is printed if the print control `IPRINT>=3`.
+                        !! `S` is the move direction.
 
         ! consav variables
-        real(wp)  :: dm1, dm2, dm3, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, &
-                     dm12, dct, dctl, phi, abobj, cta, ctam, ctbm, obj1, &
-                     slope, dx, dx1, fi, xi, dftdf1, alp, fff, a1, a2, a3, &
-                     a4, f1, f2, f3, f4, cv1, cv2, cv3, cv4, app, alpca, &
-                     alpfes, alpln, alpmin, alpnc, alpsav, alpsid, alptot, &
-                     rspace
-        integer    :: idm1, idm2, idm3, jdir, iobj, kobj, kcount, ncal(2), &
-                      nfeas, mscal, ncobj, nvc, kount, icount, igood1, igood2, &
-                      igood3, igood4, ibest, iii, nlnc, jgoto, ispace(2)
+        real(wp) :: dm1, dm2, dm3, dm4, dm5, dm6, dm7, dm8, dm9, dm10, dm11, &
+                    dm12, dct, dctl, abobj, cta, ctam, ctbm, obj1, &
+                    slope, dx, dx1, fi, xi, dftdf1, alp, fff, a1, a2, a3, &
+                    a4, f1, f2, f3, f4, cv1, cv2, cv3, cv4, app, alpca, &
+                    alpfes, alpln, alpmin, alpnc, alpsav, alpsid, alptot, &
+                    rspace
+        real(wp) :: phi = 5.0_wp    !! Not used if `NCON = NSIDE = 0`.
+                                    !! Participation coefficient, used if a design is infeasible
+                                    !! (one or more `G(J)>ABS(CT)`).  PHI is a measure of how hard
+                                    !! the design will be "pushed" towards the feasible region and
+                                    !! is, in effect, a penalty parameter.  If in a given problem, a
+                                    !! feasible solution cannot be obtained with the default value,
+                                    !! PHI should be increased, and the problem run again.  If a
+                                    !! feasible solution cannot be obtained with `PHI = 100`, it is
+                                    !! probable that no feasible solution exists.  The default value
+                                    !! is usually adequate.
+
+        integer :: idm1, idm2, idm3, jdir, iobj, kobj, kcount, &
+                   nfeas, mscal, ncobj, nvc, kount, icount, igood1, igood2, &
+                   igood3, igood4, ibest, iii, nlnc, jgoto, ispace(2)
+        integer :: ncal(2)  !! Bookkeeping information.  NCAL(1) gives the number of times
+                            !! external routine SUB1 was called with INFO = 1.  NCAL(2) gives
+                            !! the number of times INFO = 2.  NCAL(3) gives the number of times
+                            !! INFO = 3 and NCAL(4) gives the number of times INFO = 4.
 
     contains
         private
@@ -79,7 +254,7 @@ contains
 
     subroutine conmin(me, x, vlb, vub, g, scal, df, a, s, g1, g2, b, c, isc, ic, ms1, n1, n2, n3, n4, n5)
 
-        !!  ROUTINE TO SOLVE CONSTRAINED OR UNCONSTRAINED FUNCTION MINIMIZATION.
+        !!  Routine to solve constrained or unconstrained function minimization.
         !!
         !!  JUNE, 1979 VERSION
         !!
@@ -89,15 +264,83 @@ contains
         !!  RE-SCALE VARIABLES IF REQUIRED.
 
         class(conmin_class), intent(inout) :: me
-        integer, intent(in)        :: n1, n2, n3, n4, n5
-        real(wp), intent(in out)  :: x(n1), vlb(n1), vub(n1), g(n2), scal(n1), &
-                                     df(n1), a(n1, n3), s(n1), g1(n2), g2(n2), &
-                                     b(n3, n3), c(n4)
-        integer, intent(in out)    :: isc(n2), ic(n3), ms1(n5)
+        integer, intent(in)       :: n1 !! `N1 = NDV + 2`
+        integer, intent(in)       :: n2 !! `N2 = NCON + 2*NDV`
+        integer, intent(in)       :: n3 !! `N3 = NACMX1`
+        integer, intent(in)       :: n4 !! `N4 = MAX (N3,NDV)`
+        integer, intent(in)       :: n5 !! `N5 = 2*N4`
+        real(wp), intent(in out)  :: x(n1) !! Vector of decision variables, `X(I), I = 1, NDV`.  The initial
+                                           !! X-vector contains the user's best estimate of the set of optimum
+                                           !! design variables.
+        real(wp), intent(in out)  :: vlb(n1) !! Used only if `NSIDE/=0`.  `VLB(I)` is the lower allowable value
+                                             !! (lower bound) of variable `X(I)`.  If one or more variables, `X(I)`,
+                                             !! do not have lower bounds, the corresponding `VLB(I)` must be
+                                             !! initialized to a very large negative number (say `-1.0E+10`).
+        real(wp), intent(in out)  :: vub(n1) !! Used only if `NSIDE/=0`.  `VUB(I)` is the maximum allowable value
+                                             !! (upper bound) of `X(I)`.  If one or more variables, `X(I)`, do not
+                                             !! have upper bounds, the corresponding `VUB(I)` must be initialized
+                                             !! to a very large positive number (say `1.0E+10`).
+        real(wp), intent(in out)  :: g(n2) !! Not used if `NCON = NSIDE = 0`.  Vector containing all constraint
+                                           !! functions, `G(J), J = 1, NCON` for current decision variables, `X`.
+                                           !! Calculate `G(J), J = 1, NCON` if `INFO = 2`.
+        real(wp), intent(in out)  :: scal(n1) !! Not used if `NSCAL = 0`.  Vector of scaling parameters.  If
+                                              !! `NSCAL>0` vector SCAL need not be initialized since SCAL will
+                                              !! be defined in CONMIN and its associated routines.  If `NSCAL<0`,
+                                              !! vector SCAL is initialized in the main program, and the scaled
+                                              !! variables `X(I) = X(I)/SCAL(I)`.  Efficiency of the optimization
+                                              !! process can sometimes be improved if the variables are either
+                                              !! normalized or are scaled in such a way that the partial deri-
+                                              !! vative of the objective function, OBJ, with respect to variable
+                                              !! `X(I)` is of the same order of magnitude for all `X(I)`.  `SCAL(I)`
+                                              !! must be greater than zero because a negative value of `SCAL(I)`
+                                              !! will result in a change of sign of `X(I)` and possibly yield
+                                              !! erroneous optimization results.  The decision of if, and how, the
+                                              !! variables should be scaled is highly problem dependent, and some
+                                              !! experimentation is desirable for any given class of problems.
+        real(wp), intent(in out)  :: df(n1) !! Analytic gradient of the objective function for the current
+                                            !! decision variables, `X(I)`.  `DF(I)` contains the partial derivative
+                                            !! of `OBJ` with respect to `X(I)`.  Calculate `DF(I), I = 1,
+                                            !! NDV` if `INFO = 3` or `INFO = 4` and if `NFDG = 0` or `NFDG = 2`.
+        real(wp), intent(in out)  :: a(n1, n3) !! Not used if `NCON = NSIDE = 0`.  Gradients of active or violated
+                                               !! constraints, for current decision variables, `X(I)`.
+                                               !! `A(J,I)` contains the gradient of the Jth active or violated
+                                               !! constraint, `G(J)`, with respect to the Ith decision variable,
+                                               !! `X(I)` for `J = 1, NAC` and `I = 1, NDV`.  Calculate if `INFO = 4`
+                                               !! and `NFDG = 0`.
+        real(wp), intent(in out)  :: s(n1) !! Move direction in the NDV-dimensional optimization space.  `S(I)`
+                                           !! gives the rate at which variable `X(I)` changes with respect to
+                                           !! `ALPHA`.
+        real(wp), intent(in out)  :: g1(n2) !! Not used if `NCON = NSIDE = NSCAL = 0`.  Used for temporary
+                                            !! storage of constraint values `G(J), J = 1, NCON` and decision
+                                            !! variables `X(I), I = 1, NDV`.
+        real(wp), intent(in out)  :: g2(n2) !! Not used if `NCON = NSIDE = 0`.  Used for temporary storage of
+                                            !! constraint values `G(J), J = 1, NCON`.
+        real(wp), intent(in out)  :: b(n3, n3) !! Not used if `NCON = NSIDE = 0`.  Used in determining direction
+                                               !! vector S for constrained minimization problems.  Array `B` may
+                                               !! be used for temporary storage in external routine SUB1.
+        real(wp), intent(in out)  :: c(n4) !! Not used in `NCON = NSIDE = 0`.  Used with array B in determining
+                                           !! direction vector S for constrained minimization problems.  Used
+                                           !! for temporary storage of vector X if `NSCAL/=0`. routine SUB1.
+        integer, intent(in out)   :: isc(n2) !! Not used if `NCON = 0`.  Linear constraint identification vector.
+                                             !! If constraint `G(J)` is known to be a linear function of the
+                                             !! decision variables, `X(I)`, `ISC(I)` should be initialized to
+                                             !! `ISC(I) = 1`.  If constraint `G(J)` is nonlinear `ISC(I)` is initialized
+                                             !! to `ISC(I) = 0`.  Identification of linear constraints may improve
+                                             !! efficiency of the optimization process and is therefore desirable,
+                                             !! but is not essential.  If `G(J)` is not specifically known to be
+                                             !! linear, set `ISC(I) = 0`.
+        integer, intent(in out)   :: ic(n3) !! Identifies which constraints are active or violated.  `IC(J)`
+                                            !! contains the number of the Jth active or violated constraint
+                                            !! for `J = 1, NAC`.  For example, if `G(10)` is the first active
+                                            !! or violated constraint (`G(J)<CT, J = 1,9`), set `IC(1) = 10`.
+                                            !! Calculate if `INFO = 4` and `NFDG = 0`.
+        integer, intent(in out)   :: ms1(n5) !! Not used if `NCON = NSIDE = 0`.  Used with array `B` in determining
+                                             !! direction vector `S` for constrained minimization problems.  Array
+                                             !! MS1 may be used for temporary storage in external routine SUB1.
 
-        real(wp)  :: alp1, alp11, alp12, c1, ct1, ctc, ff1, gi, objb, objd, &
-                     scj, si, sib, x1, x12, xid, xx
-        integer    :: i, ii, j, k, m1, m2, m3, mcn1, nci, ndv1, ndv2, nfeasct, nic, nnac
+        real(wp) :: alp1, alp11, alp12, c1, ct1, ctc, ff1, gi, objb, objd, &
+                    scj, si, sib, x1, x12, xid, xx
+        integer :: i, ii, j, k, m1, m2, m3, mcn1, nci, ndv1, ndv2, nfeasct, nic, nnac
 
         if (me%nscal /= 0 .and. me%igoto /= 0) then
             do i = 1, me%ndv
@@ -256,7 +499,7 @@ contains
         go to 580
 
 60      me%obj1 = me%obj
-        if (me%dabfun <= 0.) me%dabfun = .001*abs(me%obj)
+        if (me%dabfun <= 0.0_wp) me%dabfun = 0.001_wp*abs(me%obj)
         if (me%dabfun < 1.0e-10_wp) me%dabfun = 1.0e-10_wp
         if (me%iprint > 0) then
             ! ------------------------------------------------------------------

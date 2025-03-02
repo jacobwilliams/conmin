@@ -7,9 +7,8 @@ PROGRAM exampl3
   IMPLICIT NONE
 
   REAL (wp)  :: s(4), g1(10), g2(10), b(10,10), c(10), vlb(4), vub(4),  &
-                scal(4), df(4), a(4,10)
+                scal(4), df(4), a(4,10), aobj, x(6), g(11)
   INTEGER    :: ms1(20), isc(10), ic(10)
-  REAL (wp)  :: aobj, x(6), g(11)
   INTEGER    :: i, n1, n2, n3, n4, n5, nlim
   type(conmin_class) :: solver
 
