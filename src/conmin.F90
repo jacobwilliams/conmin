@@ -268,21 +268,21 @@ contains
         integer, intent(in)       :: n3 !! `N3 = NACMX1`
         integer, intent(in)       :: n4 !! `N4 = MAX (N3,NDV)`
         integer, intent(in)       :: n5 !! `N5 = 2*N4`
-        real(wp), intent(in out)  :: x(n1) !! Vector of decision variables, `X(I), I = 1, NDV`.  The initial
+        real(wp), intent(inout)   :: x(n1) !! Vector of decision variables, `X(I), I = 1, NDV`.  The initial
                                            !! X-vector contains the user's best estimate of the set of optimum
                                            !! design variables.
-        real(wp), intent(in out)  :: vlb(n1) !! Used only if `NSIDE/=0`.  `VLB(I)` is the lower allowable value
+        real(wp), intent(inout)   :: vlb(n1) !! Used only if `NSIDE/=0`.  `VLB(I)` is the lower allowable value
                                              !! (lower bound) of variable `X(I)`.  If one or more variables, `X(I)`,
                                              !! do not have lower bounds, the corresponding `VLB(I)` must be
                                              !! initialized to a very large negative number (say `-1.0E+10`).
-        real(wp), intent(in out)  :: vub(n1) !! Used only if `NSIDE/=0`.  `VUB(I)` is the maximum allowable value
+        real(wp), intent(inout)   :: vub(n1) !! Used only if `NSIDE/=0`.  `VUB(I)` is the maximum allowable value
                                              !! (upper bound) of `X(I)`.  If one or more variables, `X(I)`, do not
                                              !! have upper bounds, the corresponding `VUB(I)` must be initialized
                                              !! to a very large positive number (say `1.0E+10`).
-        real(wp), intent(in out)  :: g(n2) !! Not used if `NCON = NSIDE = 0`.  Vector containing all constraint
+        real(wp), intent(inout)   :: g(n2) !! Not used if `NCON = NSIDE = 0`.  Vector containing all constraint
                                            !! functions, `G(J), J = 1, NCON` for current decision variables, `X`.
                                            !! Calculate `G(J), J = 1, NCON` if `INFO = 2`.
-        real(wp), intent(in out)  :: scal(n1) !! Not used if `NSCAL = 0`.  Vector of scaling parameters.  If
+        real(wp), intent(inout)   :: scal(n1) !! Not used if `NSCAL = 0`.  Vector of scaling parameters.  If
                                               !! `NSCAL>0` vector SCAL need not be initialized since SCAL will
                                               !! be defined in CONMIN and its associated routines.  If `NSCAL<0`,
                                               !! vector SCAL is initialized in the main program, and the scaled
@@ -296,31 +296,31 @@ contains
                                               !! erroneous optimization results.  The decision of if, and how, the
                                               !! variables should be scaled is highly problem dependent, and some
                                               !! experimentation is desirable for any given class of problems.
-        real(wp), intent(in out)  :: df(n1) !! Analytic gradient of the objective function for the current
+        real(wp), intent(inout)   :: df(n1) !! Analytic gradient of the objective function for the current
                                             !! decision variables, `X(I)`.  `DF(I)` contains the partial derivative
                                             !! of `OBJ` with respect to `X(I)`.  Calculate `DF(I), I = 1,
                                             !! NDV` if `INFO = 3` or `INFO = 4` and if `NFDG = 0` or `NFDG = 2`.
-        real(wp), intent(in out)  :: a(n1, n3) !! Not used if `NCON = NSIDE = 0`.  Gradients of active or violated
+        real(wp), intent(inout)   :: a(n1, n3) !! Not used if `NCON = NSIDE = 0`.  Gradients of active or violated
                                                !! constraints, for current decision variables, `X(I)`.
                                                !! `A(J,I)` contains the gradient of the Jth active or violated
                                                !! constraint, `G(J)`, with respect to the Ith decision variable,
                                                !! `X(I)` for `J = 1, NAC` and `I = 1, NDV`.  Calculate if `INFO = 4`
                                                !! and `NFDG = 0`.
-        real(wp), intent(in out)  :: s(n1) !! Move direction in the NDV-dimensional optimization space.  `S(I)`
+        real(wp), intent(inout)   :: s(n1) !! Move direction in the NDV-dimensional optimization space.  `S(I)`
                                            !! gives the rate at which variable `X(I)` changes with respect to
                                            !! `ALPHA`.
-        real(wp), intent(in out)  :: g1(n2) !! Not used if `NCON = NSIDE = NSCAL = 0`.  Used for temporary
+        real(wp), intent(inout)   :: g1(n2) !! Not used if `NCON = NSIDE = NSCAL = 0`.  Used for temporary
                                             !! storage of constraint values `G(J), J = 1, NCON` and decision
                                             !! variables `X(I), I = 1, NDV`.
-        real(wp), intent(in out)  :: g2(n2) !! Not used if `NCON = NSIDE = 0`.  Used for temporary storage of
+        real(wp), intent(inout)   :: g2(n2) !! Not used if `NCON = NSIDE = 0`.  Used for temporary storage of
                                             !! constraint values `G(J), J = 1, NCON`.
-        real(wp), intent(in out)  :: b(n3, n3) !! Not used if `NCON = NSIDE = 0`.  Used in determining direction
+        real(wp), intent(inout)   :: b(n3, n3) !! Not used if `NCON = NSIDE = 0`.  Used in determining direction
                                                !! vector S for constrained minimization problems.  Array `B` may
                                                !! be used for temporary storage in external routine SUB1.
-        real(wp), intent(in out)  :: c(n4) !! Not used in `NCON = NSIDE = 0`.  Used with array B in determining
+        real(wp), intent(inout)   :: c(n4) !! Not used in `NCON = NSIDE = 0`.  Used with array B in determining
                                            !! direction vector S for constrained minimization problems.  Used
                                            !! for temporary storage of vector X if `NSCAL/=0`. routine SUB1.
-        integer, intent(in out)   :: isc(n2) !! Not used if `NCON = 0`.  Linear constraint identification vector.
+        integer, intent(inout)    :: isc(n2) !! Not used if `NCON = 0`.  Linear constraint identification vector.
                                              !! If constraint `G(J)` is known to be a linear function of the
                                              !! decision variables, `X(I)`, `ISC(I)` should be initialized to
                                              !! `ISC(I) = 1`.  If constraint `G(J)` is nonlinear `ISC(I)` is initialized
@@ -328,12 +328,12 @@ contains
                                              !! efficiency of the optimization process and is therefore desirable,
                                              !! but is not essential.  If `G(J)` is not specifically known to be
                                              !! linear, set `ISC(I) = 0`.
-        integer, intent(in out)   :: ic(n3) !! Identifies which constraints are active or violated.  `IC(J)`
+        integer, intent(inout)    :: ic(n3) !! Identifies which constraints are active or violated.  `IC(J)`
                                             !! contains the number of the Jth active or violated constraint
                                             !! for `J = 1, NAC`.  For example, if `G(10)` is the first active
                                             !! or violated constraint (`G(J)<CT, J = 1,9`), set `IC(1) = 10`.
                                             !! Calculate if `INFO = 4` and `NFDG = 0`.
-        integer, intent(in out)   :: ms1(n5) !! Not used if `NCON = NSIDE = 0`.  Used with array `B` in determining
+        integer, intent(inout)    :: ms1(n5) !! Not used if `NCON = NSIDE = 0`.  Used with array `B` in determining
                                              !! direction vector `S` for constrained minimization problems.  Array
                                              !! MS1 may be used for temporary storage in external routine SUB1.
 
@@ -1275,16 +1275,16 @@ contains
     subroutine cnmn01(me, jgoto, x, df, g, isc, ic, a, g1, vub, scal, ncal, dx, &
                       dx1, fi, xi, iii, n1, n2, n3)
 
-        !!  ROUTINE TO CALCULATE GRADIENT INFORMATION BY FINITE DIFFERENCE.
+        !!  Routine to calculate gradient information by finite difference.
         !!
         !!  BY G. N. VANDERPLAATS, JUNE, 1972.
 
         class(conmin_class), intent(inout) :: me
-        integer, intent(in out)   :: jgoto
+        integer, intent(inout)    :: jgoto
         real(wp), intent(in)      :: vub(:), scal(:)
         integer, intent(in)       :: n1, n2, n3
-        real(wp), intent(in out)  :: x(:), df(:), g(n2), a(n1, n3), g1(n2)
-        integer, intent(in out)   :: ic(n3), ncal(2)
+        real(wp), intent(inout)   :: x(:), df(:), g(n2), a(n1, n3), g1(n2)
+        integer, intent(inout)    :: ic(n3), ncal(2)
         integer, intent(in)       :: isc(n2)
         real(wp), intent(out)     :: dx, dx1, fi, xi
         integer, intent(out)      :: iii
@@ -1391,29 +1391,26 @@ contains
         !!  Conjugate direction is found by fletcher-reeves algorithm.
 
         class(conmin_class), intent(inout) :: me
-        integer, intent(in out)    :: ncalc !! NCALC = CALCULATION CONTROL.
+        integer, intent(inout)     :: ncalc !! NCALC = CALCULATION CONTROL.
                                             !!
                                             !!  * NCALC = 0,     S = STEEPEST DESCENT.
                                             !!  * NCALC = 1,     S = CONJUGATE DIRECTION.
-        real(wp), intent(out)     :: slope, dftdf1
+        real(wp), intent(out)     :: slope
+        real(wp), intent(inout)   :: dftdf1
         real(wp), intent(in)      :: df(:)
-        real(wp), intent(in out)  :: s(:)
+        real(wp), intent(inout)   :: s(:)
 
-        integer    :: i
-        real(wp)  :: beta, dfi, dftdf, s1, s2, si
+        integer  :: i
+        real(wp) :: beta, dfi, dftdf, s1, s2, si
+        logical  :: fletcher_reeves !! if the fletcher-reeves conjugate direction was computed
 
-        ! ------------------------------------------------------------------
-        !               CALCULATE NORM OF GRADIENT VECTOR
-        ! ------------------------------------------------------------------
-        dftdf = sum(df(1:me%ndv)**2)
-        ! ------------------------------------------------------------------
-        ! **********                FIND DIRECTION S              **********
-        ! ------------------------------------------------------------------
+        dftdf = sum(df(1:me%ndv)**2) ! CALCULATE NORM OF GRADIENT VECTOR
+
+        ! FIND DIRECTION S
+        fletcher_reeves = .false.
         if (ncalc == 1) then
             if (dftdf1 >= 1.0e-20_wp) then
-                ! ------------------------------------------------------------------
-                !             FIND FLETCHER-REEVES CONJUGATE DIRECTION
-                ! ------------------------------------------------------------------
+                ! FIND FLETCHER-REEVES CONJUGATE DIRECTION
                 beta = dftdf/dftdf1
                 slope = 0.0_wp
                 do i = 1, me%ndv
@@ -1422,19 +1419,17 @@ contains
                     slope = slope + si*dfi
                     s(i) = si
                 end do
-                go to 40
+                fletcher_reeves = .true.
             end if
         end if
-        ncalc = 0
-        ! ------------------------------------------------------------------
-        !              CALCULATE DIRECTION OF STEEPEST DESCENT
-        ! ------------------------------------------------------------------
-        s(1:me%ndv) = -df(1:me%ndv)
-        slope = -dftdf
-        ! ------------------------------------------------------------------
-        !              NORMALIZE S TO MAX ABS VALUE OF UNITY
-        ! ------------------------------------------------------------------
-40      s1 = 0.0_wp
+        if (.not. fletcher_reeves) then
+            ncalc = 0
+            ! CALCULATE DIRECTION OF STEEPEST DESCENT
+            s(1:me%ndv) = -df(1:me%ndv)
+            slope = -dftdf
+        end if
+        ! NORMALIZE S TO MAX ABS VALUE OF UNITY
+        s1 = 0.0_wp
         do i = 1, me%ndv
             s2 = abs(s(i))
             if (s2 > s1) s1 = s2
@@ -1459,15 +1454,15 @@ contains
         !!  OBJ = INITIAL FUNCTION VALUE.
 
         class(conmin_class), intent(inout) :: me
-        real(wp), intent(in out)   :: x(:), s(:)
-        real(wp), intent(in out)   :: slope !! SLOPE = INITIAL FUNCTION SLOPE = S-TRANSPOSE TIMES DF.
+        real(wp), intent(inout)    :: x(:), s(:)
+        real(wp), intent(inout)    :: slope !! SLOPE = INITIAL FUNCTION SLOPE = S-TRANSPOSE TIMES DF.
                                             !! SLOPE MUST BE NEGATIVE.
-        real(wp), intent(in out)   :: alp !! PROPOSED MOVE PARAMETER
-        real(wp), intent(in out)   :: fff, a1, a2, a3, a4, f1, f2, f3, f4
-        real(wp), intent(in out)   :: app
-        integer, intent(in out)    :: ncal(2)
+        real(wp), intent(inout)    :: alp !! PROPOSED MOVE PARAMETER
+        real(wp), intent(inout)    :: fff, a1, a2, a3, a4, f1, f2, f3, f4
+        real(wp), intent(inout)    :: app
+        integer, intent(inout)     :: ncal(2)
         integer, intent(out)       :: kount
-        integer, intent(in out)    :: jgoto
+        integer, intent(inout)     :: jgoto
 
         real(wp)  :: aa, ab, ab2, ab3, ap, ff
         integer :: i, ii
@@ -1740,8 +1735,8 @@ contains
 
     subroutine cnmn04(ii, xbar, eps, x1, y1, slope, x2, y2, x3, y3, x4, y4)
 
-        !!  ROUTINE TO FIND FIRST XBAR>=EPS CORRESPONDING TO A MINIMUM
-        !!  OF A ONE-DIMENSIONAL REAL FUNCTION BY POLYNOMIEL INTERPOLATION.
+        !!  Routine to find first `xbar>=eps` corresponding to a minimum
+        !!  of a one-dimensional real function by polynomial interpolation.
         !!
         !!  BY G. N. VANDERPLAATS, APRIL, 1972.
         !!
@@ -1751,7 +1746,7 @@ contains
         !!  INTERPOLATION, CONSISTANT WITH INPUT DATA, WILL BE ATTEMPTED,
         !!  AND II WILL BE CHANGED ACCORDINGLY.
 
-        integer, intent(in out)  :: ii !! CALCULATION CONTROL:
+        integer, intent(inout)   :: ii !! CALCULATION CONTROL:
                                        !!
                                        !!  1.  2-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, SLOPE, X2 AND Y2.
                                        !!  2.  3-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, X2, Y2, X3 AND Y3.
@@ -1875,10 +1870,10 @@ contains
 
     subroutine cnmn05(me, g, df, a, s, b, c, slope, phi, isc, ic, ms1, nvc, n1, n2, n3, n4, n5)
 
-        !!  ROUTINE TO SOLVE DIRECTION FINDING PROBLEM IN MODIFIED METHOD OF
-        !!  FEASIBLE DIRECTIONS.
+        !!  Routine to solve direction finding problem in modified method of
+        !!  feasible directions.
         !!
-        !!  BY G. N. VANDERPLAATS                            MAY, 1972.
+        !!  BY G. N. VANDERPLAATS, MAY, 1972.
         !!
         !!  NORM OF S VECTOR USED HERE IS S-TRANSPOSE TIMES S<=1.
         !!  IF NVC = 0 FIND DIRECTION BY ZOUTENDIJK'S METHOD.  OTHERWISE
@@ -1886,9 +1881,9 @@ contains
 
         class(conmin_class), intent(inout) :: me
         integer, intent(in)       :: n1, n2, n3, n4, n5
-        real(wp), intent(in out)  :: df(:), g(n2), a(n1, n3), s(:), c(n4), b(n3, n3)
-        real(wp), intent(in out)  :: slope, phi
-        integer, intent(in out)   :: isc(n2), ic(n3), ms1(n5), nvc
+        real(wp), intent(inout)   :: df(:), g(n2), a(n1, n3), s(:), c(n4), b(n3, n3)
+        real(wp), intent(inout)   :: slope, phi
+        integer, intent(inout)    :: isc(n2), ic(n3), ms1(n5), nvc
 
         real(wp)  :: a1, c1, ct1, ct2, cta, ctam, ctb, ctbm, ctc, ctd, gg, &
                      s1, sg, thmax, tht
@@ -2139,12 +2134,12 @@ contains
         !!  * ALPTOT = TOTAL MOVE PARAMETER.
 
         class(conmin_class), intent(inout) :: me
-        real(wp), intent(in out)  :: x(:), vlb(:), vub(:), g(:), scal(:), df(:), &
+        real(wp), intent(inout)   :: x(:), vlb(:), vub(:), g(:), scal(:), df(:), &
                                      s(:), g1(:), g2(:), ctam, ctbm, slope, alp, &
                                      a2, a3, a4, f1, f2, f3, cv1, cv2, cv3, cv4, &
                                      alpca, alpfes, alpln, alpmin, alpnc, alpsav, &
                                      alpsid, alptot
-        integer, intent(in out)    :: isc(:), ncal(2), nvc, icount, igood1, igood2, &
+        integer, intent(inout)     :: isc(:), ncal(2), nvc, icount, igood1, igood2, &
                                       igood3, igood4, ibest, iii, nlnc, jgoto
 
         real(wp)  :: alpa, alpb, c1, c2, c3, cc, f4, gi, si, xi, xi1, xi2
@@ -2679,7 +2674,7 @@ contains
     subroutine cnmn07(ii, xbar, eps, x1, y1, x2, y2, x3, y3)
 
         !!  Routine to find first `xbar>=eps `corresponding to a real zero
-        !!  of a one-dimensional function by polynomiel interpolation.
+        !!  of a one-dimensional function by polynomial interpolation.
         !!
         !!  BY G. N. VANDERPLAATS, APRIL, 1972.
         !!
@@ -2689,7 +2684,7 @@ contains
         !!  interpolation, consistant with input data, will be attempted and
         !!  ii will be changed accordingly.
 
-        integer, intent(in out)    :: ii  !! CALCULATION CONTROL:
+        integer, intent(inout)     :: ii  !! CALCULATION CONTROL:
                                           !!
                                           !! 1.  2-POINT LINEAR INTERPOLATION, GIVEN X1, Y1, X2 AND Y2.
                                           !! 2.  3-POINT QUADRATIC INTERPOLATION, GIVEN X1, Y1, X2, Y2, X3 AND Y3.
@@ -2766,7 +2761,7 @@ contains
         !!  BY G. N. VANDERPLAATS, APRIL, 1972.
         !!
         !!### Reference
-        !!  * 'Structural optimization by methods of feasible directions',
+        !!  * "[Structural optimization by methods of feasible directions](https://www.sciencedirect.com/science/article/abs/pii/0045794973900552)",
         !!    G. N. Vanderplaats and F. Moses, Journal of computers
         !!    and structures, vol 3, pp 739-755, 1973.
 
@@ -2778,7 +2773,7 @@ contains
         integer, intent(out)       :: ner !! NER = ERROR FLAG.  IF NER/=0 ON RETURN, PROCESS HAS NOT
                                           !! CONVERGED IN 5*NDB ITERATIONS.
         integer, intent(out)       :: ms1(:) !! VECTOR MS1 IDENTIFIES THE SET OF BASIC VARIABLES.
-        real(wp), intent(in out)  :: c(n4), b(n3, n3)
+        real(wp), intent(inout)   :: c(n4), b(n3, n3)
 
         integer   :: i, ichk, iter1, j, jj, kk, m2, nmax
         real(wp)  :: bb, bb1, bi, c1, cb, cbmax, cbmin, eps
