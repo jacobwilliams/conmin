@@ -45,7 +45,7 @@ module conmin_module
 
     type, public :: conmin_class
 
-    !! main class.
+        !! main class.
 
         ! private  ! for now these are public so they can be set by user [should replace with an init method]
 

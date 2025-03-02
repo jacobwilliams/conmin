@@ -10,7 +10,7 @@ This new version has the following differences from the original:
   * It is now threadsafe. Common blocks have been removed and all data is encapsulated in a class.
   * The real precision is selectable via a preprocessing directive.
   * The user can specify the file unit for printing (previously, this was hard-coded to 6).
-  * Docstring have been added to the code, which are used to autogenerate the API documentation.
+  * Docstrings have been added to the code, which are used to autogenerate the API documentation.
 
 ### Introduction
 
@@ -66,7 +66,7 @@ For constrained minimization problems, the initial design need not be feasible (
 The user must supply a main program to call subroutine CONMIN along with an external subroutine to evaluate the objective function, constraint functions and the analytic gradient of the objective and currently active or violated constraint functions. At any given time in the minimization process, gradient information is required only for constraints which are active or violated (G(J)>=CT). Gradients are calculated by finite difference if this information is not directly obtainable, and a subroutine is included with CONMIN for this purpose.
 
 ### See also
- * [pyoptsparse](https://github.com/mdolab/pyoptsparse) -- includes a Python wrapper to the original CONMIN.
+ * [pyopt](https://www.pyopt.org) / [pyoptsparse](https://github.com/mdolab/pyoptsparse) -- includes a Python wrapper to a slightly-modifed version of the original CONMIN.
  * [slsqp](https://github.com/jacobwilliams/slsqp) -- Modern Fortran Edition of the SLSQP Optimizer
  * [conmax](https://github.com/jacobwilliams/conmax) -- Modern Fortran CONMAX Optimization Method for general nonlinearly constrained function minimization
  * [optgra](https://github.com/jacobwilliams/optgra) -- Modern Fortran edition of OPTGRA optimization algorithm from ESA
