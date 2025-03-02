@@ -15,6 +15,7 @@
 !### History
 !   * BY G. N. VANDERPLAATS
 !     NASA-AMES RESEARCH CENTER, MOFFETT FIELD, CALIF.
+!   * Modernized by Jacob Williams, March 2025.
 !
 !### See also
 !  * CONMIN - A FORTRAN PROGRAM FOR CONSTRAINED FUNCTION
@@ -46,7 +47,7 @@ module conmin_module
 
     !! main class.
 
-        ! private
+        ! private  ! for now these are public so they can be set by user [should replace with an init method]
 
         ! cnmn1 variables
         real(wp) :: delfun = 0.001_wp   !! Minimum relative change in the objective
