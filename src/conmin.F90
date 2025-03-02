@@ -190,8 +190,8 @@ module conmin_module
                           !! `NCON = NSIDE = 0`), Fletcher-Reeves conjugate direction method will
                           !! be restarted with a steepest descent direction every ICNDIR
                           !! iterations.  If `ICNDIR = 1` only steepest descent will be used.
-        integer :: igoto !! Reverse communication flag.
-                         !! CONMIN executes according to the parameter IGOTO which must be initialized to zero.
+        integer :: igoto = 0 !! Reverse communication flag.
+                             !! CONMIN executes according to the parameter IGOTO which must be initialized to zero.
         integer :: nac  !! Number of active and violated constraints (`G(J)>=CT`).
                         !! Calculate `NAC` if `INFO = 4` and `NFDG = 0`.
         integer :: info !! * `INFO = 1`:  calculate OBJ and G(I), I = 1, NCON
@@ -231,7 +231,6 @@ module conmin_module
                                     !! feasible solution cannot be obtained with `PHI = 100`, it is
                                     !! probable that no feasible solution exists.  The default value
                                     !! is usually adequate.
-
         integer :: idm1, idm2, idm3, jdir, iobj, kobj, kcount, &
                    nfeas, mscal, ncobj, nvc, kount, icount, igood1, igood2, &
                    igood3, igood4, ibest, iii, nlnc, jgoto, ispace(2)
