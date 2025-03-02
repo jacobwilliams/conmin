@@ -962,7 +962,7 @@ contains
             write (me%iunit, 9200) me%alp
         end if
         if (me%iprint >= 2) then
-            if (objb <= 0.) then
+            if (objb <= 0.0_wp) then
                 if (me%iprint == 2) write (me%iunit, 9300) me%iter, me%obj
                 if (me%iprint > 2) write (me%iunit, 9400) me%obj
             else
@@ -2521,7 +2521,7 @@ contains
 
 190         if (iii < me%ncon) go to 170
         end if
-        if (me%linobj <= 0 .and. slope <= 0.) then
+        if (me%linobj <= 0 .and. slope <= 0.0_wp) then
             ! ------------------------------------------------------------------
             !          CALCULATE ALPHA TO MINIMIZE FUNCTION
             ! ------------------------------------------------------------------
@@ -2818,9 +2818,9 @@ contains
             do i = 1, ndb
                 c1 = c(i)
                 bi = b(i, i)
-                !     IF (BI>EPS .OR. C1>0.) GO TO 30
+                ! IF (BI>EPS .OR. C1>0.) GO TO 30
                 if (bi <= eps .and. c1 <= -1.0e-05_wp) then
-                    !  0. CHANGED TO -1.0E-05 ON 1/12/81
+                    ! 0. CHANGED TO -1.0E-05 ON 1/12/81
                     cb = c1/bi
                     if (cb > cbmax) then
                         ichk = i
