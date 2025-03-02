@@ -45,7 +45,7 @@ The basic analytic technique used by CONMIN is to minimize OBJ until one or more
 
 An example of a constrained nonlinear problem is the minimization of the four variable Rosen-Suzuki function (ref. 1):
 
-```math
+$$
 \begin{align}
 \text{Minimize}:\quad
 J &=  x_1^2 - 5x_1 + x_2^2 - 5x_2 + 2x_3^2 - 21x_3 + x_4^2 + 7x_4 + 50 \\
@@ -54,7 +54,7 @@ g_1 &= x_1^2 + x_1 + x_2^2 - x_2 + x_3^2 + x_3 + x_4^2 - x_4 - 8 \leq 0 \\
 g_2 &= x_1^2 - x_1 + 2x_2^2 + x_3^2 + 2x_4^2 - x_4 - 10 \leq 0 \\
 g_3 &= 2x_1^2 + 2x_1 + x_2^2 - x_2 + x_3^2 - x_4 - 5 \leq 0
 \end{align}
-```
+$$
 
 
 This problem has four decision variables ($[x_1, x_2, x_3, x_4]$) and three constraints ($[g_1, g_2, g_3]$), (NDV = 4, NCON = 3). No lower or upper bounds VLB(I) or VUB(I) are prescribed so control parameter NSIDE is specified as NSIDE = 0 to indicate this. It is necessary to provide a set of initial values for X(I), and from this the constrained optimum is obtained by CONMIN and its associated routines.
