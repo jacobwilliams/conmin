@@ -5,11 +5,12 @@ This is work in progress to refactor the original CONMIN optimizer (by G. N. Van
 [![last-commit](https://img.shields.io/github/last-commit/jacobwilliams/conmin)](https://github.com/jacobwilliams/conmin/commits/master)
 
 This new version has the following differences from the original:
-* The code has been extensively refactored and reformatted to be easier to follow. Obsolete language features are being removed [work in progress].
-* It is now threadsafe. Common blocks have been removed and all data is encapsulated in a class.
-* The real precision is selectable via a preprocessing directive.
-* The user can specify the file unit for printing (previously, this was hard-coded to 6).
-* Docstring have been added to the code, which are used to autogenerate the API documentation.
+
+  * The code has been extensively refactored and reformatted to be easier to follow. Obsolete language features are being removed [work in progress].
+  * It is now threadsafe. Common blocks have been removed and all data is encapsulated in a class.
+  * The real precision is selectable via a preprocessing directive.
+  * The user can specify the file unit for printing (previously, this was hard-coded to 6).
+  * Docstring have been added to the code, which are used to autogenerate the API documentation.
 
 ### Introduction
 
