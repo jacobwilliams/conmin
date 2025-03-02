@@ -1222,21 +1222,23 @@ contains
                ' ITERATIONS')
 7300    format(/t6, 'NUMBER OF ITERATIONS =', i5)
 7400    format(/t6, 'CONSTRAINT PARAMETER, BETA =', e14.5)
-7500    format(//t13, 27('* ')/t13, '*', t65, '*'/t13, '*', t34, &
+
+7500    format(//t13, '* * * * * * * * * * * * * * * * * * * * * * * * * * * '/t13,&
+                '*', t65, '*'/t13, '*', t34, &
                 'C O N M I N', t65, '*'/t13, '*', t65, '*'/t13, '*', t29, &
                 ' FORTRAN PROGRAM FOR ', t65, '*'/t13, '*', t65, '*'/t13, '*', t23, &
                 'CONSTRAINED FUNCTION MINIMIZATION', t65, '*'/t13, '*', t65, '*'/ &
-                t13, 27('* '))
+                t13, '* * * * * * * * * * * * * * * * * * * * * * * * * * * ')
 7600    format(//t6, 'CONSTRAINED FUNCTION MINIMIZATION'// &
                 t6, 'CONTROL PARAMETERS')
 7700    format(/t6, 'IPRINT  NDV    ITMAX    NCON    NSIDE  ICNDIR   NSCAL NFDG'/ &
                 8i8//t6, 'LINOBJ  ITRM     N1      N2      N3      N4      N5'/8i8)
 7800    format(/t10, 'FDCH', t26, 'FDCHM', t42, 'ALPHAX', t58, 'ABOBJ1'/ &
-                ' ', 4('  ', e14.5))
+                ' ', *('  ', e14.5))
 7900    format(/t10, 'CT', t26, 'CTMIN', t42, 'CTL', t58, 'CTLMIN'/ &
-                ' ', 4('  ', e14.5)// &
+                ' ', *('  ', e14.5)// &
                 t10, 'THETA', t26, 'PHI', t42, 'DELFUN', t58, 'DABFUN'/ &
-                ' ', 4('  ', e14.5))
+                ' ', *('  ', e14.5))
 8000    format(/t6, 'LOWER BOUNDS ON DECISION VARIABLES (VLB)')
 8100    format(/t6, 'UPPER BOUNDS ON DECISION VARIABLES (VUB)')
 8200    format(//t6, 'UNCONSTRAINED FUNCTION MINIMIZATION'//t6, &
