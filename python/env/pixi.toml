@@ -1,0 +1,13 @@
+[project]
+authors = ["Jacob Williams <jacobwilliams@users.noreply.github.com>"]
+channels = ["conda-forge"]
+name = "env"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+python = "==3.10"
+pyoptsparse = ">=2.11.3,<3"
+setuptools = ">=75.8.2,<76"
