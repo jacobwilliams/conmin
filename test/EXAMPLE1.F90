@@ -6,10 +6,10 @@ USE conmin_module, only: conmin_class, wp => conmin_wp
 
 IMPLICIT NONE
 
-REAL (wp)  :: s(6), g1(11), g2(11), b(11,11), c(11), vlb(6), vub(6),  &
-              scal(6), df(6), a(6,11), aobj, x(6), g(11)
-INTEGER    :: ms1(22), isc(11), ic(11)
-INTEGER    :: i, n1, n2, n3, n4, n5, nlim
+REAL (wp) :: s(6), g1(11), g2(11), b(11,11), c(11), vlb(6), vub(6), &
+             scal(6), df(6), a(6,11), aobj, x(6), g(11)
+INTEGER   :: ms1(22), isc(11), ic(11)
+INTEGER   :: i, n1, n2, n3, n4, n5, nlim
 type(conmin_class) :: solver
 
 OPEN (newunit=solver%iunit,FILE='EXOUT1.TXT',STATUS='REPLACE')
