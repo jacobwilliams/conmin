@@ -67,6 +67,8 @@ nlim = solver%itmax * (n+5)
 ! non-iterative part of analysis
 solver%igoto = 0
 
+solver%report => report  ! to report iterations
+
 ! iterative part of analysis
 do  i = 1, nlim
     ! call the optimization routine conmin
@@ -114,15 +116,26 @@ do  i = 1, nlim
 
     end if
 
-    write(*,'(a,i2,a,i1,a,i1,a,f26.12,1x,a,3(f20.6),1x,a,2(f20.6))') &
-            '(', solver%iter, ',', solver%info, ',', solver%igoto, ') '// &
-            'j:', solver%obj, &
-            'x:', x(1), x(2), x(3), &
-            'g:', g(1), g(2)
-
     if (solver%igoto == 0) exit
 end do
 
 close (solver%iunit)
+
+contains
+
+    subroutine report(me, iter, x, obj, g)
+        !! example iteration reporting function
+        class(conmin_class), intent(inout) :: me
+        integer, intent(in)                :: iter !! Iteration number
+        real(wp),dimension(:), intent(in)  :: x    !! Optimization variables
+        real(wp),intent(in)                :: obj  !! Objective function value
+        real(wp),dimension(:),intent(in)   :: g    !! Constraint functions
+
+        write(*,'(a,i2,a,i1,a,i1,a,f26.12,1x,a,3(f20.6),1x,a,2(f20.6))') &
+            '(', iter, ',', solver%info, ',', solver%igoto, ') '// &
+            'j:', obj, &
+            'x:', x(1), x(2), x(3), &
+            'g:', g(1), g(2)
+    end subroutine report
 
 end program tp37

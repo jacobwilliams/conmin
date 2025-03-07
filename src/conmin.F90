@@ -244,6 +244,8 @@ module conmin_module
                             !! the number of times INFO = 2.  NCAL(3) gives the number of times
                             !! INFO = 3 and NCAL(4) gives the number of times INFO = 4.
 
+        procedure(report_f),pointer :: report => null() !! a function to call once per iteration to report the solution
+
     contains
         private
         procedure, public :: solve => conmin
@@ -255,6 +257,18 @@ module conmin_module
         procedure :: cnmn06
         procedure :: cnmn07
     end type conmin_class
+
+    abstract interface
+        subroutine report_f(me,iter,x,obj,g)
+            !! Report function to call once per iteration to report the solution.
+            import :: conmin_class, wp
+            class(conmin_class), intent(inout) :: me
+            integer, intent(in) :: iter !! Iteration number
+            real(wp),dimension(:),intent(in) :: x !! Decision variables
+            real(wp),intent(in) :: obj !! Objective function value
+            real(wp),dimension(:),intent(in) :: g !! Constraint functions
+        end subroutine report_f
+    end interface
 
 contains
 
@@ -537,7 +551,7 @@ contains
             write (me%iunit, 9700) me%obj
             write (me%iunit, 9800)
             do i = 1, me%ndv
-                x1 = 1.
+                x1 = 1.0_wp
                 if (me%nscal /= 0) x1 = scal(i)
                 g1(i) = x(i)*x1
             end do
@@ -545,6 +559,7 @@ contains
                 m1 = min(me%ndv, i + 5)
                 write (me%iunit, 5400) i, g1(i:m1)
             end do
+            if (associated(me%report)) call me%report(me%iter, g1(1:me%ndv), me%obj, g(1:me%ncon))
             if (me%ncon /= 0) then
                 write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
@@ -966,7 +981,7 @@ contains
             end if
             write (me%iunit, 9800)
             do i = 1, me%ndv
-                ff1 = 1.
+                ff1 = 1.0_wp
                 if (me%nscal /= 0) ff1 = scal(i)
                 g1(i) = ff1*x(i)
             end do
@@ -974,6 +989,7 @@ contains
                 m1 = min(me%ndv, i + 5)
                 write (me%iunit, 5400) i, (g1(j), j=i, m1)
             end do
+            if (associated(me%report)) call me%report(me%iter, g1(1:me%ndv), me%obj, g(1:me%ncon))
             if (me%ncon /= 0) then
                 write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
@@ -1070,6 +1086,7 @@ contains
                 m1 = min(me%ndv, i + 5)
                 write (me%iunit, 5400) i, (x(j), j=i, m1)
             end do
+            if (associated(me%report)) call me%report(me%iter, x(1:me%ndv), me%obj, g(1:me%ncon))
             if (me%ncon /= 0) then
                 write (me%iunit, 10000)
                 do i = 1, me%ncon, 6
