@@ -1803,19 +1803,13 @@ contains
                 if (abs(qq) < me%small) return
                 x11 = x1*x1
                 dnom = x2*x2*x31 - x11*x32 - x3*x3*x21
-                if (abs(dnom) < me%small) then
-                    ii = 2
-                else
+                if (abs(dnom) >= me%small) then
                     aa = ((x31*x31*(y2 - y1) - x21*x21*(y3 - y1))/(x31*x21) - slope*x32)/dnom
-                    if (abs(aa) < me%small) then
-                        ii = 2
-                    else
+                    if (abs(aa) >= me%small) then
                         bb = ((y2 - y1)/x21 - slope - aa*(x2*x2 + x1*x2 - 2.0_wp*x11))/x21
                         cc = slope - 3.0_wp*aa*x11 - 2.0_wp*bb*x1
                         bac = bb*bb - 3.0_wp*aa*cc
-                        if (bac < 0.0_wp) then
-                            ii = 2
-                        else
+                        if (bac >= 0.0_wp) then
                             bac = sqrt(bac)
                             xbar = (bac - bb)/(3.0_wp*aa)
                             if (xbar < eps) xbar = eps
@@ -1823,6 +1817,7 @@ contains
                         end if
                     end if
                 end if
+                ii = 2
 
             case(4) ! II=4: 4-POINT CUBIC INTERPOLATION
 
