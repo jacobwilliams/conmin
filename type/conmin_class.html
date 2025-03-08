@@ -1,0 +1,4849 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran edition of conmin">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>conmin_class &ndash; conmin </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">conmin </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../sourcefile/conmin.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>conmin_class
+      <small>Derived Type</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="<p>100.0% of total for derived types.</p>Including implementation: 1793 statements, 100.0% of total for derived types.">47 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/conmin.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/conmin.f90.html'>conmin.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/conmin_module.html'>conmin_module</a></li>
+            <li class="breadcrumb-item active" aria-current="page">conmin_class</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#vars-0"
+         aria-expanded="false" aria-controls="vars-0">
+         <h4 class="card-header bg-primary text-white">Variables</h4>
+      </a>
+      <div id="vars-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../type/conmin_class.html#variable-small">small</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-large">large</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-delfun">delfun</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dabfun">dabfun</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-fdch">fdch</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-fdchm">fdchm</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ct">ct</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ctmin">ctmin</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ctl">ctl</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ctlmin">ctlmin</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alphax">alphax</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-abobj1">abobj1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-theta">theta</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-obj">obj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ndv">ndv</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ncon">ncon</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nside">nside</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-iunit">iunit</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-iprint">iprint</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nfdg">nfdg</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nscal">nscal</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-linobj">linobj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-itmax">itmax</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-itrm">itrm</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-icndir">icndir</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-igoto">igoto</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nac">nac</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-info">info</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-infog">infog</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-iter">iter</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dct">dct</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dctl">dctl</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-abobj">abobj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-cta">cta</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ctam">ctam</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ctbm">ctbm</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-obj1">obj1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-slope">slope</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dx">dx</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dx1">dx1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-fi">fi</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-xi">xi</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-dftdf1">dftdf1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alp">alp</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-fff">fff</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-a1">a1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-a2">a2</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-a3">a3</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-a4">a4</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-f1">f1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-f2">f2</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-f3">f3</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-f4">f4</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-cv1">cv1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-cv2">cv2</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-cv3">cv3</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-cv4">cv4</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-app">app</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpca">alpca</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpfes">alpfes</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpln">alpln</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpmin">alpmin</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpnc">alpnc</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpsav">alpsav</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alpsid">alpsid</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-alptot">alptot</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-rspace">rspace</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-phi">phi</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-jdir">jdir</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-iobj">iobj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-kobj">kobj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-kcount">kcount</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nfeas">nfeas</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-mscal">mscal</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ncobj">ncobj</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nvc">nvc</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-kount">kount</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-icount">icount</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-igood1">igood1</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-igood2">igood2</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-igood3">igood3</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-igood4">igood4</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ibest">ibest</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-iii">iii</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-nlnc">nlnc</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-jgoto">jgoto</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ispace">ispace</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-ncal">ncal</a>
+            <a class="list-group-item" href="../type/conmin_class.html#variable-report">report</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+      <div class="card mb-4">
+      <a data-bs-toggle="collapse" href="#boundprocs-0"
+         aria-expanded="false" aria-controls="boundprocs-0">
+         <h4 class="card-header bg-primary text-white">Type-Bound Procedures</h4>
+      </a>
+      <div id="boundprocs-0" class="collapse">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-solve">solve</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn01">cnmn01</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn02">cnmn02</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn03">cnmn03</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn04">cnmn04</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn05">cnmn05</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn06">cnmn06</a>
+            <a class="list-group-item" href="../type/conmin_class.html#boundprocedure-cnmn07">cnmn07</a>
+        </div>
+      </div>
+    </div>
+
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../type/conmin_class.html#src">conmin_class</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+      <h2 id="type-def-statement">
+        type, public :: conmin_class</h2>
+    <p>main class.</p>
+    <br>
+
+    <section>
+    <h2>Components</h2>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Visibility</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+<th></th><th scope="col">Initial</th>        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-small"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>small</strong></td>
+<td> =</td>
+                <td>1.0e-20_wp</td>
+            <td>
+                <p>Small number</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-large"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>large</strong></td>
+<td> =</td>
+                <td>1.0e+20_wp</td>
+            <td>
+                <p>Large number</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-delfun"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>delfun</strong></td>
+<td> =</td>
+                <td>0.001_wp</td>
+            <td>
+                <p>Minimum relative change in the objective
+function to indicate convergence.  If in <code>ITRM</code> consecutive
+iterations, <code>ABS(1.0-OBJ(J-1)/OBJ(J))&lt;DELFUN</code> and the current
+design is feasible (all <code>G(J)&lt;=ABS(CT)</code>), the minimization
+process is terminated.  If the current design is infeasible
+(some <code>G(J)&gt;ABS(CT)</code>), five iterations are required to
+terminate and this situation indicates that a feasible design
+may not exist.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dabfun"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dabfun</strong></td>
+<td> =</td>
+                <td>0.0_wp</td>
+            <td>
+                <p>Default value = 0.001 times the initial function value.  Same
+as DELFUN except comparison is on absolute change in the
+objective function, <code>ABS(OBJ(J)-OBJ(J-1))</code>, instead of relative
+change.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fdch"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fdch</strong></td>
+<td> =</td>
+                <td>0.01_wp</td>
+            <td>
+                <p>Not used if <code>NFDG = 0</code>.  Relative change in
+decision variable <code>X(I)</code> in calculating finite difference
+gradients.  For example, <code>FDCH = 0.01</code> corresponds to a finite
+difference step of one percent of the value of the decision
+variable.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fdchm"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fdchm</strong></td>
+<td> =</td>
+                <td>0.01_wp</td>
+            <td>
+                <p>Not used if <code>NFDG = 0</code>.  Minimum absolute
+step in finite difference gradient calculations.  FDCHM applies
+to the unscaled variable values.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ct"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ct</strong></td>
+<td> =</td>
+                <td>-0.1_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.
+Constraint thickness parameter.  If <code>CT&lt;=G(J)&lt;=ABS(CT)</code>,
+<code>G(J)</code> is defined as active.  If <code>G(J)&gt;ABS(CT)</code>, <code>G(J)</code> is said to
+be violated.  If <code>G(J)&lt;CT</code>, <code>G(J)</code> is not active.  CT is
+sequentially reduced in magnitude during the optimization
+process.  If <code>ABS(CT)</code> is very small, one or more constraints
+may be active on one iteration and inactive on the next,
+only to become active again on a subsequent iteration.
+This is often referred to as "zigzagging" between constraints.
+A wide initial value of the constraint thickness is desirable
+for highly nonlinear problems so that when a constraint
+becomes active it tends to remain active, thus reducing the
+zigzagging problem.  The default value is usually adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctmin"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctmin</strong></td>
+<td> =</td>
+                <td>0.004_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.  Minimum
+absolute value of CT considered in the optimization process.
+CTMIN may be considered as "numerical zero" since it may not be
+meaningful to compare numbers smaller than CTMIN.  The value of
+CTMIN is chosen to indicate that satisfaction of a constraint
+within this tolerance is acceptable.  The default value is usually
+adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctl"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctl</strong></td>
+<td> =</td>
+                <td>-0.01_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.
+Constraint thickness parameter for linear and side constraints.
+CTL is smaller in magnitude than CT because the zigzagging
+problem is avoided with linear and side constraints.  The default
+value is usually adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctlmin"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctlmin</strong></td>
+<td> =</td>
+                <td>0.001_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.  Minimum
+absolute value of CTL considered in the optimization process.
+The default value is usually adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alphax"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alphax</strong></td>
+<td> =</td>
+                <td>0.1_wp</td>
+            <td>
+                <p>the maximum fractional change in any
+component of X as an initial estimate for ALPHA in the one-dimensional
+search. That is, the initial ALPHA will be such that no component of X is changed by
+more than this amount. This only applies to those X(i) of magnitude greater than 0.1.
+If an optimization run shows numerous ALPHA = 0 results for the one-dimensional search,
+it may help to try ALPHAX less than the default. ALPHAX is changed by CONMIN depending
+on the progress of the optimization.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-abobj1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>abobj1</strong></td>
+<td> =</td>
+                <td>0.1_wp</td>
+            <td>
+                <p>the fractional change attempted as a first step in
+the one-dimensional search and is based on a linear approximation.
+ABOBJ1 is updated during the optimization, depending on progress.
+The initial step in the one-dimensional search is taken as the amount
+necessary to change <code>OBJ</code> by <code>ABOBJ1*ABS(OBJ)</code> or to change some <code>X(i)</code> by <code>ALPHAX*ABS( X(i) )</code>,
+whichever is less.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-theta"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>theta</strong></td>
+<td> =</td>
+                <td>1.0_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.  Mean value
+of the push-off factor in the method of feasible directions.
+A larger value of THETA is desirable if the constraints, <code>G(J)</code>,
+are known to be highly nonlinear, and a smaller value may be
+used if all <code>G(J)</code> are known to be nearly linear.  The actual
+value of the push-off factor used in the program is a quadratic
+function of each <code>G(J)</code>, varying from 0.0 for <code>G(J) = CT</code> to <code>4.0*THETA</code>
+for <code>G(J) = ABS(CT)</code>.  A value of <code>THETA = 0.0</code> is used in the
+program for constraints which are identified by the user to be
+strictly linear.  THETA is called a "push-off" factor because
+it pushes the design away from the active constraints into the
+feasible region.  The default value is usually adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-obj"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>obj</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Value of objective function for the current decision variables,
+<code>X(I), I = 1, NDV</code> contained in vector <code>X</code>.  Calculate OBJ if
+INFO = 1 or INFO = 2.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ndv"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ndv</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Number of decision variables, <code>X(I)</code>, contained in vector <code>X</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncon"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncon</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Number of constraint functions, <code>G(J)</code>.  NCON may be zero.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nside"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nside</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Side constraint parameter.  <code>NSIDE = 0</code> signifies that the
+variables <code>X(I)</code> do not have lower or upper bounds.  <code>NSIDE&gt;0</code>
+signifies that all variables <code>X(I)</code> have lower and upper bounds
+defined by <code>VLB(I)</code> and <code>VUB(I)</code> respectively.  If one or more
+variables are not bounded while others are, the values of the
+lower and upper bounds on the unbounded variables must be taken
+as very large negative and positive values respectively
+(i.e., <code>VLB(I) = -1.0E+10</code>, <code>VUB(I) = 1.0E+10</code>).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iunit"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iunit</strong></td>
+<td> =</td>
+                <td>output_unit</td>
+            <td>
+                <p>Unit number for printing. Should be non-zero.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iprint"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iprint</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+                <p>Print control.  All printing is done on unit number <code>iunit</code>.</p>
+<ul>
+<li><code>iprint=0</code>:  Print nothing.</li>
+<li><code>iprint=1</code>:  Print initial and final function information.</li>
+<li><code>iprint=2</code>:  1st debug level.  Print all of above plus control
+     parameters.  Print function value and X-vector at each
+     iteration.</li>
+<li><code>iprint=3</code>:  2nd. debug level.  Print all of above plus all constraint
+     values, numbers of active or violated constraints, direction
+     vectors, move parameters and miscellaneous information.  The
+     constraint parameter, BETA, printed under this option
+     approaches zero as the optimum objective is achieved.</li>
+<li><code>iprint=4</code>:  Complete debug.  Print all of above plus gradients of
+     objective function, active or violated constraint functions
+     and miscellaneous information.</li>
+<li><code>iprint=5</code>:  all of above plus each proposed design vector, objective
+     and constraints during the one-dimensional search.</li>
+</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nfdg"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nfdg</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>the finite difference gradient parameter:</p>
+<ul>
+<li><code>NFDG = 0</code>:  all gradient information is calculated by finite difference
+   within <a href="../proc/conmin.html">conmin</a>.</li>
+<li><code>NFDG = 1</code>:  all gradient information is supplied by the user.</li>
+<li><code>NFDG = 2</code>:  the gradient of <code>OBJ</code> is supplied by the user and the
+   gradients of constraints are calculated by finite
+   difference within <a href="../proc/conmin.html">conmin</a>.</li>
+</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nscal"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nscal</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Scaling control parameter.  The decision variables will be
+scaled linearly.</p>
+<ul>
+<li><code>NSCAL&lt;0</code>:  Scale variables <code>X(I)</code>by dividing by <code>SCAL(I)</code>, where
+               vector SCAL is defined by the user.</li>
+<li><code>NSCAL==0</code>: Do not scale the variables.</li>
+<li><code>NSCAL&gt;0</code>:  Scale the variables every NSCAL iterations.
+               Variables are normalized so that scaled
+               <code>X(I) = X(I)/ABS(X(I))</code>.  When using this option, it
+               is desirable that <code>NSCAL = ICNDIR</code> if ICNDIR is input
+               as nonzero, and <code>NSCAL = NDV + 1</code> in ICNDIR is input
+               as zero.</li>
+</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-linobj"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>linobj</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+                <p>Not used if NCON = NSIDE = 0.  Linear objective function
+identifier.  If the objective, OBJ, is specifically known to
+be a strictly linear function of the decision variables, <code>X(I)</code>,
+set <code>LINOBJ = 1</code>.  If OBJ is a general nonlinear function, set
+<code>LINOBJ = 0</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-itmax"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>itmax</strong></td>
+<td> =</td>
+                <td>10</td>
+            <td>
+                <p>Maximum number of iterations in the
+minimization process.  If <code>NFDG==0</code> each iteration requires one
+set of gradient computations (INFO = 3 or 4) and approximately
+three function evaluations (INFO = 1 or 2).  If <code>NFDG&gt;0</code>
+each iteration requires approximately NDV + 3 function
+evaluations (INFO = 1 or 2).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-itrm"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>itrm</strong></td>
+<td> =</td>
+                <td>3</td>
+            <td>
+                <p>Number of consecutive iterations to indicate
+convergence by relative or absolute changes, <code>DELFUN</code> or <code>DABFUN</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-icndir"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>icndir</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Default value = <code>NDV + 1</code>.  Conjugate direction restart parameter.
+If the function is currently unconstrained, (all <code>G(J)&lt;CT</code> or
+<code>NCON = NSIDE = 0</code>), Fletcher-Reeves conjugate direction method will
+be restarted with a steepest descent direction every ICNDIR
+iterations.  If <code>ICNDIR = 1</code> only steepest descent will be used.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igoto"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igoto</strong></td>
+<td> =</td>
+                <td>0</td>
+            <td>
+                <p>Reverse communication flag.
+CONMIN executes according to the parameter IGOTO which must be initialized to zero.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nac"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nac</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Number of active and violated constraints (<code>G(J)&gt;=CT</code>).
+Calculate <code>NAC</code> if <code>INFO = 4</code> and <code>NFDG = 0</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-info"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>info</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <ul>
+<li><code>INFO = 1</code>:  calculate OBJ and G(I), I = 1, NCON</li>
+<li><code>INFO = 2</code>:  calculate NAC, IC(I), I = 1,NAC, the gradient of OBJ, and
+  the gradient of G(J), where J = IC(I), I = 1,NAC.
+  Store the gradients of G in columns of A.</li>
+</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-infog"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>infog</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <ul>
+<li><code>INFOG = 0</code>:   same as when INFOG was not used.</li>
+<li><code>INFOG = 1</code>:   only those constraints identified as active or violated
+               in array IC(I), I = 1, NAC need be evaluated.  This is
+               only meaningful if finite difference gradients are
+               calculated, and allows the user to avoid
+               calculating non-essential information.  If it is
+               convenient to evaluate all constraints each time,
+               variable INFOG may be ignored.</li>
+</ul>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iter"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iter</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Iteration number.  The optimization process is iterative so
+that the vector of decision variables at the Kth iteration
+is defined by <code>X(K) = X(K - 1) + ALPHA*S(K)</code>, where in this case
+<code>K</code> refers to the iteration number and the components <code>X(I)</code> are
+all changed simultaneously.  <code>ALPHA</code> is defined as the move
+parameter and is printed if the print control <code>IPRINT&gt;=3</code>.
+<code>S</code> is the move direction.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dct"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dct</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dctl"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dctl</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-abobj"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>abobj</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cta"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cta</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctam"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctam</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctbm"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctbm</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-obj1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>obj1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-slope"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dx"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dx</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dx1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dx1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fi"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fi</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-xi"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xi</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-dftdf1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dftdf1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alp"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alp</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-fff"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fff</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a2"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a2</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a3"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a3</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a4"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f2"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f2</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f3"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f3</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f4"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv1"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv2"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv2</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv3"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv3</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv4"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-app"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>app</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpca"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpca</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpfes"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpfes</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpln"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpln</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpmin"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpmin</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpnc"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpnc</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpsav"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsav</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpsid"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsid</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alptot"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alptot</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-rspace"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>rspace</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-phi"></span>
+              real(kind=wp),
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>phi</strong></td>
+<td> =</td>
+                <td>5.0_wp</td>
+            <td>
+                <p>Not used if <code>NCON = NSIDE = 0</code>.
+Participation coefficient, used if a design is infeasible
+(one or more <code>G(J)&gt;ABS(CT)</code>).  PHI is a measure of how hard
+the design will be "pushed" towards the feasible region and
+is, in effect, a penalty parameter.  If in a given problem, a
+feasible solution cannot be obtained with the default value,
+PHI should be increased, and the problem run again.  If a
+feasible solution cannot be obtained with <code>PHI = 100</code>, it is
+probable that no feasible solution exists.  The default value
+is usually adequate.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jdir"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jdir</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iobj"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iobj</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-kobj"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>kobj</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-kcount"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>kcount</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nfeas"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nfeas</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-mscal"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>mscal</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncobj"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncobj</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nvc"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nvc</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-kount"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>kount</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-icount"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>icount</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood1"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood1</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood2"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood2</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood3"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood3</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood4"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood4</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibest"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibest</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iii"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iii</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlnc"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlnc</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jgoto"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jgoto</strong></td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ispace"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ispace</strong>(2)</td>
+                <td></td>
+                <td></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncal"></span>
+              integer,
+            </td>
+              <td>public</td>
+            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncal</strong>(2)</td>
+                <td></td>
+                <td></td>
+            <td>
+                <p>Bookkeeping information.  NCAL(1) gives the number of times
+external routine SUB1 was called with INFO = 1.  NCAL(2) gives
+the number of times INFO = 2.  NCAL(3) gives the number of times
+INFO = 3 and NCAL(4) gives the number of times INFO = 4.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-report"></span>
+              procedure(<a href='../interface/report_f.html'>report_f</a>),
+            </td>
+              <td>public,</td>
+            <td>
+              pointer
+            </td>
+            <td>::</td>
+            <td><strong>report</strong></td>
+<td>=&gt; </td>
+                <td>null()</td>
+            <td>
+                <p>a function to call once per iteration to report the solution</p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    </section>
+    <br>
+    
+
+
+      <section>
+        <h2>Type-Bound Procedures</h2>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-solve"></span>
+      <h3>
+          procedure, public ::
+  <strong>solve</strong> => <a href='/home/runner/work/conmin/conmin/doc/proc/conmin.html'>conmin</a>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/conmin.html'>conmin</a>(me, x, vlb, vub, g, scal, df, a, s, g1, g2, b, c, isc, ic, ms1, n1, n2, n3, n4, n5)  
+</h3>
+    
+
+  <p>Routine to solve constrained or unconstrained function minimization.</p><a href="../proc/conmin.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(n1)</td>
+            <td>
+<p>Vector of decision variables, <code>X(I), I = 1, NDV</code>.  The initial
+X-vector contains the user's best estimate of the set of optimum
+design variables.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vlb</strong>(n1)</td>
+            <td>
+<p>Used only if <code>NSIDE/=0</code>.  <code>VLB(I)</code> is the lower allowable value
+(lower bound) of variable <code>X(I)</code>.  If one or more variables, <code>X(I)</code>,
+do not have lower bounds, the corresponding <code>VLB(I)</code> must be
+initialized to a very large negative number (say <code>-1.0E+10</code>).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vub</strong>(n1)</td>
+            <td>
+<p>Used only if <code>NSIDE/=0</code>.  <code>VUB(I)</code> is the maximum allowable value
+(upper bound) of <code>X(I)</code>.  If one or more variables, <code>X(I)</code>, do not
+have upper bounds, the corresponding <code>VUB(I)</code> must be initialized
+to a very large positive number (say <code>1.0E+10</code>).</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g</strong>(n2)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = 0</code>.  Vector containing all constraint
+functions, <code>G(J), J = 1, NCON</code> for current decision variables, <code>X</code>.
+Calculate <code>G(J), J = 1, NCON</code> if <code>INFO = 2</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>scal</strong>(n1)</td>
+            <td>
+<p>Not used if <code>NSCAL = 0</code>.  Vector of scaling parameters.  If
+<code>NSCAL&gt;0</code> vector SCAL need not be initialized since SCAL will
+be defined in CONMIN and its associated routines.  If <code>NSCAL&lt;0</code>,
+vector SCAL is initialized in the main program, and the scaled
+variables <code>X(I) = X(I)/SCAL(I)</code>.  Efficiency of the optimization
+process can sometimes be improved if the variables are either
+normalized or are scaled in such a way that the partial deri-
+vative of the objective function, OBJ, with respect to variable
+<code>X(I)</code> is of the same order of magnitude for all <code>X(I)</code>.  <code>SCAL(I)</code>
+must be greater than zero because a negative value of <code>SCAL(I)</code>
+will result in a change of sign of <code>X(I)</code> and possibly yield
+erroneous optimization results.  The decision of if, and how, the
+variables should be scaled is highly problem dependent, and some
+experimentation is desirable for any given class of problems.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(n1)</td>
+            <td>
+<p>Analytic gradient of the objective function for the current
+decision variables, <code>X(I)</code>.  <code>DF(I)</code> contains the partial derivative
+of <code>OBJ</code> with respect to <code>X(I)</code>.  Calculate <code>DF(I), I = 1,
+NDV</code> if <code>INFO = 3</code> or <code>INFO = 4</code> and if <code>NFDG = 0</code> or <code>NFDG = 2</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a</strong>(n1,n3)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = 0</code>.  Gradients of active or violated
+constraints, for current decision variables, <code>X(I)</code>.
+<code>A(J,I)</code> contains the gradient of the Jth active or violated
+constraint, <code>G(J)</code>, with respect to the Ith decision variable,
+<code>X(I)</code> for <code>J = 1, NAC</code> and <code>I = 1, NDV</code>.  Calculate if <code>INFO = 4</code>
+and <code>NFDG = 0</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(n1)</td>
+            <td>
+<p>Move direction in the NDV-dimensional optimization space.  <code>S(I)</code>
+gives the rate at which variable <code>X(I)</code> changes with respect to
+<code>ALPHA</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong>(n2)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = NSCAL = 0</code>.  Used for temporary
+storage of constraint values <code>G(J), J = 1, NCON</code> and decision
+variables <code>X(I), I = 1, NDV</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g2</strong>(n2)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = 0</code>.  Used for temporary storage of
+constraint values <code>G(J), J = 1, NCON</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>b</strong>(n3,n3)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = 0</code>.  Used in determining direction
+vector S for constrained minimization problems.  Array <code>B</code> may
+be used for temporary storage in external routine SUB1.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>c</strong>(n4)</td>
+            <td>
+<p>Not used in <code>NCON = NSIDE = 0</code>.  Used with array B in determining
+direction vector S for constrained minimization problems.  Used
+for temporary storage of vector X if <code>NSCAL/=0</code>. routine SUB1.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>isc</strong>(n2)</td>
+            <td>
+<p>Not used if <code>NCON = 0</code>.  Linear constraint identification vector.
+If constraint <code>G(J)</code> is known to be a linear function of the
+decision variables, <code>X(I)</code>, <code>ISC(I)</code> should be initialized to
+<code>ISC(I) = 1</code>.  If constraint <code>G(J)</code> is nonlinear <code>ISC(I)</code> is initialized
+to <code>ISC(I) = 0</code>.  Identification of linear constraints may improve
+efficiency of the optimization process and is therefore desirable,
+but is not essential.  If <code>G(J)</code> is not specifically known to be
+linear, set <code>ISC(I) = 0</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ic</strong>(n3)</td>
+            <td>
+<p>Identifies which constraints are active or violated.  <code>IC(J)</code>
+contains the number of the Jth active or violated constraint
+for <code>J = 1, NAC</code>.  For example, if <code>G(10)</code> is the first active
+or violated constraint (<code>G(J)&lt;CT, J = 1,9</code>), set <code>IC(1) = 10</code>.
+Calculate if <code>INFO = 4</code> and <code>NFDG = 0</code>.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ms1</strong>(n5)</td>
+            <td>
+<p>Not used if <code>NCON = NSIDE = 0</code>.  Used with array <code>B</code> in determining
+direction vector <code>S</code> for constrained minimization problems.  Array
+MS1 may be used for temporary storage in external routine SUB1.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n1</strong></td>
+            <td>
+<p><code>N1 = NDV + 2</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n2</strong></td>
+            <td>
+<p><code>N2 = NCON + 2*NDV</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n3</strong></td>
+            <td>
+<p><code>N3 = NACMX1</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n4</strong></td>
+            <td>
+<p><code>N4 = MAX (N3,NDV)</code></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n5</strong></td>
+            <td>
+<p><code>N5 = 2*N4</code></p>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn01"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn01</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn01.html'>cnmn01</a>(me, jgoto, x, df, g, isc, ic, a, g1, vub, scal, ncal, dx, dx1, fi, xi, iii, n1, n2, n3)  
+</h3>
+    
+
+  <p>Routine to calculate gradient information by finite difference.</p><a href="../proc/cnmn01.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jgoto</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g</strong>(n2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>isc</strong>(n2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ic</strong>(n3)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a</strong>(n1,n3)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong>(n2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vub</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>scal</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncal</strong>(2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dx</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dx1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iii</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn02"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn02</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn02.html'>cnmn02</a>(me, ncalc, slope, dftdf1, df, s)  
+</h3>
+    
+
+  <p>Routine to determine conjugate direction vector or direction
+of steepest descent for unconstrained function minimization.</p><a href="../proc/cnmn02.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncalc</strong></td>
+            <td>
+<p>NCALC = CALCULATION CONTROL.</p><a href="../proc/cnmn02.html#variable-ncalc" class="pull-right"><emph>Read more&hellip;</emph></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>dftdf1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn03"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn03</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn03.html'>cnmn03</a>(me, x, s, slope, alp, fff, a1, a2, a3, a4, f1, f2, f3, f4, app, ncal, kount, jgoto)  
+</h3>
+    
+
+  <p>Routine to solve one-dimensional search in unconstrained
+minimization using 2-point quadratic interpolation, 3-point
+cubic interpolation and 4-point cubic interpolation.</p><a href="../proc/cnmn03.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+<p>SLOPE = INITIAL FUNCTION SLOPE = S-TRANSPOSE TIMES DF.
+SLOPE MUST BE NEGATIVE.</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alp</strong></td>
+            <td>
+<p>PROPOSED MOVE PARAMETER</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>fff</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>app</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncal</strong>(2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>kount</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jgoto</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn04"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn04</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn04.html'>cnmn04</a>(me, ii, xbar, eps, x1, y1, slope, x2, y2, x3, y3, x4, y4)  
+</h3>
+    
+
+  <p>Routine to find first <code>xbar&gt;=eps</code> corresponding to a minimum
+of a one-dimensional real function by polynomial interpolation.</p><a href="../proc/cnmn04.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ii</strong></td>
+            <td>
+<p>CALCULATION CONTROL:</p><a href="../proc/cnmn04.html#variable-ii~3" class="pull-right"><emph>Read more&hellip;</emph></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xbar</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>eps</strong></td>
+            <td>
+<p>may be negative</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn05"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn05</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn05.html'>cnmn05</a>(me, g, df, a, s, b, c, slope, phi, isc, ic, ms1, nvc, n1, n2, n3, n4, n5)  
+</h3>
+    
+
+  <p>Routine to solve direction finding problem in modified method of
+feasible directions.</p><a href="../proc/cnmn05.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g</strong>(n2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a</strong>(n1,n3)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>b</strong>(n3,n3)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>c</strong>(n4)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>phi</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>isc</strong>(n2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ic</strong>(n3)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ms1</strong>(n5)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nvc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>n5</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn06"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn06</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn06.html'>cnmn06</a>(me, x, vlb, vub, g, scal, df, s, g1, g2, ctam, ctbm, slope, alp, a2, a3, a4, f1, f2, f3, cv1, cv2, cv3, cv4, alpca, alpfes, alpln, alpmin, alpnc, alpsav, alpsid, alptot, isc, ncal, nvc, icount, igood1, igood2, igood3, igood4, ibest, iii, nlnc, jgoto)  
+</h3>
+    
+
+  <p>Routine to solve one-dimensional search problem for constrained
+function minimization.</p><a href="../proc/cnmn06.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vlb</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vub</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>scal</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g2</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctam</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctbm</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alp</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpca</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpfes</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpln</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpmin</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpnc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsav</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsid</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alptot</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>isc</strong>(:)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncal</strong>(2)</td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nvc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>icount</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood4</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibest</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iii</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlnc</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jgoto</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+          <div class="row">
+              <div class="card mt-3">
+    <div class="card-header codesum">
+      <span class="anchor" id="boundprocedure-cnmn07"></span>
+      <h3>
+          procedure, private ::
+  <strong>cnmn07</strong>
+        
+      </h3>
+    </div>
+    <ul class="list-group">
+        <li class="list-group-item">
+                  <h3>
+    private  subroutine <a href='../proc/cnmn07.html'>cnmn07</a>(me, ii, xbar, eps, x1, y1, x2, y2, x3, y3)  
+</h3>
+    
+
+  <p>Routine to find first <code>xbar&gt;=eps</code>corresponding to a real zero
+of a one-dimensional function by polynomial interpolation.</p><a href="../proc/cnmn07.html" class="pull-right"><emph>Read more&hellip;</emph></a>
+
+  <h4>Arguments</h4>
+      <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              class(<a href='conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ii</strong></td>
+            <td>
+<p>CALCULATION CONTROL:</p><a href="../proc/cnmn07.html#variable-ii~5" class="pull-right"><emph>Read more&hellip;</emph></a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(out)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>xbar</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>eps</strong></td>
+            <td>
+<p>may be negative</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y1</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y2</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" ></span>
+              real(kind=wp),
+            </td>
+<td>intent(in)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>y3</strong></td>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+        </li>
+    </ul>
+  </div>
+
+          </div>
+      </section>
+
+    <section>
+    <h3><span class="anchor" id="src"></span>Source Code</h3>
+    <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">conmin_class</span>
+
+<span class="w">        </span><span class="c">!! main class.</span>
+
+<span class="w">        </span><span class="c">! private  ! for now these are public so they can be set by user [should replace with an init method]</span>
+
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">small</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0e-20_wp</span><span class="w"> </span><span class="c">!! Small number</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">large</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0e+20_wp</span><span class="w"> </span><span class="c">!! Large number</span>
+
+<span class="w">        </span><span class="c">! cnmn1 variables</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">delfun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001_wp</span><span class="w">   </span><span class="c">!! Minimum relative change in the objective</span>
+<span class="w">                                        </span><span class="c">!! function to indicate convergence.  If in `ITRM` consecutive</span>
+<span class="w">                                        </span><span class="c">!! iterations, `ABS(1.0-OBJ(J-1)/OBJ(J))&lt;DELFUN` and the current</span>
+<span class="w">                                        </span><span class="c">!! design is feasible (all `G(J)&lt;=ABS(CT)`), the minimization</span>
+<span class="w">                                        </span><span class="c">!! process is terminated.  If the current design is infeasible</span>
+<span class="w">                                        </span><span class="c">!! (some `G(J)&gt;ABS(CT)`), five iterations are required to</span>
+<span class="w">                                        </span><span class="c">!! terminate and this situation indicates that a feasible design</span>
+<span class="w">                                        </span><span class="c">!! may not exist.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dabfun</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="w"> </span><span class="c">!! Default value = 0.001 times the initial function value.  Same</span>
+<span class="w">                                    </span><span class="c">!! as DELFUN except comparison is on absolute change in the</span>
+<span class="w">                                    </span><span class="c">!! objective function, `ABS(OBJ(J)-OBJ(J-1))`, instead of relative</span>
+<span class="w">                                    </span><span class="c">!! change.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">fdch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01_wp</span><span class="w">   </span><span class="c">!! Not used if `NFDG = 0`.  Relative change in</span>
+<span class="w">                                     </span><span class="c">!! decision variable `X(I)` in calculating finite difference</span>
+<span class="w">                                     </span><span class="c">!! gradients.  For example, `FDCH = 0.01` corresponds to a finite</span>
+<span class="w">                                     </span><span class="c">!! difference step of one percent of the value of the decision</span>
+<span class="w">                                     </span><span class="c">!! variable.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">fdchm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01_wp</span><span class="w"> </span><span class="c">!! Not used if `NFDG = 0`.  Minimum absolute</span>
+<span class="w">                                    </span><span class="c">!! step in finite difference gradient calculations.  FDCHM applies</span>
+<span class="w">                                    </span><span class="c">!! to the unscaled variable values.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">0.1_wp</span><span class="w">    </span><span class="c">!! Not used if `NCON = NSIDE = 0`.</span>
+<span class="w">                                    </span><span class="c">!! Constraint thickness parameter.  If `CT&lt;=G(J)&lt;=ABS(CT)`,</span>
+<span class="w">                                    </span><span class="c">!! `G(J)` is defined as active.  If `G(J)&gt;ABS(CT)`, `G(J)` is said to</span>
+<span class="w">                                    </span><span class="c">!! be violated.  If `G(J)&lt;CT`, `G(J)` is not active.  CT is</span>
+<span class="w">                                    </span><span class="c">!! sequentially reduced in magnitude during the optimization</span>
+<span class="w">                                    </span><span class="c">!! process.  If `ABS(CT)` is very small, one or more constraints</span>
+<span class="w">                                    </span><span class="c">!! may be active on one iteration and inactive on the next,</span>
+<span class="w">                                    </span><span class="c">!! only to become active again on a subsequent iteration.</span>
+<span class="w">                                    </span><span class="c">!! This is often referred to as &quot;zigzagging&quot; between constraints.</span>
+<span class="w">                                    </span><span class="c">!! A wide initial value of the constraint thickness is desirable</span>
+<span class="w">                                    </span><span class="c">!! for highly nonlinear problems so that when a constraint</span>
+<span class="w">                                    </span><span class="c">!! becomes active it tends to remain active, thus reducing the</span>
+<span class="w">                                    </span><span class="c">!! zigzagging problem.  The default value is usually adequate.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ctmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.004_wp</span><span class="w">    </span><span class="c">!! Not used if `NCON = NSIDE = 0`.  Minimum</span>
+<span class="w">                                        </span><span class="c">!! absolute value of CT considered in the optimization process.</span>
+<span class="w">                                        </span><span class="c">!! CTMIN may be considered as &quot;numerical zero&quot; since it may not be</span>
+<span class="w">                                        </span><span class="c">!! meaningful to compare numbers smaller than CTMIN.  The value of</span>
+<span class="w">                                        </span><span class="c">!! CTMIN is chosen to indicate that satisfaction of a constraint</span>
+<span class="w">                                        </span><span class="c">!! within this tolerance is acceptable.  The default value is usually</span>
+<span class="w">                                        </span><span class="c">!! adequate.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ctl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">0.01_wp</span><span class="w">  </span><span class="c">!! Not used if `NCON = NSIDE = 0`.</span>
+<span class="w">                                    </span><span class="c">!! Constraint thickness parameter for linear and side constraints.</span>
+<span class="w">                                    </span><span class="c">!! CTL is smaller in magnitude than CT because the zigzagging</span>
+<span class="w">                                    </span><span class="c">!! problem is avoided with linear and side constraints.  The default</span>
+<span class="w">                                    </span><span class="c">!! value is usually adequate.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ctlmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.001_wp</span><span class="w">   </span><span class="c">!! Not used if `NCON = NSIDE = 0`.  Minimum</span>
+<span class="w">                                        </span><span class="c">!! absolute value of CTL considered in the optimization process.</span>
+<span class="w">                                        </span><span class="c">!! The default value is usually adequate.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">alphax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1_wp</span><span class="w">  </span><span class="c">!! the maximum fractional change in any</span>
+<span class="w">                                     </span><span class="c">!! component of X as an initial estimate for ALPHA in the one-dimensional</span>
+<span class="w">                                     </span><span class="c">!! search. That is, the initial ALPHA will be such that no component of X is changed by</span>
+<span class="w">                                     </span><span class="c">!! more than this amount. This only applies to those X(i) of magnitude greater than 0.1.</span>
+<span class="w">                                     </span><span class="c">!! If an optimization run shows numerous ALPHA = 0 results for the one-dimensional search,</span>
+<span class="w">                                     </span><span class="c">!! it may help to try ALPHAX less than the default. ALPHAX is changed by CONMIN depending</span>
+<span class="w">                                     </span><span class="c">!! on the progress of the optimization.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">abobj1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.1_wp</span><span class="w">  </span><span class="c">!! the fractional change attempted as a first step in</span>
+<span class="w">                                     </span><span class="c">!! the one-dimensional search and is based on a linear approximation.</span>
+<span class="w">                                     </span><span class="c">!! ABOBJ1 is updated during the optimization, depending on progress.</span>
+<span class="w">                                     </span><span class="c">!! The initial step in the one-dimensional search is taken as the amount</span>
+<span class="w">                                     </span><span class="c">!! necessary to change `OBJ` by `ABOBJ1*ABS(OBJ)` or to change some `X(i)` by `ALPHAX*ABS( X(i) )`,</span>
+<span class="w">                                     </span><span class="c">!! whichever is less.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="w"> </span><span class="c">!! Not used if `NCON = NSIDE = 0`.  Mean value</span>
+<span class="w">                                    </span><span class="c">!! of the push-off factor in the method of feasible directions.</span>
+<span class="w">                                    </span><span class="c">!! A larger value of THETA is desirable if the constraints, `G(J)`,</span>
+<span class="w">                                    </span><span class="c">!! are known to be highly nonlinear, and a smaller value may be</span>
+<span class="w">                                    </span><span class="c">!! used if all `G(J)` are known to be nearly linear.  The actual</span>
+<span class="w">                                    </span><span class="c">!! value of the push-off factor used in the program is a quadratic</span>
+<span class="w">                                    </span><span class="c">!! function of each `G(J)`, varying from 0.0 for `G(J) = CT` to `4.0*THETA`</span>
+<span class="w">                                    </span><span class="c">!! for `G(J) = ABS(CT)`.  A value of `THETA = 0.0` is used in the</span>
+<span class="w">                                    </span><span class="c">!! program for constraints which are identified by the user to be</span>
+<span class="w">                                    </span><span class="c">!! strictly linear.  THETA is called a &quot;push-off&quot; factor because</span>
+<span class="w">                                    </span><span class="c">!! it pushes the design away from the active constraints into the</span>
+<span class="w">                                    </span><span class="c">!! feasible region.  The default value is usually adequate.</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="c">!! Value of objective function for the current decision variables,</span>
+<span class="w">                        </span><span class="c">!! `X(I), I = 1, NDV` contained in vector `X`.  Calculate OBJ if</span>
+<span class="w">                        </span><span class="c">!! INFO = 1 or INFO = 2.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ndv</span><span class="w"> </span><span class="c">!! Number of decision variables, `X(I)`, contained in vector `X`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncon</span><span class="w"> </span><span class="c">!! Number of constraint functions, `G(J)`.  NCON may be zero.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nside</span><span class="w">    </span><span class="c">!! Side constraint parameter.  `NSIDE = 0` signifies that the</span>
+<span class="w">                            </span><span class="c">!! variables `X(I)` do not have lower or upper bounds.  `NSIDE&gt;0`</span>
+<span class="w">                            </span><span class="c">!! signifies that all variables `X(I)` have lower and upper bounds</span>
+<span class="w">                            </span><span class="c">!! defined by `VLB(I)` and `VUB(I)` respectively.  If one or more</span>
+<span class="w">                            </span><span class="c">!! variables are not bounded while others are, the values of the</span>
+<span class="w">                            </span><span class="c">!! lower and upper bounds on the unbounded variables must be taken</span>
+<span class="w">                            </span><span class="c">!! as very large negative and positive values respectively</span>
+<span class="w">                            </span><span class="c">!! (i.e., `VLB(I) = -1.0E+10`, `VUB(I) = 1.0E+10`).</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iunit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">output_unit</span><span class="w"> </span><span class="c">!! Unit number for printing. Should be non-zero.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iprint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="c">!! Print control.  All printing is done on unit number `iunit`.</span>
+<span class="w">                                </span><span class="c">!!</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=0`:  Print nothing.</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=1`:  Print initial and final function information.</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=2`:  1st debug level.  Print all of above plus control</span>
+<span class="w">                                </span><span class="c">!!      parameters.  Print function value and X-vector at each</span>
+<span class="w">                                </span><span class="c">!!      iteration.</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=3`:  2nd. debug level.  Print all of above plus all constraint</span>
+<span class="w">                                </span><span class="c">!!      values, numbers of active or violated constraints, direction</span>
+<span class="w">                                </span><span class="c">!!      vectors, move parameters and miscellaneous information.  The</span>
+<span class="w">                                </span><span class="c">!!      constraint parameter, BETA, printed under this option</span>
+<span class="w">                                </span><span class="c">!!      approaches zero as the optimum objective is achieved.</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=4`:  Complete debug.  Print all of above plus gradients of</span>
+<span class="w">                                </span><span class="c">!!      objective function, active or violated constraint functions</span>
+<span class="w">                                </span><span class="c">!!      and miscellaneous information.</span>
+<span class="w">                                </span><span class="c">!!  * `iprint=5`:  all of above plus each proposed design vector, objective</span>
+<span class="w">                                </span><span class="c">!!      and constraints during the one-dimensional search.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nfdg</span><span class="w"> </span><span class="c">!! the finite difference gradient parameter:</span>
+<span class="w">                        </span><span class="c">!!</span>
+<span class="w">                        </span><span class="c">!!  * `NFDG = 0`:  all gradient information is calculated by finite difference</span>
+<span class="w">                        </span><span class="c">!!    within [[conmin]].</span>
+<span class="w">                        </span><span class="c">!!  * `NFDG = 1`:  all gradient information is supplied by the user.</span>
+<span class="w">                        </span><span class="c">!!  * `NFDG = 2`:  the gradient of `OBJ` is supplied by the user and the</span>
+<span class="w">                        </span><span class="c">!!    gradients of constraints are calculated by finite</span>
+<span class="w">                        </span><span class="c">!!    difference within [[conmin]].</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nscal</span><span class="w">    </span><span class="c">!! Scaling control parameter.  The decision variables will be</span>
+<span class="w">                            </span><span class="c">!! scaled linearly.</span>
+<span class="w">                            </span><span class="c">!!</span>
+<span class="w">                            </span><span class="c">!!  * `NSCAL&lt;0`:  Scale variables `X(I) `by dividing by `SCAL(I)`, where</span>
+<span class="w">                            </span><span class="c">!!                vector SCAL is defined by the user.</span>
+<span class="w">                            </span><span class="c">!!  * `NSCAL==0`: Do not scale the variables.</span>
+<span class="w">                            </span><span class="c">!!  * `NSCAL&gt;0`:  Scale the variables every NSCAL iterations.</span>
+<span class="w">                            </span><span class="c">!!                Variables are normalized so that scaled</span>
+<span class="w">                            </span><span class="c">!!                `X(I) = X(I)/ABS(X(I))`.  When using this option, it</span>
+<span class="w">                            </span><span class="c">!!                is desirable that `NSCAL = ICNDIR` if ICNDIR is input</span>
+<span class="w">                            </span><span class="c">!!                as nonzero, and `NSCAL = NDV + 1` in ICNDIR is input</span>
+<span class="w">                            </span><span class="c">!!                as zero.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">linobj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w">   </span><span class="c">!! Not used if NCON = NSIDE = 0.  Linear objective function</span>
+<span class="w">                                </span><span class="c">!! identifier.  If the objective, OBJ, is specifically known to</span>
+<span class="w">                                </span><span class="c">!! be a strictly linear function of the decision variables, `X(I)`,</span>
+<span class="w">                                </span><span class="c">!! set `LINOBJ = 1`.  If OBJ is a general nonlinear function, set</span>
+<span class="w">                                </span><span class="c">!! `LINOBJ = 0`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">itmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="c">!! Maximum number of iterations in the</span>
+<span class="w">                              </span><span class="c">!! minimization process.  If `NFDG==0` each iteration requires one</span>
+<span class="w">                              </span><span class="c">!! set of gradient computations (INFO = 3 or 4) and approximately</span>
+<span class="w">                              </span><span class="c">!! three function evaluations (INFO = 1 or 2).  If `NFDG&gt;0`</span>
+<span class="w">                              </span><span class="c">!! each iteration requires approximately NDV + 3 function</span>
+<span class="w">                              </span><span class="c">!! evaluations (INFO = 1 or 2).</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">itrm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c">!! Number of consecutive iterations to indicate</span>
+<span class="w">                            </span><span class="c">!! convergence by relative or absolute changes, `DELFUN` or `DABFUN`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">icndir</span><span class="w"> </span><span class="c">!! Default value = `NDV + 1`.  Conjugate direction restart parameter.</span>
+<span class="w">                          </span><span class="c">!! If the function is currently unconstrained, (all `G(J)&lt;CT` or</span>
+<span class="w">                          </span><span class="c">!! `NCON = NSIDE = 0`), Fletcher-Reeves conjugate direction method will</span>
+<span class="w">                          </span><span class="c">!! be restarted with a steepest descent direction every ICNDIR</span>
+<span class="w">                          </span><span class="c">!! iterations.  If `ICNDIR = 1` only steepest descent will be used.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">igoto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="c">!! Reverse communication flag.</span>
+<span class="w">                             </span><span class="c">!! CONMIN executes according to the parameter IGOTO which must be initialized to zero.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">nac</span><span class="w">  </span><span class="c">!! Number of active and violated constraints (`G(J)&gt;=CT`).</span>
+<span class="w">                        </span><span class="c">!! Calculate `NAC` if `INFO = 4` and `NFDG = 0`.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="c">!! * `INFO = 1`:  calculate OBJ and G(I), I = 1, NCON</span>
+<span class="w">                        </span><span class="c">!! * `INFO = 2`:  calculate NAC, IC(I), I = 1,NAC, the gradient of OBJ, and</span>
+<span class="w">                        </span><span class="c">!!   the gradient of G(J), where J = IC(I), I = 1,NAC.</span>
+<span class="w">                        </span><span class="c">!!   Store the gradients of G in columns of A.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">infog</span><span class="w"> </span><span class="c">!! * `INFOG = 0`:   same as when INFOG was not used.</span>
+<span class="w">                         </span><span class="c">!! * `INFOG = 1`:   only those constraints identified as active or violated</span>
+<span class="w">                         </span><span class="c">!!                in array IC(I), I = 1, NAC need be evaluated.  This is</span>
+<span class="w">                         </span><span class="c">!!                only meaningful if finite difference gradients are</span>
+<span class="w">                         </span><span class="c">!!                calculated, and allows the user to avoid</span>
+<span class="w">                         </span><span class="c">!!                calculating non-essential information.  If it is</span>
+<span class="w">                         </span><span class="c">!!                convenient to evaluate all constraints each time,</span>
+<span class="w">                         </span><span class="c">!!                variable INFOG may be ignored.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">iter</span><span class="w"> </span><span class="c">!! Iteration number.  The optimization process is iterative so</span>
+<span class="w">                        </span><span class="c">!! that the vector of decision variables at the Kth iteration</span>
+<span class="w">                        </span><span class="c">!! is defined by `X(K) = X(K - 1) + ALPHA*S(K)`, where in this case</span>
+<span class="w">                        </span><span class="c">!! `K` refers to the iteration number and the components `X(I)` are</span>
+<span class="w">                        </span><span class="c">!! all changed simultaneously.  `ALPHA` is defined as the move</span>
+<span class="w">                        </span><span class="c">!! parameter and is printed if the print control `IPRINT&gt;=3`.</span>
+<span class="w">                        </span><span class="c">!! `S` is the move direction.</span>
+
+<span class="w">        </span><span class="c">! consav variables</span>
+<span class="w">        </span><span class="c">! [note: removed dm1, dm2, idm1, etc. as no longer necessary]</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">dct</span><span class="p">,</span><span class="w"> </span><span class="n">dctl</span><span class="p">,</span><span class="w"> </span><span class="n">abobj</span><span class="p">,</span><span class="w"> </span><span class="n">cta</span><span class="p">,</span><span class="w"> </span><span class="n">ctam</span><span class="p">,</span><span class="w"> </span><span class="n">ctbm</span><span class="p">,</span><span class="w"> </span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">dx</span><span class="p">,</span><span class="w"> </span><span class="n">dx1</span><span class="p">,</span><span class="w"> </span><span class="n">fi</span><span class="p">,</span><span class="w"> </span><span class="n">xi</span><span class="p">,</span><span class="w"> </span><span class="n">dftdf1</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">fff</span><span class="p">,</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="n">a4</span><span class="p">,</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="n">f3</span><span class="p">,</span><span class="w"> </span><span class="n">f4</span><span class="p">,</span><span class="w"> </span><span class="n">cv1</span><span class="p">,</span><span class="w"> </span><span class="n">cv2</span><span class="p">,</span><span class="w"> </span><span class="n">cv3</span><span class="p">,</span><span class="w"> </span><span class="n">cv4</span><span class="p">,</span><span class="w"> </span><span class="n">app</span><span class="p">,</span><span class="w"> </span><span class="n">alpca</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="n">alpfes</span><span class="p">,</span><span class="w"> </span><span class="n">alpln</span><span class="p">,</span><span class="w"> </span><span class="n">alpmin</span><span class="p">,</span><span class="w"> </span><span class="n">alpnc</span><span class="p">,</span><span class="w"> </span><span class="n">alpsav</span><span class="p">,</span><span class="w"> </span><span class="n">alpsid</span><span class="p">,</span><span class="w"> </span><span class="n">alptot</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                    </span><span class="n">rspace</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">phi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0_wp</span><span class="w">    </span><span class="c">!! Not used if `NCON = NSIDE = 0`.</span>
+<span class="w">                                    </span><span class="c">!! Participation coefficient, used if a design is infeasible</span>
+<span class="w">                                    </span><span class="c">!! (one or more `G(J)&gt;ABS(CT)`).  PHI is a measure of how hard</span>
+<span class="w">                                    </span><span class="c">!! the design will be &quot;pushed&quot; towards the feasible region and</span>
+<span class="w">                                    </span><span class="c">!! is, in effect, a penalty parameter.  If in a given problem, a</span>
+<span class="w">                                    </span><span class="c">!! feasible solution cannot be obtained with the default value,</span>
+<span class="w">                                    </span><span class="c">!! PHI should be increased, and the problem run again.  If a</span>
+<span class="w">                                    </span><span class="c">!! feasible solution cannot be obtained with `PHI = 100`, it is</span>
+<span class="w">                                    </span><span class="c">!! probable that no feasible solution exists.  The default value</span>
+<span class="w">                                    </span><span class="c">!! is usually adequate.</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">jdir</span><span class="p">,</span><span class="w"> </span><span class="n">iobj</span><span class="p">,</span><span class="w"> </span><span class="n">kobj</span><span class="p">,</span><span class="w"> </span><span class="n">kcount</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                   </span><span class="n">nfeas</span><span class="p">,</span><span class="w"> </span><span class="n">mscal</span><span class="p">,</span><span class="w"> </span><span class="n">ncobj</span><span class="p">,</span><span class="w"> </span><span class="n">nvc</span><span class="p">,</span><span class="w"> </span><span class="n">kount</span><span class="p">,</span><span class="w"> </span><span class="n">icount</span><span class="p">,</span><span class="w"> </span><span class="n">igood1</span><span class="p">,</span><span class="w"> </span><span class="n">igood2</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                   </span><span class="n">igood3</span><span class="p">,</span><span class="w"> </span><span class="n">igood4</span><span class="p">,</span><span class="w"> </span><span class="n">ibest</span><span class="p">,</span><span class="w"> </span><span class="n">iii</span><span class="p">,</span><span class="w"> </span><span class="n">nlnc</span><span class="p">,</span><span class="w"> </span><span class="n">jgoto</span><span class="p">,</span><span class="w"> </span><span class="n">ispace</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">ncal</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">  </span><span class="c">!! Bookkeeping information.  NCAL(1) gives the number of times</span>
+<span class="w">                            </span><span class="c">!! external routine SUB1 was called with INFO = 1.  NCAL(2) gives</span>
+<span class="w">                            </span><span class="c">!! the number of times INFO = 2.  NCAL(3) gives the number of times</span>
+<span class="w">                            </span><span class="c">!! INFO = 3 and NCAL(4) gives the number of times INFO = 4.</span>
+
+<span class="w">        </span><span class="k">procedure</span><span class="p">(</span><span class="n">report_f</span><span class="p">),</span><span class="k">pointer</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nb">null</span><span class="p">()</span><span class="w"> </span><span class="c">!! a function to call once per iteration to report the solution</span>
+
+<span class="w">    </span><span class="k">contains</span>
+<span class="k">        private</span>
+<span class="k">        procedure</span><span class="p">,</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">solve</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">conmin</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn01</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn02</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn03</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn04</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn05</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn06</span>
+<span class="w">        </span><span class="k">procedure</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">cnmn07</span>
+<span class="w">    </span><span class="k">end type </span><span class="n">conmin_class</span>
+</pre></div>
+
+    </section>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              conmin
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>

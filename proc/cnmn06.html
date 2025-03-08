@@ -1,0 +1,1717 @@
+<!-- -*- mode: jinja2 -*- -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran edition of conmin">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="../favicon.png">
+
+    <title>cnmn06 &ndash; conmin</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="../css/pygments.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/local.css" rel="stylesheet">
+      <link  href="../tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="../js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="../index.html">conmin </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="../sourcefile/conmin.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="../search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <div class="row">
+    <h1>cnmn06
+      <small>Subroutine</small>
+      
+    </h1>
+      <div class="container p-2 mb-4 bg-light border rounded-3">
+    <div class="row align-items-center justify-content-between" id="info-bar">
+      <div class="col">
+        <ul class="list-inline" style="margin-bottom:0px;display:inline">
+
+            <li class="list-inline-item" id="statements"><i class="fa fa-list-ol"></i>
+              <a data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-html="true"
+                 title="20.9% of total for procedures.">381 statements</a>
+            </li>
+
+            <li class="list-inline-item" id="source-file">
+              <i class="fa fa-code"></i>
+              <a href="../src/conmin.F90"> Source File</a>
+            </li>
+        </ul>
+      </div>
+      <div class="col">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb justify-content-end mb-0">
+                <li class="breadcrumb-item"><a href='../sourcefile/conmin.f90.html'>conmin.F90</a></li>
+                <li class="breadcrumb-item"><a href='../module/conmin_module.html'>conmin_module</a></li>
+            <li class="breadcrumb-item active" aria-current="page">cnmn06</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(function () {
+    $('[data-bs-toggle="tooltip"]').tooltip()
+    })
+  </script>
+
+  </div>
+  
+  <div class="row">
+    <div class="col-md-3 hidden-xs hidden-sm visible-md visible-lg">
+      <div id="sidebar">
+      <h3>Contents</h3>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <div class="card card-primary">
+      <div class="card-header text-left"><h3 class="card-title">Source Code</h3></div>
+      <div class="list-group">
+        <a class="list-group-item" href="../proc/cnmn06.html#src">cnmn06</a>
+      </div>
+    </div>
+
+
+  </div>
+
+    </div>
+    
+    <div class="col-md-9" id='text'>
+    <h2>private  subroutine cnmn06(me, x, vlb, vub, g, scal, df, s, g1, g2, ctam, ctbm, slope, alp, a2, a3, a4, f1, f2, f3, cv1, cv2, cv3, cv4, alpca, alpfes, alpln, alpmin, alpnc, alpsav, alpsid, alptot, isc, ncal, nvc, icount, igood1, igood2, igood3, igood4, ibest, iii, nlnc, jgoto)  
+</h2>
+    
+
+    <p>Routine to solve one-dimensional search problem for constrained
+function minimization.</p>
+<p>BY G. N. VANDERPLAATS, AUG., 1974.</p>
+<ul>
+<li>OBJ = INITIAL AND FINAL FUNCTION VALUE.</li>
+<li>ALP = MOVE PARAMETER.</li>
+<li>SLOPE = INITIAL SLOPE.</li>
+<li>ALPSID = MOVE TO SIDE CONSTRAINT.</li>
+<li>ALPFES = MOVE TO FEASIBLE REGION.</li>
+<li>ALPNC = MOVE TO NEW NON-LINEAR CONSTRAINT.</li>
+<li>ALPLN = MOVE TO LINEAR CONSTRAINT.</li>
+<li>ALPCA = MOVE TO RE-ENCOUNTER CURRENTLY ACTIVE CONSTRAINT.</li>
+<li>ALPMIN = MOVE TO MINIMIZE FUNCTION.</li>
+<li>ALPTOT = TOTAL MOVE PARAMETER.</li>
+</ul>
+
+    <h3>Type Bound</h3>
+    <p><a href='../type/conmin_class.html'>conmin_class</a></p>
+
+    <h3>Arguments</h3>
+        <table class="table table-striped varlist">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+<th scope="col">Intent</th><th scope="col">Optional</th>        <th scope="col">Attributes</th>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-me~8"></span>
+              class(<a href='../type/conmin_class.html'>conmin_class</a>),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>me</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-x~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>x</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vlb~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vlb</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-vub~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>vub</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-scal~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>scal</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-df~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>df</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-s~5"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>s</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g1~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g1</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-g2~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>g2</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctam~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctam</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ctbm~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ctbm</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-slope~6"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>slope</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alp~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alp</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a2~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a2</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a3~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a3</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-a4~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>a4</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f1~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f1</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f2~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f2</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-f3~3"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>f3</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv1~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv1</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv2~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv2</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv3~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv3</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-cv4~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>cv4</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpca~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpca</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpfes~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpfes</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpln~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpln</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpmin~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpmin</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpnc~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpnc</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpsav~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsav</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alpsid~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alpsid</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-alptot~2"></span>
+              real(kind=wp),
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>alptot</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-isc~4"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>isc</strong>(:)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ncal~4"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ncal</strong>(2)</td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nvc~3"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nvc</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-icount~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>icount</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood1~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood1</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood2~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood2</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood3~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood3</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-igood4~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>igood4</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-ibest~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>ibest</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-iii~3"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>iii</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-nlnc~2"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>nlnc</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+        <tr>
+            <td>
+              <span class="anchor" id="variable-jgoto~4"></span>
+              integer,
+            </td>
+<td>intent(inout)</td>
+              <td></td>            <td>
+              
+            </td>
+            <td>::</td>
+            <td><strong>jgoto</strong></td>
+            <td>
+                
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+    <br>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Calls</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~cnmn06~~CallsGraph Pages: 1 -->
+<svg id="proccnmn06CallsGraph" width="318pt" height="74pt"
+ viewBox="0.00 0.00 318.00 74.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~cnmn06~~CallsGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 70)">
+<title>proc~~cnmn06~~CallsGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-70 314,-70 314,4 -4,4"/>
+<!-- proc~cnmn06 -->
+<g id="proc~~cnmn06~~CallsGraph_node1" class="node">
+<title>proc~cnmn06</title>
+<polygon fill="none" stroke="black" points="137,-45 0,-45 0,-21 137,-21 137,-45"/>
+<text text-anchor="middle" x="68.5" y="-30.6" font-family="Helvetica,sans-Serif" font-size="10.50">conmin_class%cnmn06</text>
+</g>
+<!-- proc~cnmn04 -->
+<g id="proc~~cnmn06~~CallsGraph_node2" class="node">
+<title>proc~cnmn04</title>
+<g id="a_proc~~cnmn06~~CallsGraph_node2"><a xlink:href="../proc/cnmn04.html" xlink:title="conmin_class%cnmn04">
+<polygon fill="#d9534f" stroke="#d9534f" points="310,-66 173,-66 173,-42 310,-42 310,-66"/>
+<text text-anchor="middle" x="241.5" y="-51.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">conmin_class%cnmn04</text>
+</a>
+</g>
+</g>
+<!-- proc~cnmn06&#45;&gt;proc~cnmn04 -->
+<g id="proc~~cnmn06~~CallsGraph_edge1" class="edge">
+<title>proc~cnmn06&#45;&gt;proc~cnmn04</title>
+<path fill="none" stroke="#000000" d="M137.08,-41.3C145.54,-42.34 154.24,-43.41 162.83,-44.46"/>
+<polygon fill="#000000" stroke="#000000" points="162.5,-47.95 172.85,-45.69 163.35,-41 162.5,-47.95"/>
+</g>
+<!-- proc~cnmn07 -->
+<g id="proc~~cnmn06~~CallsGraph_node3" class="node">
+<title>proc~cnmn07</title>
+<g id="a_proc~~cnmn06~~CallsGraph_node3"><a xlink:href="../proc/cnmn07.html" xlink:title="conmin_class%cnmn07">
+<polygon fill="#d9534f" stroke="#d9534f" points="310,-24 173,-24 173,0 310,0 310,-24"/>
+<text text-anchor="middle" x="241.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">conmin_class%cnmn07</text>
+</a>
+</g>
+</g>
+<!-- proc~cnmn06&#45;&gt;proc~cnmn07 -->
+<g id="proc~~cnmn06~~CallsGraph_edge2" class="edge">
+<title>proc~cnmn06&#45;&gt;proc~cnmn07</title>
+<path fill="none" stroke="#000000" d="M137.08,-24.7C145.54,-23.66 154.24,-22.59 162.83,-21.54"/>
+<polygon fill="#000000" stroke="#000000" points="163.35,-25 172.85,-20.31 162.5,-18.05 163.35,-25"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CallsGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CallsGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 27.51" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.86 0.86) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 741.5,-28 741.5,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="70,-24 0,-24 0,0 70,0 70,-24"/>
+<text text-anchor="middle" x="35" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="146,-24 88,-24 88,0 146,0 146,-24"/>
+<text text-anchor="middle" x="117" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="225.5,-24 164.5,-24 164.5,0 225.5,0 225.5,-24"/>
+<text text-anchor="middle" x="195" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="374,-24 244,-24 244,0 374,0 374,-24"/>
+<text text-anchor="middle" x="309" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="537.5,-24 392.5,-24 392.5,0 537.5,0 537.5,-24"/>
+<text text-anchor="middle" x="465" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="614,-24 556,-24 556,0 614,0 614,-24"/>
+<text text-anchor="middle" x="585" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="737.5,-24 632.5,-24 632.5,0 737.5,0 737.5,-24"/>
+<text text-anchor="middle" x="685" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+  <h3 class="card-title">Called by</h3>
+      </div>
+      <div class="card-body">
+  <div class="depgraph"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: proc~~cnmn06~~CalledByGraph Pages: 1 -->
+<svg id="proccnmn06CalledByGraph" width="314pt" height="32pt"
+ viewBox="0.00 0.00 314.00 32.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="proc~~cnmn06~~CalledByGraph" class="graph" transform="scale(1 1) rotate(0) translate(4 28)">
+<title>proc~~cnmn06~~CalledByGraph</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 310,-28 310,4 -4,4"/>
+<!-- proc~cnmn06 -->
+<g id="proc~~cnmn06~~CalledByGraph_node1" class="node">
+<title>proc~cnmn06</title>
+<polygon fill="none" stroke="black" points="306,-24 169,-24 169,0 306,0 306,-24"/>
+<text text-anchor="middle" x="237.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">conmin_class%cnmn06</text>
+</g>
+<!-- proc~conmin -->
+<g id="proc~~cnmn06~~CalledByGraph_node2" class="node">
+<title>proc~conmin</title>
+<g id="a_proc~~cnmn06~~CalledByGraph_node2"><a xlink:href="../proc/conmin.html" xlink:title="conmin_class%conmin">
+<polygon fill="#d9534f" stroke="#d9534f" points="133,-24 0,-24 0,0 133,0 133,-24"/>
+<text text-anchor="middle" x="66.5" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">conmin_class%conmin</text>
+</a>
+</g>
+</g>
+<!-- proc~conmin&#45;&gt;proc~cnmn06 -->
+<g id="proc~~cnmn06~~CalledByGraph_edge1" class="edge">
+<title>proc~conmin&#45;&gt;proc~cnmn06</title>
+<path fill="none" stroke="#000000" d="M133.32,-12C141.63,-12 150.18,-12 158.65,-12"/>
+<polygon fill="#000000" stroke="#000000" points="158.91,-15.5 168.91,-12 158.91,-8.5 158.91,-15.5"/>
+</g>
+</g>
+</svg>
+</div>          <div>
+            <a type="button" class="graph-help" data-bs-toggle="modal" href="#CalledByGraph-help-text">Help</a>
+          </div>
+          <div class="modal fade" id="CalledByGraph-help-text" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="-graph-help-label">Graph Key</h4>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+<p>Nodes of different colours represent the following: </p>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.43.0 (0)
+ -->
+<!-- Title: Graph Key Pages: 1 -->
+<svg width="641pt" height="28pt"
+ viewBox="0.00 0.00 641.00 27.51" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(0.86 0.86) rotate(0) translate(4 28)">
+<title>Graph Key</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-28 741.5,-28 741.5,4 -4,4"/>
+<!-- Subroutine -->
+<g id="node1" class="node">
+<title>Subroutine</title>
+<polygon fill="#d9534f" stroke="#d9534f" points="70,-24 0,-24 0,0 70,0 70,-24"/>
+<text text-anchor="middle" x="35" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Subroutine</text>
+</g>
+<!-- Function -->
+<g id="node2" class="node">
+<title>Function</title>
+<polygon fill="#d94e8f" stroke="#d94e8f" points="146,-24 88,-24 88,0 146,0 146,-24"/>
+<text text-anchor="middle" x="117" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Function</text>
+</g>
+<!-- Interface -->
+<g id="node3" class="node">
+<title>Interface</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="225.5,-24 164.5,-24 164.5,0 225.5,0 225.5,-24"/>
+<text text-anchor="middle" x="195" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Interface</text>
+</g>
+<!-- Type Bound Procedure -->
+<g id="node4" class="node">
+<title>Type Bound Procedure</title>
+<polygon fill="#a7506f" stroke="#a7506f" points="374,-24 244,-24 244,0 374,0 374,-24"/>
+<text text-anchor="middle" x="309" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Type Bound Procedure</text>
+</g>
+<!-- Unknown Procedure Type -->
+<g id="node5" class="node">
+<title>Unknown Procedure Type</title>
+<polygon fill="#777777" stroke="#777777" points="537.5,-24 392.5,-24 392.5,0 537.5,0 537.5,-24"/>
+<text text-anchor="middle" x="465" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Unknown Procedure Type</text>
+</g>
+<!-- Program -->
+<g id="node6" class="node">
+<title>Program</title>
+<polygon fill="#f0ad4e" stroke="#f0ad4e" points="614,-24 556,-24 556,0 614,0 614,-24"/>
+<text text-anchor="middle" x="585" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50" fill="white">Program</text>
+</g>
+<!-- This Page&#39;s Entity -->
+<g id="node7" class="node">
+<title>This Page&#39;s Entity</title>
+<polygon fill="none" stroke="black" points="737.5,-24 632.5,-24 632.5,0 737.5,0 737.5,-24"/>
+<text text-anchor="middle" x="685" y="-9.6" font-family="Helvetica,sans-Serif" font-size="10.50">This Page&#39;s Entity</text>
+</g>
+</g>
+</svg>
+
+<p>Solid arrows point from a procedure to one which it calls. Dashed 
+arrows point from an interface to procedures which implement that interface.
+This could include the module procedures in a generic interface or the
+implementation in a submodule of an interface in a parent module.
+</p>
+ </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    
+    
+
+    
+    
+
+
+
+    
+    <section>
+    <h2><span class="anchor" id="src"></span>Source Code</h2>
+    <div class="hl codehilite"><pre><span></span><span class="w">    </span><span class="k">subroutine </span><span class="n">cnmn06</span><span class="p">(</span><span class="n">me</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vlb</span><span class="p">,</span><span class="w"> </span><span class="n">vub</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">scal</span><span class="p">,</span><span class="w"> </span><span class="n">df</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">g1</span><span class="p">,</span><span class="w"> </span><span class="n">g2</span><span class="p">,</span><span class="w"> </span><span class="n">ctam</span><span class="p">,</span><span class="w"> </span><span class="n">ctbm</span><span class="p">,</span><span class="w"> </span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">a4</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                      </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="n">f3</span><span class="p">,</span><span class="w"> </span><span class="n">cv1</span><span class="p">,</span><span class="w"> </span><span class="n">cv2</span><span class="p">,</span><span class="w"> </span><span class="n">cv3</span><span class="p">,</span><span class="w"> </span><span class="n">cv4</span><span class="p">,</span><span class="w"> </span><span class="n">alpca</span><span class="p">,</span><span class="w"> </span><span class="n">alpfes</span><span class="p">,</span><span class="w"> </span><span class="n">alpln</span><span class="p">,</span><span class="w"> </span><span class="n">alpmin</span><span class="p">,</span><span class="w"> </span><span class="n">alpnc</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                      </span><span class="n">alpsav</span><span class="p">,</span><span class="w"> </span><span class="n">alpsid</span><span class="p">,</span><span class="w"> </span><span class="n">alptot</span><span class="p">,</span><span class="w"> </span><span class="n">isc</span><span class="p">,</span><span class="w"> </span><span class="n">ncal</span><span class="p">,</span><span class="w"> </span><span class="n">nvc</span><span class="p">,</span><span class="w"> </span><span class="n">icount</span><span class="p">,</span><span class="w"> </span><span class="n">igood1</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                      </span><span class="n">igood2</span><span class="p">,</span><span class="w"> </span><span class="n">igood3</span><span class="p">,</span><span class="w"> </span><span class="n">igood4</span><span class="p">,</span><span class="w"> </span><span class="n">ibest</span><span class="p">,</span><span class="w"> </span><span class="n">iii</span><span class="p">,</span><span class="w"> </span><span class="n">nlnc</span><span class="p">,</span><span class="w"> </span><span class="n">jgoto</span><span class="p">)</span>
+
+<span class="w">        </span><span class="c">!!  Routine to solve one-dimensional search problem for constrained</span>
+<span class="w">        </span><span class="c">!!  function minimization.</span>
+<span class="w">        </span><span class="c">!!</span>
+<span class="w">        </span><span class="c">!!  BY G. N. VANDERPLAATS, AUG., 1974.</span>
+<span class="w">        </span><span class="c">!!</span>
+<span class="w">        </span><span class="c">!!  * OBJ = INITIAL AND FINAL FUNCTION VALUE.</span>
+<span class="w">        </span><span class="c">!!  * ALP = MOVE PARAMETER.</span>
+<span class="w">        </span><span class="c">!!  * SLOPE = INITIAL SLOPE.</span>
+<span class="w">        </span><span class="c">!!  * ALPSID = MOVE TO SIDE CONSTRAINT.</span>
+<span class="w">        </span><span class="c">!!  * ALPFES = MOVE TO FEASIBLE REGION.</span>
+<span class="w">        </span><span class="c">!!  * ALPNC = MOVE TO NEW NON-LINEAR CONSTRAINT.</span>
+<span class="w">        </span><span class="c">!!  * ALPLN = MOVE TO LINEAR CONSTRAINT.</span>
+<span class="w">        </span><span class="c">!!  * ALPCA = MOVE TO RE-ENCOUNTER CURRENTLY ACTIVE CONSTRAINT.</span>
+<span class="w">        </span><span class="c">!!  * ALPMIN = MOVE TO MINIMIZE FUNCTION.</span>
+<span class="w">        </span><span class="c">!!  * ALPTOT = TOTAL MOVE PARAMETER.</span>
+
+<span class="w">        </span><span class="k">class</span><span class="p">(</span><span class="n">conmin_class</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">me</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">x</span><span class="p">(:),</span><span class="w"> </span><span class="n">vlb</span><span class="p">(:),</span><span class="w"> </span><span class="n">vub</span><span class="p">(:),</span><span class="w"> </span><span class="n">g</span><span class="p">(:),</span><span class="w"> </span><span class="n">scal</span><span class="p">(:),</span><span class="w"> </span><span class="n">df</span><span class="p">(:),</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                     </span><span class="n">s</span><span class="p">(:),</span><span class="w"> </span><span class="n">g1</span><span class="p">(:),</span><span class="w"> </span><span class="n">g2</span><span class="p">(:),</span><span class="w"> </span><span class="n">ctam</span><span class="p">,</span><span class="w"> </span><span class="n">ctbm</span><span class="p">,</span><span class="w"> </span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                     </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">a4</span><span class="p">,</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="n">f3</span><span class="p">,</span><span class="w"> </span><span class="n">cv1</span><span class="p">,</span><span class="w"> </span><span class="n">cv2</span><span class="p">,</span><span class="w"> </span><span class="n">cv3</span><span class="p">,</span><span class="w"> </span><span class="n">cv4</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                     </span><span class="n">alpca</span><span class="p">,</span><span class="w"> </span><span class="n">alpfes</span><span class="p">,</span><span class="w"> </span><span class="n">alpln</span><span class="p">,</span><span class="w"> </span><span class="n">alpmin</span><span class="p">,</span><span class="w"> </span><span class="n">alpnc</span><span class="p">,</span><span class="w"> </span><span class="n">alpsav</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                     </span><span class="n">alpsid</span><span class="p">,</span><span class="w"> </span><span class="n">alptot</span>
+<span class="w">        </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">inout</span><span class="p">)</span><span class="w">     </span><span class="kd">::</span><span class="w"> </span><span class="n">isc</span><span class="p">(:),</span><span class="w"> </span><span class="n">ncal</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">nvc</span><span class="p">,</span><span class="w"> </span><span class="n">icount</span><span class="p">,</span><span class="w"> </span><span class="n">igood1</span><span class="p">,</span><span class="w"> </span><span class="n">igood2</span><span class="p">,</span><span class="w"> </span><span class="p">&amp;</span>
+<span class="w">                                      </span><span class="n">igood3</span><span class="p">,</span><span class="w"> </span><span class="n">igood4</span><span class="p">,</span><span class="w"> </span><span class="n">ibest</span><span class="p">,</span><span class="w"> </span><span class="n">iii</span><span class="p">,</span><span class="w"> </span><span class="n">nlnc</span><span class="p">,</span><span class="w"> </span><span class="n">jgoto</span>
+
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span><span class="w">  </span><span class="kd">::</span><span class="w"> </span><span class="n">alpa</span><span class="p">,</span><span class="w"> </span><span class="n">alpb</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">c3</span><span class="p">,</span><span class="w"> </span><span class="n">cc</span><span class="p">,</span><span class="w"> </span><span class="n">f4</span><span class="p">,</span><span class="w"> </span><span class="n">gi</span><span class="p">,</span><span class="w"> </span><span class="n">si</span><span class="p">,</span><span class="w"> </span><span class="n">xi</span><span class="p">,</span><span class="w"> </span><span class="n">xi1</span><span class="p">,</span><span class="w"> </span><span class="n">xi2</span>
+<span class="w">        </span><span class="kt">integer</span><span class="w">   </span><span class="kd">::</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">jbest</span><span class="p">,</span><span class="w"> </span><span class="n">ksid</span><span class="p">,</span><span class="w"> </span><span class="n">nvc1</span>
+<span class="w">        </span><span class="kt">real</span><span class="p">(</span><span class="n">wp</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">zro</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jgoto</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            select case</span><span class="w"> </span><span class="p">(</span><span class="n">jgoto</span><span class="p">)</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">70</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">140</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">230</span>
+<span class="w">            </span><span class="k">end select</span>
+<span class="k">        end if</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5100</span><span class="p">)</span>
+<span class="w">        </span><span class="n">alpsav</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">        </span><span class="n">icount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="c">! TOLERANCES.</span>
+<span class="w">        </span><span class="n">ctam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ctmin</span><span class="p">)</span>
+<span class="w">        </span><span class="n">ctbm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ctlmin</span><span class="p">)</span>
+<span class="w">        </span><span class="c">! PROPOSED MOVE.</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! *****  BEGIN SEARCH OR IMPOSE SIDE CONSTRAINT MODIFICATION  *****</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="mi">10</span><span class="w">      </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsav</span>
+<span class="w">        </span><span class="n">icount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">icount</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">alpsid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">large</span>
+<span class="w">        </span><span class="c">! INITIAL ALPHA AND OBJ.</span>
+<span class="w">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="n">f1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span>
+<span class="w">        </span><span class="n">ksid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">nside</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="c">! FIND MOVE TO SIDE CONSTRAINT AND INSURE AGAINST VIOLATION OF</span>
+<span class="w">            </span><span class="c">! SIDE CONSTRAINTS</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span>
+<span class="w">                </span><span class="n">si</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">si</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                    </span><span class="c">! ITH COMPONENT OF S IS SMALL.  SET TO ZERO.</span>
+<span class="w">                    </span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">                    </span><span class="n">slope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">si</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="k">                    </span><span class="n">xi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">si</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="o">/</span><span class="n">si</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">si</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                        </span><span class="c">! LOWER BOUND.</span>
+<span class="w">                        </span><span class="n">xi2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vlb</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                        </span><span class="n">xi1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">xi2</span><span class="p">)</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xi1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">xi1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span>
+<span class="w">                        </span><span class="c">! CONSTRAINT VALUE.</span>
+<span class="w">                        </span><span class="n">gi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xi2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xi</span><span class="p">)</span><span class="o">/</span><span class="n">xi1</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">gi</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0e-6_wp</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">20</span>
+<span class="w">                        </span><span class="c">! PROPOSED MOVE TO LOWER BOUND.</span>
+<span class="w">                        </span><span class="n">alpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xi2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xi</span><span class="p">)</span><span class="o">*</span><span class="n">si</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alpa</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpsid</span><span class="p">)</span><span class="w"> </span><span class="n">alpsid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpa</span>
+<span class="w">                        </span><span class="k">cycle</span>
+<span class="k">                    end if</span>
+<span class="w">                    </span><span class="c">! UPPER BOUND.</span>
+<span class="w">                    </span><span class="n">xi2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vub</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">xi1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">xi2</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xi1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">xi1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span>
+<span class="w">                    </span><span class="c">! CONSTRAINT VALUE.</span>
+<span class="w">                    </span><span class="n">gi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xi</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xi2</span><span class="p">)</span><span class="o">/</span><span class="n">xi1</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">gi</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0e-6_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                        </span><span class="c">! PROPOSED MOVE TO UPPER BOUND.</span>
+<span class="w">                        </span><span class="n">alpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">xi2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">xi</span><span class="p">)</span><span class="o">*</span><span class="n">si</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alpa</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpsid</span><span class="p">)</span><span class="w"> </span><span class="n">alpsid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpa</span>
+<span class="w">                        </span><span class="k">cycle</span>
+<span class="k">                    end if</span>
+
+<span class="w">                    </span><span class="c">! MOVE WILL VIOLATE SIDE CONSTRAINT.  SET S(I)=0.</span>
+<span class="mi">20</span><span class="w">                  </span><span class="n">slope</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">df</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">                    </span><span class="n">ksid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ksid</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="k">            end do</span>
+<span class="w">            </span><span class="c">! ALPSID IS UPPER BOUND ON ALPHA.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpsid</span><span class="p">)</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!           CHECK ILL-CONDITIONING</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ksid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">icount</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nvc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0_wp</span>
+<span class="w">        </span><span class="n">alpmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0_wp</span>
+<span class="w">        </span><span class="n">alpln</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.1_wp</span><span class="o">*</span><span class="n">alpsid</span>
+<span class="w">        </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="n">alpca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! STORE CONSTRAINT VALUES IN G1.</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">g1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">!  ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!               MOVE A DISTANCE A2*S</span>
+<span class="w">        </span><span class="c">!  ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a2</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5200</span><span class="p">)</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">nscal</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span>
+<span class="w">                    </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scal</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">                </span><span class="k">end do</span>
+<span class="k">                write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!               UPDATE FUNCTION AND CONSTRAINT VALUES</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">jgoto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="mi">70</span><span class="w">      </span><span class="n">f2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5400</span><span class="p">)</span><span class="w"> </span><span class="n">f2</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5500</span><span class="p">)</span>
+<span class="w">            </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!           IDENTIFY ACCAPTABILITY OF DESIGNS F1 AND F2</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! IGOOD = 0 IS ACCAPTABLE.</span>
+<span class="w">        </span><span class="c">! CV = MAXIMUM CONSTRAINT VIOLATION.</span>
+<span class="w">        </span><span class="n">igood1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">igood2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">cv1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="n">cv2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="n">nvc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctam</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctbm</span>
+<span class="w">                </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g1</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span>
+<span class="w">                </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">nvc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nvc1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv1</span><span class="p">)</span><span class="w"> </span><span class="n">cv1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c1</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv2</span><span class="p">)</span><span class="w"> </span><span class="n">cv2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c2</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">            if</span><span class="w"> </span><span class="p">(</span><span class="n">cv1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">igood1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cv2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">igood2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">        </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f2</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! IF F2 VIOLATES FEWER CONSTRAINTS THAN F1 BUT STILL HAS CONSTRAINT</span>
+<span class="w">        </span><span class="c">! VIOLATIONS RETURN</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nvc1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nvc</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">nvc1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!         IDENTIFY BEST OF DESIGNS F1 ANF F2</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! IBEST CORRESPONDS TO MINIMUM VALUE DESIGN.</span>
+<span class="w">        </span><span class="c">! IF CONSTRAINTS ARE VIOLATED, IBEST CORRESPONDS TO MINIMUM</span>
+<span class="w">        </span><span class="c">! CONSTRAINT VIOLATION.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood1</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood2</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! VIOLATED CONSTRAINTS.  PICK MINIMUM VIOLATION.</span>
+<span class="w">            </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cv1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">cv2</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="c">! NO CONSTRAINT VIOLATION.  PICK MINIMUM F.</span>
+<span class="w">            </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">f2</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f1</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! IF CV2 IS GREATER THAN CV1, SET MOVE LIMITS TO A2.</span>
+<span class="w">        </span><span class="c">! PROGRAM MOD-FEB, 1981, GV.</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cv2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv1</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">alpln</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">            </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">            </span><span class="n">alpca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="c">! *****                 2 - POINT INTERPOLATION                *****</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="n">iii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="mi">90</span><span class="w">          </span><span class="n">iii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iii</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g1</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span>
+<span class="w">            </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isc</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="c">!                    LINEAR CONSTRAINT</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">1.0e-5_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ctbm</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">                </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn07</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ctbm</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpfes</span><span class="p">)</span><span class="w"> </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ctl</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">alp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpln</span><span class="p">)</span><span class="w"> </span><span class="n">alpln</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="c">!                 NON-LINEAR CONSTRAINT</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0e-5_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ctam</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn07</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                        if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ctam</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpfes</span><span class="p">)</span><span class="w"> </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ct</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">alp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpnc</span><span class="p">)</span><span class="w"> </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                    </span><span class="k">end if</span>
+<span class="k">                end if</span>
+<span class="k">            end if</span>
+
+<span class="mi">100</span><span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">90</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">linobj</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! CALCULATE ALPHA TO MINIMIZE FUNCTION.</span>
+<span class="w">            </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn04</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alpmin</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!                     PROPOSED MOVE</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! MOVE AT LEAST FAR ENOUGH TO OVERCOME CONSTRAINT VIOLATIONS.</span>
+<span class="w">        </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpfes</span>
+<span class="w">        </span><span class="c">! MOVE TO MINIMIZE FUNCTION.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alpmin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a3</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpmin</span>
+<span class="w">        </span><span class="c">! IF A3&lt;=0, SET A3 = ALPSID.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="c">! LIMIT MOVE TO NEW CONSTRAINT ENCOUNTER.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpnc</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpnc</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpln</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpln</span>
+<span class="w">        </span><span class="c">! MAKE A3 NON-ZERO.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span>
+<span class="w">        </span><span class="c">! IF A3=A2=ALPSID AND F2 IS BEST, GO INVOKE SIDE CONSTRAINT</span>
+<span class="w">        </span><span class="c">! MODIFICATION.</span>
+<span class="w">        </span><span class="n">alpb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="o">-</span><span class="n">a2</span><span class="o">/</span><span class="n">a3</span>
+<span class="w">        </span><span class="n">alpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="o">-</span><span class="n">alpsid</span><span class="o">/</span><span class="n">a3</span>
+<span class="w">        </span><span class="n">jbest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpb</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0e-10_wp</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">alpa</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0e-10_wp</span><span class="p">)</span><span class="w"> </span><span class="n">jbest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jbest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">        </span><span class="c">! SIDE CONSTRAINT CHECK NOT SATISFIED.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! STORE CONSTRAINT VALUES IN G2.</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">g2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">! IF A3=A2, SET A3=.9*A2.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpb</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1.0e-10_wp</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9_wp</span><span class="o">*</span><span class="n">a2</span>
+<span class="w">        </span><span class="c">! MOVE AT LEAST .01*A2.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="mf">0.01_wp</span><span class="o">*</span><span class="n">a2</span><span class="p">))</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.01_wp</span><span class="o">*</span><span class="n">a2</span>
+<span class="w">        </span><span class="c">! LIMIT MOVE TO 5.*A2.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="mf">5.0_wp</span><span class="o">*</span><span class="n">a2</span><span class="p">))</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0_wp</span><span class="o">*</span><span class="n">a2</span>
+<span class="w">        </span><span class="c">! LIMIT MOVE TO ALPSID.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpsid</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="c">! MOVE A DISTANCE A3*S.</span>
+<span class="w">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">        </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alp</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5600</span><span class="p">)</span>
+<span class="w">            </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5200</span><span class="p">)</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">nscal</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scal</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">                </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!          UPDATE FUNCTION AND CONSTRAINT VALUES</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">jgoto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="mi">140</span><span class="w">     </span><span class="n">f3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5400</span><span class="p">)</span><span class="w"> </span><span class="n">f3</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5500</span><span class="p">)</span>
+<span class="w">            </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!   CALCULATE MAXIMUM CONSTRAINT VIOLATION AND PICK BEST DESIGN</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">cv3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="n">igood3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">nvc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctam</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctbm</span>
+<span class="w">                </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv3</span><span class="p">)</span><span class="w"> </span><span class="n">cv3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c1</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">nvc1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nvc1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">            if</span><span class="w"> </span><span class="p">(</span><span class="n">cv3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">igood3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! DETERMINE BEST DESIGN.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ibest</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! CHOOSE BETWEEN F1 AND F3.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood1</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood3</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">cv1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">cv3</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">                </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">160</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="k">            if</span><span class="w"> </span><span class="p">(</span><span class="n">f3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f1</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="c">! CHOOSE BETWEEN F2 AND F3.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood2</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood3</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">cv2</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">cv3</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">f3</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f2</span><span class="p">)</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="k">        end if</span>
+
+<span class="mi">160</span><span class="w">     </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">        </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f3</span>
+<span class="w">        </span><span class="c">! IF F3 VIOLATES FEWER CONSTRAINTS THAN F1 RETURN.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nvc1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">nvc</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="c">! IF OBJECTIVE AND ALL CONSTRAINTS ARE LINEAR, RETURN.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">linobj</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">nlnc</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="c">! IF A3 = ALPLN AND F3 IS BOTH GOOD AND BEST RETURN.</span>
+<span class="w">        </span><span class="n">alpb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="o">-</span><span class="n">alpln</span><span class="o">/</span><span class="n">a3</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpb</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">igood3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">        </span><span class="c">! IF A3 = ALPSID AND F3 IS BEST, GO INVOKE SIDE CONSTRAINT MODIFICATION.</span>
+<span class="w">        </span><span class="n">alpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0_wp</span><span class="o">-</span><span class="n">alpsid</span><span class="o">/</span><span class="n">a3</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">alpa</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! **********            3 - POINT INTERPOLATION            *********</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="n">alpca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0_wp</span>
+<span class="w">        </span><span class="n">alpmin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mf">1.0_wp</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! IF A3 IS GREATER THAN A2 AND CV3 IS GREATER THAN CV2, SET</span>
+<span class="w">        </span><span class="c">! MOVE LIMITS TO A3.  PROGRAM MOD-FEB, 1981, GV.</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a2</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">cv3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv2</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">alpln</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">            </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">            </span><span class="n">alpca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            </span><span class="n">iii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="mi">170</span><span class="w">         </span><span class="n">iii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">iii</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g1</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span>
+<span class="w">            </span><span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g2</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span>
+<span class="w">            </span><span class="n">c3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isc</span><span class="p">(</span><span class="n">iii</span><span class="p">)</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="c">! LINEAR CONSTRAINT.  FIND ALPFES ONLY.  ALPLN SAME AS BEFORE.</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">ctbm</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">190</span>
+<span class="w">                </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn07</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">c3</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpfes</span><span class="p">)</span><span class="w"> </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="c">!                 NON-LINEAR CONSTRAINT</span>
+<span class="w">                </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">                </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">                </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn07</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">c3</span><span class="p">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                    if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ct</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                        if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ctam</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">180</span>
+<span class="w">                    </span><span class="k">end if</span>
+<span class="w">                    </span><span class="c">! ALP IS MINIMUM MOVE.  UPDATE FOR NEXT CONSTRAINT ENCOUNTER.</span>
+<span class="w">                    </span><span class="n">alpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                    </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn07</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alp</span><span class="p">,</span><span class="w"> </span><span class="n">alpa</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">c1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">c3</span><span class="p">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpca</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">alpa</span><span class="p">)</span><span class="w"> </span><span class="n">alpca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                    </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">190</span>
+
+<span class="mi">180</span><span class="w">                 </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpfes</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">ctam</span><span class="p">)</span><span class="w"> </span><span class="n">alpfes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alp</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">alpnc</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">c1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">alpnc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">                </span><span class="k">end if</span>
+<span class="k">            end if</span>
+
+<span class="mi">190</span><span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">iii</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">170</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">linobj</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">slope</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="c">!          CALCULATE ALPHA TO MINIMIZE FUNCTION</span>
+<span class="w">            </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">            </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a3</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="p">(</span><span class="n">igood2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">ibest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">            </span><span class="k">call </span><span class="n">me</span><span class="p">%</span><span class="n">cnmn04</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span><span class="w"> </span><span class="n">alpmin</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="n">slope</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="n">a3</span><span class="p">,</span><span class="w"> </span><span class="n">f3</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">,</span><span class="w"> </span><span class="n">zro</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!                   PROPOSED MOVE</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">! MOVE AT LEAST ENOUGH TO OVERCOME CONSTRAINT VIOLATIONS.</span>
+<span class="w">        </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpfes</span>
+<span class="w">        </span><span class="c">! MOVE TO MINIMIZE FUNCTION.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">alpmin</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">a4</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpmin</span>
+<span class="w">        </span><span class="c">! IF A4&lt;=0, SET A4 = ALPSID.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpsid</span>
+<span class="w">        </span><span class="c">! LIMIT MOVE TO NEW CONSTRAINT ENCOUNTER.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpln</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpln</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpnc</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpnc</span>
+<span class="w">        </span><span class="c">! LIMIT MOVE TO RE-ENCOUNTER CURRENTLY ACTIVE CONSTRAINT.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">alpca</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alpca</span>
+<span class="w">        </span><span class="c">! LIMIT A4 TO 5.*A3.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="p">(</span><span class="mf">5.0_wp</span><span class="o">*</span><span class="n">a3</span><span class="p">))</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">5.0_wp</span><span class="o">*</span><span class="n">a3</span>
+<span class="w">        </span><span class="c">! UPDATE DESIGN.</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ibest</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="c">! STORE CONSTRAINT VALUES IN G2.  F3 IS BEST.  F2 IS NOT.</span>
+<span class="w">            </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">g2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">! IF A4=A3 AND IGOOD1=0 AND IGOOD3=1, SET A4=.9*A3.</span>
+<span class="w">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">igood3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="nb">abs</span><span class="p">(</span><span class="n">alp</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">small</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.9_wp</span><span class="o">*</span><span class="n">a3</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!               MOVE A DISTANCE A4*S</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">        </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alp</span>
+<span class="w">        </span><span class="k">do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">alp</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end do</span>
+<span class="k">        if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5000</span><span class="p">)</span>
+<span class="w">            </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5200</span><span class="p">)</span><span class="w"> </span><span class="n">a4</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">nscal</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scal</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">                </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="k">        end if</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!          UPDATE FUNCTION AND CONSTRAINT VALUES</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ncal</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">jgoto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="mi">230</span><span class="w">     </span><span class="n">f4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5400</span><span class="p">)</span><span class="w"> </span><span class="n">f4</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">.</span><span class="nb">and</span><span class="p">.</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5500</span><span class="p">)</span>
+<span class="w">            </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5300</span><span class="p">)</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="w">        </span><span class="c">! DETERMINE ACCAPTABILITY OF F4.</span>
+<span class="w">        </span><span class="n">igood4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="n">cv4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0_wp</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">            do </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span>
+<span class="w">                </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctam</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isc</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">cc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctbm</span>
+<span class="w">                </span><span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">cc</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv4</span><span class="p">)</span><span class="w"> </span><span class="n">cv4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c1</span>
+<span class="w">            </span><span class="k">end do</span>
+<span class="k">            if</span><span class="w"> </span><span class="p">(</span><span class="n">cv4</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0.0_wp</span><span class="p">)</span><span class="w"> </span><span class="n">igood4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="k">end if</span>
+<span class="k">        </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span>
+<span class="w">        </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f4</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!                 DETERMINE BEST DESIGN</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="k">select case</span><span class="w"> </span><span class="p">(</span><span class="n">ibest</span><span class="p">)</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! CHOOSE BETWEEN F1 AND F4.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood1</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood4</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">cv1</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv4</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">f4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f1</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="w">            </span><span class="c">! F1 IS BEST.</span>
+<span class="w">            </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a4</span>
+<span class="w">            </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f1</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a4</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g1</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! CHOOSE BETWEEN F2 AND F4.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood2</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood4</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">cv2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv4</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">f4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f2</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="w">            </span><span class="c">! F2 IS BEST.</span>
+<span class="w">            </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f2</span>
+<span class="w">            </span><span class="n">a2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">            </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a2</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a2</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g2</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="w">            </span><span class="c">! CHOOSE BETWEEN F3 AND F4.</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">igood3</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">.</span><span class="nb">or</span><span class="p">.</span><span class="w"> </span><span class="n">igood4</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">cv3</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">cv4</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="k">                if</span><span class="w"> </span><span class="p">(</span><span class="n">f4</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">f3</span><span class="p">)</span><span class="w"> </span><span class="k">go</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="mi">340</span>
+<span class="w">            </span><span class="k">end if</span>
+<span class="w">            </span><span class="c">! F3 IS BEST.</span>
+<span class="w">            </span><span class="n">me</span><span class="p">%</span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f3</span>
+<span class="w">            </span><span class="n">a3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a4</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">            </span><span class="n">alptot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span>
+<span class="w">            </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a3</span><span class="o">*</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ndv</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="k">then</span>
+<span class="k">                </span><span class="n">g</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g2</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">me</span><span class="p">%</span><span class="n">ncon</span><span class="p">)</span>
+<span class="w">            </span><span class="k">end if</span>
+
+<span class="k">        end select</span>
+
+<span class="mi">340</span><span class="w">     </span><span class="n">alp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alptot</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iprint</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="k">write</span><span class="w"> </span><span class="p">(</span><span class="n">me</span><span class="p">%</span><span class="n">iunit</span><span class="p">,</span><span class="w"> </span><span class="mi">5700</span><span class="p">)</span>
+<span class="w">        </span><span class="n">jgoto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+<span class="w">        </span><span class="c">!                              FORMATS</span>
+<span class="w">        </span><span class="c">! ------------------------------------------------------------------</span>
+
+<span class="mi">5000</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;THREE-POINT INTERPOLATION&#39;</span><span class="p">)</span>
+<span class="mi">5100</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">///</span><span class="s1">&#39;* * * CONSTRAINED ONE-DIMENSIONAL SEARCH INFORMATION * * *&#39;</span><span class="p">)</span>
+<span class="mi">5200</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">//</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;PROPOSED DESIGN&#39;</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ALPHA =&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">e12</span><span class="p">.</span><span class="mi">5</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;X-VECTOR&#39;</span><span class="p">)</span>
+<span class="mi">5300</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">8e12</span><span class="p">.</span><span class="mi">4</span><span class="p">)</span>
+<span class="mi">5400</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;OBJ =&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">e13</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="mi">5500</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CONSTRAINT VALUES&#39;</span><span class="p">)</span>
+<span class="mi">5600</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;TWO-POINT INTERPOLATION&#39;</span><span class="p">)</span>
+<span class="mi">5700</span><span class="w">    </span><span class="k">format</span><span class="p">(</span><span class="o">/</span><span class="n">t6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;* * * END OF ONE-DIMENSIONAL SEARCH&#39;</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">end subroutine </span><span class="n">cnmn06</span>
+</pre></div>
+
+    </section>
+    <br>
+    
+    </div>
+  </div>
+
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              conmin
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="../tipuesearch/tipuesearch_content.js"></script>
+          <script src="../tipuesearch/tipuesearch_set.js"></script>
+          <script src="../tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>

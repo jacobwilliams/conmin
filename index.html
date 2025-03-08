@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Modern Fortran edition of conmin">
+    <meta name="author" content="Jacob Williams" >
+    <link rel="icon" href="./favicon.png">
+
+    <title> conmin </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="./css/pygments.css" rel="stylesheet">
+    <link href="./css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/local.css" rel="stylesheet">
+      <link  href="./tipuesearch/tipuesearch.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="./js/svg-pan-zoom.min.js"></script>
+  </head>
+
+  <body>
+
+    <!-- Fixed navbar -->
+    <div class="container-fluid mb-sm-4 mb-xl-2">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="./index.html">conmin </a>
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon">
+          </button>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" href="./sourcefile/conmin.f90.html">Source File</a>
+                  </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/modules.html">Modules</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/procedures.html">Procedures</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/absint.html">Abstract Interfaces</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="./lists/types.html">Derived Types</a>
+                </li>
+            </ul>
+              <div class="d-flex align-items-end flex-grow-1">
+                <form action="./search.html" role="search" class="ms-auto">
+                  <input type="text" class="form-control" aria-label="Search" placeholder="Search" name="q" id="tipue_search_input" autocomplete="off" required>
+                </form>
+              </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+  <!-- Main component for a primary marketing message or call to action -->
+    <div class="p-5 mb-4 bg-light border rounded-3" id="jumbotron">
+      <p>Modern Fortran edition of conmin</p>
+        <p> Find us on&hellip;</p>
+      <p>
+        <a class="btn btn-lg btn-primary" href="https://github.com/jacobwilliams/conmin" role="button">GitHub</a>
+        
+        
+        
+        
+      </p>
+    </div>
+
+      <div class="row" id='text'>
+        <div class=col-md-8>
+          <h1>conmin</h1>
+          <p>This is work in progress to refactor the original CONMIN optimizer (by G. N. Vanderplaats) into Modern Fortran. The latest API documentation can be found <a href="https://jacobwilliams.github.io/conmin/index.html">here</a>.</p>
+<p><a href="https://github.com/topics/fortran"><img alt="Language" src="https://img.shields.io/badge/-Fortran-734f96?logo=fortran&amp;logoColor=white"></a>
+<a href="https://github.com/jacobwilliams/conmin/actions"><img alt="CI Status" src="https://github.com/jacobwilliams/conmin/actions/workflows/CI.yml/badge.svg"></a>
+<a href="https://github.com/jacobwilliams/conmin/commits/master"><img alt="last-commit" src="https://img.shields.io/github/last-commit/jacobwilliams/conmin"></a></p>
+<p>This new version has the following differences from the original:</p>
+<ul>
+<li>The code has been extensively refactored and reformatted to be easier to follow. Obsolete language features are being removed [work in progress].</li>
+<li>It is now threadsafe. Common blocks have been removed and all data is encapsulated in a class.</li>
+<li>The real precision is selectable via a preprocessing directive.</li>
+<li>The user can specify the file unit for printing (previously, this was hard-coded to 6).</li>
+<li>Docstrings have been added to the code, which are used to autogenerate the API documentation.</li>
+</ul>
+<h3>Introduction</h3>
+<p>In many mathematical problems, it is necessary to determine the minimum or maximum of a function of several variables, limited by various linear and nonlinear inequality constraints. It is seldom possible, in practical applications, to solve these problems directly, and iterative methods are used to obtain the numerical solution. Machine-calculation of this solution is, of course, desirable and the CONMIN program has been developed to solve a wide variety of such problems.</p>
+<p>CONMIN is a FORTRAN program, in subroutine form, for the minimization of a multi-variable function subject to a set of inequality constraints. The general minimization problem is: Find values for the set of variables, X(I), to</p>
+<div class="codehilite"><pre><span></span><code>  Minimize    OBJ
+
+  Subject to:
+
+       G(J) &lt;= 0                  J = 1,NCON
+
+       VLB(I) &lt;= X(I) &lt;= VUB(I)   I = 1,NDV      NSIDE &gt; 0
+</code></pre></div>
+
+<p>where OBJ is a general function (objective function) of the variables, X(I) referred to hereafter as decision variables. OBJ need not be a simple analytic function, and may be any function which can be numerically evaluated.</p>
+<p>G(J) is the value of the Jth inequality constraint, which is also a function of the X(I). NCON is the number of constraints, G(J). NCON may be zero. VLB(I) and VUB(I) are lower and upper bounds respectively on variable X(I), and are referred to as side constraints. NSIDE = 0 indicates that no lower or upper bounds are prescribed. If NCON = 0 and NSIDE = 0, the objective function is said to be unconstrained. NDV is the total number of decision variables, X(I).</p>
+<p>Constraint G(J) is defined as active if CT&lt;=G(J)&lt;=ABS(CT) and violated if G(J)&gt;ABS(CT), where constraint thickness, CT, is a small specified negative number. The numerical significance of CT may be understood by referring to Fig. 1, which shows a single constraint in a two variable design space. Constraint G(J) is mathematically equal to zero along a single curve in design space. However, on a digital computer, the exact value of G(J) = 0 can seldom be obtained. Therefore, the "curve" becomes a thick band with constraint thickness of 2*ABS(CT) over which G(J) is assumed to be zero. Because all G(J) must be negative, CT is taken as a negative number for consistency so that any G(J)&gt;CT is defined as active (or violated) if G(J)&gt;ABS(CT). While it may seem logical to choose a very small value (in magnitude) for CT (say -1.0E-6), the nature of the optimization algorithm used by CONMIN is such that more numerical stability can be achieved by taking CT = -0.1 or even -0.2. CT is used for numerical stability only, and when the optimization is complete, one or more constraints, G(J), will usually be very near zero, as seen in the examples in SECTION VIII.</p>
+<p>It is desirable that G(J) be normalized so that</p>
+<div class="codehilite"><pre><span></span><code>  -1 &lt;= G(J) &lt;= 1             J = 1, NCON
+</code></pre></div>
+
+<p>In this way the constraint thickness, CT, has the same numerical significance for all G(J). It is not necessary that all G(J) be precisely in this form, and such normalization may not be possible. However, it is important that all G(J) at least be of the same order of magnitude. For example, assume that some G(J) = X(1)**2-X(2). If X(1) and X(2) are expected to be of order 100 for the particular problem under consideration, G(J) may be scaled by dividing by 10,000 to provide a value for G(J) of order one.</p>
+<p>The basic analytic technique used by CONMIN is to minimize OBJ until one or more constraints, G(J), become active. The minimization process then continues by following the constraint boundaries in a direction such that the value of OBJ continues to decrease. When a point is reached such that no further decrease in OBJ can be obtained, the process is terminated. The value of the constraint thickness parameter, CT, and the normalization of the constraints, G(J), have considerable effect on the numerical stability and rate of convergence of the optimization process.</p>
+<p>An example of a constrained nonlinear problem is the minimization of the four variable Rosen-Suzuki function (ref. 1):</p>
+<p>
+<script type="math/tex; mode=display">
+\begin{align}
+\text{Minimize}:\quad
+J &=  x_1^2 - 5x_1 + x_2^2 - 5x_2 + 2x_3^2 - 21x_3 + x_4^2 + 7x_4 + 50 \\
+\text{Subject to:}\quad
+g_1 &= x_1^2 + x_1 + x_2^2 - x_2 + x_3^2 + x_3 + x_4^2 - x_4 - 8 \leq 0 \\
+g_2 &= x_1^2 - x_1 + 2x_2^2 + x_3^2 + 2x_4^2 - x_4 - 10 \leq 0 \\
+g_3 &= 2x_1^2 + 2x_1 + x_2^2 - x_2 + x_3^2 - x_4 - 5 \leq 0
+\end{align}
+</script>
+</p>
+<p>This problem has four decision variables ($[x_1, x_2, x_3, x_4]$) and three constraints ($[g_1, g_2, g_3]$), (NDV = 4, NCON = 3). No lower or upper bounds VLB(I) or VUB(I) are prescribed so control parameter NSIDE is specified as NSIDE = 0 to indicate this. It is necessary to provide a set of initial values for X(I), and from this the constrained optimum is obtained by CONMIN and its associated routines.</p>
+<p>The minimization algorithm is based on Zoutendijk's method of feasible directions (ref. 2). The algorithm has been modified to improve efficiency and numerical stability and to solve optimization problems in which one or more constraints, G(J), are initially violated (ref. 3). While the program is intended primarily for the efficient solution of constrained functions, unconstrained functions may also be minimized (NCON = 0 and NSIDE = 0), and the conjugate direction method of Fletcher and Reeves (ref. 4) is used for this purpose. If a function is to be maximized, this may be achieved by minimizing the negative of the function.</p>
+<p>For constrained minimization problems, the initial design need not be feasible (one or more G(J) may be greater than ABS(CT)), and a feasible solution (if one exists) is obtained with a minimal increase in the value of the objective function.</p>
+<p>The user must supply a main program to call subroutine CONMIN along with an external subroutine to evaluate the objective function, constraint functions and the analytic gradient of the objective and currently active or violated constraint functions. At any given time in the minimization process, gradient information is required only for constraints which are active or violated (G(J)&gt;=CT). Gradients are calculated by finite difference if this information is not directly obtainable, and a subroutine is included with CONMIN for this purpose.</p>
+<h3>See also</h3>
+<ul>
+<li><a href="https://www.pyopt.org">pyopt</a> / <a href="https://github.com/mdolab/pyoptsparse">pyoptsparse</a> -- includes a Python wrapper to a slightly-modifed version of the original CONMIN.</li>
+<li><a href="https://github.com/jacobwilliams/slsqp">slsqp</a> -- Modern Fortran Edition of the SLSQP Optimizer</li>
+<li><a href="https://github.com/jacobwilliams/conmax">conmax</a> -- Modern Fortran CONMAX Optimization Method for general nonlinearly constrained function minimization</li>
+<li><a href="https://github.com/jacobwilliams/optgra">optgra</a> -- Modern Fortran edition of OPTGRA optimization algorithm from ESA</li>
+<li><a href="https://github.com/jacobwilliams/psqp">psqp</a>  -- Modern Fortran Edition of PSQP (Sequential quadratic programming algorithm)</li>
+</ul>
+<h3>References</h3>
+<ol>
+<li>G. N. Vanderplaats, "<a href="https://ntrs.nasa.gov/citations/19730017892">CONMIN - A fortran program for constrained function minimization: user's manual</a>", NASA TM X-62,282, AUGUST, 1973.</li>
+<li><a href="https://jblevins.org/mirror/amiller/conmin.zip">conmin.zip</a> Fortran 90 version from Alan Miller.</li>
+<li>Lund, S., "Direct Search Program for Optimization of Non-linear
+    Functions with Non-linear Constraints," Users Manual SK/P13, NTH,
+    Trondheim, Norway, 1971.</li>
+<li>Zoutendijk, G., "<a href="https://ir.cwi.nl/pub/32064/32064D.pdf">Methods of Feasible Directions</a>," Elsevier Publishing
+    Co., Amsterdam, 1960.</li>
+<li>Vanderplaats, G. N., and Moses, F., "<a href="https://www.sciencedirect.com/science/article/abs/pii/0045794973900552">Structural Optimization by
+    Methods of Feasible Directions</a>," National Symposium on Computerized Structural Analysis and Design, Washington, D.C., March 1972.</li>
+<li>Fletcher, R. and Reeves, C. M., "<a href="https://academic.oup.com/comjnl/article-abstract/7/2/149/335311?redirectedFrom=fulltext&amp;login=false">Function Minimization by Conjugate
+    Gradients</a>," British Computer J., Vol. 7, No. 2, 1964.</li>
+<li>Schmit, L. A., Jr., "<a href="https://www.vrand.com/resources/publications/archive/structural-design-by-systematic-synthesis/">Structural Design by Systematic Synthesis</a>,"
+    Proceedings of the Second National Conference on Electronic Computation,
+    Structural Division, ASCE, Pittsburgh, PA, Sept. 1960.</li>
+</ol>
+        </div>
+          <div class="col-md-4">
+            <div class="card card-body bg-light">
+              <h2 class="card-title">Developer Info</h2>
+              <h4 class="card-text">Jacob Williams</h4>
+              <p class="card-text"></p>
+                <div class="text-center"><div class="btn-group" role="group">
+                    
+                    <a class="btn btn-lg btn-primary" href="https://github.com/jacobwilliams"><i class="fa fa-github fa-lg"></i></a>
+                    
+                    
+                    
+                    
+                    
+                    
+                </div></div>
+            </div>
+          </div>
+      </div>
+        <div class="row">
+          <hr>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Source Files</h3>
+              <ul><li><a href='sourcefile/conmin.f90.html'>conmin.F90</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/files.html"><em>All source files&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Modules</h3>
+              <ul><li><a href='module/conmin_module.html'>conmin_module</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/modules.html"><em>All modules&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Procedures</h3>
+              <ul><li><a href='proc/cnmn01.html'>cnmn01</a></li><li><a href='proc/cnmn02.html'>cnmn02</a></li><li><a href='proc/cnmn03.html'>cnmn03</a></li><li><a href='proc/cnmn04.html'>cnmn04</a></li><li><a href='proc/cnmn05.html'>cnmn05</a></li><li><a href='proc/cnmn06.html'>cnmn06</a></li><li><a href='proc/cnmn07.html'>cnmn07</a></li><li><a href='proc/cnmn08.html'>cnmn08</a></li><li><a href='proc/conmin.html'>conmin</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/procedures.html"><em>All procedures&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-3">
+            <div>
+              <h3>Derived Types</h3>
+              <ul><li><a href='type/conmin_class.html'>conmin_class</a></li></ul>
+            </div>
+            <div>
+              <ul>
+                <li><a href="./lists/types.html"><em>All derived types&hellip;</em></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <hr>
+    </div> <!-- /container -->
+    <footer>
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col">
+            <p>
+              conmin
+ was developed by Jacob Williams<br>              &copy; 2025 
+</p>
+          </div>
+          <div class="col">
+            <p class="text-end">
+              Documentation generated by
+              <a href="https://github.com/Fortran-FOSS-Programmers/ford">FORD</a>
+            </p>
+          </div>
+        </div>
+        <br>
+      </div> <!-- /container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>    
+
+    <!-- MathJax JavaScript
+             ================================================== -->
+             <!-- Placed at the end of the document so the pages load faster -->
+        <script type="text/x-mathjax-config">
+          MathJax.Hub.Config({
+          TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } },
+          jax: ['input/TeX','input/MathML','output/HTML-CSS'],
+          extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']
+          });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+          <script src="./tipuesearch/tipuesearch_content.js"></script>
+          <script src="./tipuesearch/tipuesearch_set.js"></script>
+          <script src="./tipuesearch/tipuesearch.js"></script>
+
+  </body>
+</html>
