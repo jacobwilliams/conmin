@@ -1752,113 +1752,120 @@ contains
         real(wp), intent(in)    :: eps !! may be negative
         real(wp), intent(in)    :: x1, y1, slope, x2, y2, x3, y3, x4, y4
 
-        real(wp)  :: aa, bac, bb, cc, dnom, dx, q1, q2, q3, q4, q5, q6, qq, &
-                     x11, x111, x21, x22, x222, x31, x32, x33, x41, x42, x44, xbar1
-        integer   :: nslop
+        real(wp) :: aa, bac, bb, cc, dnom, dx, q1, q2, q3, q4, q5, q6, qq, &
+                    x11, x111, x21, x22, x222, x31, x32, x33, x41, x42, x44, xbar1
+        integer  :: nslop
 
         xbar1 = eps - 1.0_wp
         xbar = xbar1
         x21 = x2 - x1
         if (abs(x21) < me%small) return
         nslop = mod(ii, 2)
-        select case (ii)
-        case (1); go to 10
-        case (2); go to 20
-        case (3); go to 30
-        case (4); go to 40
-        end select
 
-        ! ------------------------------------------------------------------
-        !             II=1: 2-POINT QUADRATIC INTERPOLATION
-        ! ------------------------------------------------------------------
-10      ii = 1
-        dx = x1 - x2
-        if (abs(dx) < me%small) return
-        aa = (slope + (y2 - y1)/dx)/dx
-        if (aa < me%small) return
-        bb = slope - 2.0_wp*aa*x1
-        xbar = -0.5_wp*bb/aa
-        if (xbar < eps) xbar = xbar1
-        return
+        do
 
-        ! ------------------------------------------------------------------
-        !             II=2: 3-POINT QUADRATIC INTERPOLATION
-        ! ------------------------------------------------------------------
-20      ii = 2
-        x21 = x2 - x1
-        x31 = x3 - x1
-        x32 = x3 - x2
-        qq = x21*x31*x32
-        if (abs(qq) < me%small) return
-        aa = (y1*x32 - y2*x31 + y3*x21)/qq
-        if (aa >= me%small) then
-            bb = (y2 - y1)/x21 - aa*(x1 + x2)
-            xbar = -0.5_wp*bb/aa
-            if (xbar < eps) xbar = xbar1
-            return
-        end if
-        if (nslop == 0) return
-        go to 10
+            select case (ii)
 
-        ! ------------------------------------------------------------------
-        !               II=3: 3-POINT CUBIC INTERPOLATION
-        ! ------------------------------------------------------------------
-30      ii = 3
-        x21 = x2 - x1
-        x31 = x3 - x1
-        x32 = x3 - x2
-        qq = x21*x31*x32
-        if (abs(qq) < me%small) return
-        x11 = x1*x1
-        dnom = x2*x2*x31 - x11*x32 - x3*x3*x21
-        if (abs(dnom) < me%small) go to 20
-        aa = ((x31*x31*(y2 - y1) - x21*x21*(y3 - y1))/(x31*x21) - slope*x32)/dnom
-        if (abs(aa) < me%small) go to 20
-        bb = ((y2 - y1)/x21 - slope - aa*(x2*x2 + x1*x2 - 2.0_wp*x11))/x21
-        cc = slope - 3.0_wp*aa*x11 - 2.0_wp*bb*x1
-        bac = bb*bb - 3.0_wp*aa*cc
-        if (bac < 0.0_wp) go to 20
-        bac = sqrt(bac)
-        xbar = (bac - bb)/(3.0_wp*aa)
-        if (xbar < eps) xbar = eps
-        return
+            case(1) ! II=1: 2-POINT QUADRATIC INTERPOLATION
 
-        ! ------------------------------------------------------------------
-        !                II=4: 4-POINT CUBIC INTERPOLATION
-        ! ------------------------------------------------------------------
-40      x21 = x2 - x1
-        x31 = x3 - x1
-        x41 = x4 - x1
-        x32 = x3 - x2
-        x42 = x4 - x2
-        x11 = x1*x1
-        x22 = x2*x2
-        x33 = x3*x3
-        x44 = x4*x4
-        x111 = x1*x11
-        x222 = x2*x22
-        q2 = x31*x21*x32
-        if (abs(q2) < 1.0e-30_wp) return
-        q1 = x111*x32 - x222*x31 + x3*x33*x21
-        q4 = x111*x42 - x222*x41 + x4*x44*x21
-        q5 = x41*x21*x42
-        dnom = q2*q4 - q1*q5
-        if (abs(dnom) >= 1.0e-30_wp) then
-            q3 = y3*x21 - y2*x31 + y1*x32
-            q6 = y4*x21 - y2*x41 + y1*x42
-            aa = (q2*q6 - q3*q5)/dnom
-            bb = (q3 - q1*aa)/q2
-            cc = (y2 - y1 - aa*(x222 - x111))/x21 - bb*(x1 + x2)
-            bac = bb*bb - 3.0_wp*aa*cc
-            if (abs(aa) >= me%small .and. bac >= 0.0_wp) then
-                bac = sqrt(bac)
-                xbar = (bac - bb)/(3.0_wp*aa)
+                dx = x1 - x2
+                if (abs(dx) < me%small) return
+                aa = (slope + (y2 - y1)/dx)/dx
+                if (aa < me%small) return
+                bb = slope - 2.0_wp*aa*x1
+                xbar = -0.5_wp*bb/aa
                 if (xbar < eps) xbar = xbar1
                 return
-            end if
-        end if
-        if (nslop == 1) go to 30
-        go to 20
+
+            case(2) ! II=2: 3-POINT QUADRATIC INTERPOLATION
+
+                x21 = x2 - x1
+                x31 = x3 - x1
+                x32 = x3 - x2
+                qq = x21*x31*x32
+                if (abs(qq) < me%small) return
+                aa = (y1*x32 - y2*x31 + y3*x21)/qq
+                if (aa >= me%small) then
+                    bb = (y2 - y1)/x21 - aa*(x1 + x2)
+                    xbar = -0.5_wp*bb/aa
+                    if (xbar < eps) xbar = xbar1
+                    return
+                end if
+                if (nslop == 0) return
+                ii = 1
+
+            case(3) ! II=3: 3-POINT CUBIC INTERPOLATION
+
+                x21 = x2 - x1
+                x31 = x3 - x1
+                x32 = x3 - x2
+                qq = x21*x31*x32
+                if (abs(qq) < me%small) return
+                x11 = x1*x1
+                dnom = x2*x2*x31 - x11*x32 - x3*x3*x21
+                if (abs(dnom) < me%small) then
+                    ii = 2
+                else
+                    aa = ((x31*x31*(y2 - y1) - x21*x21*(y3 - y1))/(x31*x21) - slope*x32)/dnom
+                    if (abs(aa) < me%small) then
+                        ii = 2
+                    else
+                        bb = ((y2 - y1)/x21 - slope - aa*(x2*x2 + x1*x2 - 2.0_wp*x11))/x21
+                        cc = slope - 3.0_wp*aa*x11 - 2.0_wp*bb*x1
+                        bac = bb*bb - 3.0_wp*aa*cc
+                        if (bac < 0.0_wp) then
+                            ii = 2
+                        else
+                            bac = sqrt(bac)
+                            xbar = (bac - bb)/(3.0_wp*aa)
+                            if (xbar < eps) xbar = eps
+                            return
+                        end if
+                    end if
+                end if
+
+            case(4) ! II=4: 4-POINT CUBIC INTERPOLATION
+
+                x21 = x2 - x1
+                x31 = x3 - x1
+                x41 = x4 - x1
+                x32 = x3 - x2
+                x42 = x4 - x2
+                x11 = x1*x1
+                x22 = x2*x2
+                x33 = x3*x3
+                x44 = x4*x4
+                x111 = x1*x11
+                x222 = x2*x22
+                q2 = x31*x21*x32
+                if (abs(q2) < 1.0e-30_wp) return
+                q1 = x111*x32 - x222*x31 + x3*x33*x21
+                q4 = x111*x42 - x222*x41 + x4*x44*x21
+                q5 = x41*x21*x42
+                dnom = q2*q4 - q1*q5
+                if (abs(dnom) >= 1.0e-30_wp) then
+                    q3 = y3*x21 - y2*x31 + y1*x32
+                    q6 = y4*x21 - y2*x41 + y1*x42
+                    aa = (q2*q6 - q3*q5)/dnom
+                    bb = (q3 - q1*aa)/q2
+                    cc = (y2 - y1 - aa*(x222 - x111))/x21 - bb*(x1 + x2)
+                    bac = bb*bb - 3.0_wp*aa*cc
+                    if (abs(aa) >= me%small .and. bac >= 0.0_wp) then
+                        bac = sqrt(bac)
+                        xbar = (bac - bb)/(3.0_wp*aa)
+                        if (xbar < eps) xbar = xbar1
+                        return
+                    end if
+                end if
+                if (nslop == 1) then
+                    ii = 3
+                else
+                    ii = 2
+                end if
+
+            end select
+
+        end do
 
     end subroutine cnmn04
 
