@@ -97,8 +97,8 @@ do  i = 1, nlim
         ! objective function
         solver%obj = -x(1) * x(2) * x(3)
         ! constraint values
-        g(1) =  x(1) + 2.0_wp * x(2) + 2.0_wp * x(3) - 72.0_wp
-        g(2) = -x(1) - 2.0_wp * x(2) - 2.0_wp * x(3)
+        g(1) =  x(1) + 2.0_wp * x(2) + 2.0_wp * x(3) - 72.0_wp  ! <= 0
+        g(2) = -x(1) - 2.0_wp * x(2) - 2.0_wp * x(3)            ! <= 0
 
     case (2)
         ! objective gradient:
