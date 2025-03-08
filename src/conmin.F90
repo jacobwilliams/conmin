@@ -516,7 +516,7 @@ contains
                 if (me%nside == 0 .and. me%ncon == 0) write (me%iunit, 8200)
                 if (me%nside /= 0 .or. me%ncon > 0) write (me%iunit, 7600)
                 write (me%iunit, 7700) me%iprint, me%ndv, me%itmax, me%ncon, me%nside, me%icndir, me%nscal, &
-                                me%nfdg, me%linobj, me%itrm, n1, n2, n3, n4, n5
+                                       me%nfdg, me%linobj, me%itrm, n1, n2, n3, n4, n5
                 write (me%iunit, 7900) me%ct, me%ctmin, me%ctl, me%ctlmin, me%theta, me%phi, me%delfun, me%dabfun
                 write (me%iunit, 7800) me%fdch, me%fdchm, me%alphax, me%abobj1
                 if (me%nside /= 0) then
